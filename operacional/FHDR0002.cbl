@@ -11,9 +11,10 @@
 
         INPUT-OUTPUT SECTION.
          FILE-CONTROL.
-          SELECT IN-FL ASSIGN 'C:\Users\F9329132\operacional\LOG_01.txt'
-          ORGANIZATION IS LINE SEQUENTIAL.
-         SELECT OUT-FL ASSIGN 'C:\Users\F9329132\operacional\LOG_02.txt'
+
+      *  SELECT OUT-FL ASSIGN "C:\Users\F9329132\misc\operacional\out01.
+      *    "txt"
+         SELECT OUT-FL ASSIGN ".\..\fls\out0002.txt"
           ORGANIZATION IS LINE SEQUENTIAL.
       *   SELECT OUT-FL ASSIGN ''.
        DATA DIVISION.
@@ -71,7 +72,7 @@
 
           MOVE FUNCTION CURRENT-DATE TO DT.
           MOVE CT-01 TO RCRD-ID.
-          MOVE 'DESCRICAO QUALQUER'TO DESCR.
+          MOVE 'DESCRICAO QUALQUER>>'TO DESCR.
           WRITE RCRD-01.
 
 

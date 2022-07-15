@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style id="stl">
+		:root {
+			--bg : #222222;
+			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+
+			--softBg: #999999;
+			--txt: #eeeedd;
+
+			--tint01: #ed7411;
+			--tint02: #555555;
+
+			--red: #bb3030;
+			--green: #11ee11;
+			--golden: #ffff11;
+		}
+
+		* {
+			background-color: var(--bg);
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 32px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		p,
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 14px;
+			color: var(--txt);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 2px;
+			border-radius: 5px;
+
+			margin-left: 20px;
+			margin-right: 20x;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			height: 30px;
+			width: 50;
+
+			font-size: 16px;
+
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 12px;
+
+
+		}
+
+		[x]::placeholder {
+			color: red;
+			font-size: 16px;
+		}
+
+		.btn {
+			color: var(--txt);
+			background-color: var(--bg4);
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 35px;
+			min-width: 35px;
+			transition: background-color 0.2s;
+		}
+
+		.btn[del] {
+			color: var(--red);
+			border-width: 3px;
+			font-weight: 700;
+			border-color: var(--red);
+			border-radius: 5px;
+
+
+		}
+
+		.btn:hover {
+			background-color: var(--bg2);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.row {
+			text-align: center;
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+
+			align-items: center;
+		}
+
+		.q_input {
+			margin-left: auto;
+			margin-right: auto;
+			width: 60%;
+
+		}
+
+		.item {
+			flex: 1;
+			margin: 2px;
+			display: flex;
+			vertical-align: center;
+			vertical-align: middle;
+
+		}
+
+		.qBtn {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-width: 400px;
+			margin-top: 5px;
+		}
+
+		.out {
+			background-color: #999999;
+		}
+
+		td {
+			background-color: #aabbcc00;
+			border-radius: 3px;
+			border: 2px solid;
+			margin-left: auto;
+
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.lrg {
+			width: 200px;
+			padding: 5px;
+
+		}
+	</style>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<title>Rick & Morty Characters</title>
+</head>
+
+<body id="body" class="bord" style="width:95%;">
+	<div class="col bord " style="min-height: 500px; width: 100%; ">
+
+
+		<h1 class="bord" style="
+				width: 50%;
+				color:var(--bg);
+				background-color:var(--txt);
+				padding:5px;
+			" onclick="show_theme_options()">Rick & Morty</h1>
+
+		<div id="board_container" class="col bord" style="
+					width: 90%;
+					height: 400px;
+					min-height: 340px;
+					border-width: 3px; margin-bottom: 20px;
+					background-color: #aabbcc00;
+					">
+		</div>
+	</div>
+</body>
+<script>
+	
+
+  
+	let local_library = 
+	{
+		"Human":
+			[
+				{
+					"id":1,
+					"name":"Rick Sanchez",
+					"status":"Alive",
+					"species":"Human",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+					"episodes":51
+				},
+				{
+					"id":2,
+					"name":"Morty Smith",
+					"status":"Alive",
+					"species":"Human",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/2.jpeg",
+					"episodes":51
+				},
+				{
+					"id":3,
+					"name":"Summer Smith",
+					"status":"Alive",
+					"species":"Human",
+					"gender":"Female",
+					"image":"https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+					"episodes":42
+				},
+				{
+					"id":4,
+					"name":"Beth Smith",
+					"status":"Alive",
+					"species":"Human",
+					"gender":"Female",
+					"image":"https://rickandmortyapi.com/api/character/avatar/4.jpeg",
+					"episodes":42
+				},
+				{
+					"id":5,
+					"name":"Jerry Smith",
+					"status":"Alive",
+					"species":"Human",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/5.jpeg",
+					"episodes":39
+				}
+			],
+		"mock": 
+			[
+				{
+					"id":12222,
+					"name":"macaco louco",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/122.jpeg",
+					"episodes":51
+				},
+				{
+					"id":2232323,
+					"name":"JAO gulo",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/124.jpeg",
+					"episodes":51
+				},
+				{
+					"id":2123123145,
+					"name":"wasda shaka",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/125.jpeg",
+					"episodes":51
+				},
+				{
+					"id":215161,
+					"name":"JAO gulo",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/126.jpeg",
+					"episodes":51
+				}
+			]  ,
+			"mock2": 
+			[
+				{
+					"id":12222,
+					"name":"macaco louco",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/122.jpeg",
+					"episodes":51
+				},
+				{
+					"id":2232323,
+					"name":"JAO gulo",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/124.jpeg",
+					"episodes":51
+				},
+				{
+					"id":2123123145,
+					"name":"wasda shaka",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/125.jpeg",
+					"episodes":51
+				},
+				{
+					"id":215161,
+					"name":"JAO gulo",
+					"status":"Alive",
+					"species":"mock",
+					"gender":"Male",
+					"image":"https://rickandmortyapi.com/api/character/avatar/126.jpeg",
+					"episodes":51
+				}
+			]  
+		};
+
+
+	//downloadLib()
+	function downloadLib(){
+  		fetch('./personagens.json').then(data => data.json().then(data => local_library = data));
+	}
+
+	show_local_library();
+	//show_theme_options();//SHOW MAIN SCREEN
+	function show_theme_options() {
+		let r =`
+			<div style="display:flex; flex-direction: column; justify-content:space-evenly">
+				<button class="btn hcent" 
+					onclick="show_local_library()" 
+					style="
+						border-color: tranparent;
+						font-size: 16px;
+						font-weight: 800;
+						width: 80%;
+						margin-top: 5px;
+
+						"
+				>
+					Biblioteca
+				</button>
+				<h2>Escolha o tema:</h2>
+				
+				
+			</div>
+			`;
+		for (theme in local_library
+		) {
+			r += `\n<button class="btn" onclick="choose_theme('${theme}')">${theme}</button>`;
+		}
+
+		document.getElementById('board_container').innerHTML = r;
+	}
+
+	function choose_theme(chosen_theme) {
+		console.log('chosen theme >> ', chosen_theme);
+		//choose a random word in the given theme
+		Math.random();
+		Math.random();
+		Math.random();
+		let word = local_library
+		[chosen_theme][parseInt(Math.random() * 10) % local_library
+		[chosen_theme].length];
+		start_game(word, chosen_theme);
+	}
+
+
+
+	function start_game(wrd, ctheme) {
+		InputBlocked = false;
+		word = wrd
+		word_list = wrd.split('');
+		document.getElementById('board_container').innerHTML = `
+			<h2 id="msg-container" style="height: 50px; margin: 0; font-size:12px"> </h2>
+			<h2 id="incorrect-letters" style="height: 50px; margin: 0; color: var(--red)"> </h2>
+			<h2 id="correct-letters" style="height: 50px; margin: 0; color: var(--green)"> </h2>
+			<h4>${'Tema: ' + ctheme}</h3>
+			<div class="col" > 
+				<div id='hd' style="font-size: 64px;color: var(--bg)">O</div>
+				<div class="row" style="margin-top: -14px;text-align: center; justify-content: center;">
+					<div id='la' style="font-size: 70px; color: var(--bg)">
+						/
+					</div>
+					<div id='bd' style="font-size: 54px;color: var(--bg)">
+						[_]
+					</div>
+					<div id='ra' style="font-size: 70px;color: var(--bg)">
+						\\
+					</div>
+				</div>
+				<div class="row" style="margin-top: -16px;text-align: center; justify-content: center;">
+					<div id='ll' style="font-size: 70px;color: var(--bg)">
+						|
+					</div>
+					<div id='cr' style="font-size: 58px;color: var(--bg)">
+						'''
+					</div>
+					<div id='rl' style="font-size: 70px;color: var(--bg)">
+						|
+					</div>
+				</div>
+
+			</div>
+		`;
+   
+		update_correct_guess();
+	}
+
+	function update_correct_guess() {
+		let r = '';
+		win = true;
+		for (let lt of word) {
+			if (correct_guesses.includes(lt)) {
+				r += lt + ' ';
+			} else {
+				//se entrar aqui, existe ao menos uma letra faltando
+				win = false;
+				r += '_ ';
+			}
+		}
+		if (win) show_victory_screen();
+		document.getElementById('correct-letters').textContent = r;
+	}
+
+	const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Ç'];
+	const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+	let stick_apendages = ['la', 'rl', 'll', 'ra', 'bd', 'hd'];
+	let incorrect_guesses = [];
+	let correct_guesses = [];
+	let word = '';
+	let word_list = [];
+	let InputBlocked = true;
+	function reset_game() {
+		InputBlocked = true;
+		//return window.location.reload();;
+		show_theme_options();
+		stick_apendages = ['hd', 'bd', 'la', 'rl', 'll', 'ra'];
+		incorrect_guesses = [];
+		correct_guesses = [];
+		word = '';
+		word_list = [];
+
+	}
+	//LEMBRAR DE TIRAR O CR JUNTO COM O HD
+
+	window.addEventListener("keydown", receiveInput);
+
+	function receiveInput(event) {
+		if (InputBlocked) return;
+		let k = event.key.toUpperCase();
+		console.log(k);
+
+		let msg = '';
+		if (['ALT', 'META', 'F12', 'F5', 'SHIFT'].includes(k)) return;
+
+		if (!letters.includes(k)) msg = '"' + k + '" é inválido. Seu palpite deve ser uma letra.';
+		if (incorrect_guesses.includes(k)) msg = '"' + k + '" Já foi utilizada, NÃO FAZ PARTE DA PALAVRA. Seu palpite deve ser uma letra nova.';
+		if (correct_guesses.includes(k)) msg = '"' + k + '" Já foi utilizada, FAZ PARTE DA PALAVRA. Seu palpite deve ser uma letra nova.';
+		const time_msg_lasts = 5000;
+
+		if (msg) {
+			let msg_cont = document.getElementById('msg-container');
+			msg_cont.textContent = msg;
+			msg_cont.style.color = 'var(--golden)';
+			setTimeout(() => {
+				msg_cont.style.color = 'var(--bg)';
+			}, time_msg_lasts);
+
+			blockInput = false;
+
+			return;
+		}
+		if (word_list.includes(k)) {//correct guess
+			correct_guesses.push(k);
+			return update_correct_guess();
+		} else {//incorrect guess
+			incorrect_guesses.push(k);
+			document.getElementById('incorrect-letters').textContent =
+				incorrect_guesses.reduce(
+					(prev, curr) => curr + ',' + prev,
+					''
+				);
+			document.getElementById(stick_apendages.pop()).style.color = 'var(--red)';
+			if (stick_apendages.length === 0) return show_failure_screen();
+			if (stick_apendages.length === 4) document.getElementById('cr').style.color = 'var(--red)';
+		}
+	}
+	function show_victory_screen() {
+		InputBlocked = true;
+		setTimeout(
+			() => {
+				document.getElementById('board_container').innerHTML = `
+					<div class="bord"
+							style="margin-top: auto;
+							margin-bottom: auto;
+							border-width: 5px;
+							border-color: var(--green);
+							padding: 12px;
+							background-color: var(--bg);
+							">
+							<h1
+								style="
+									width: 350px;
+									font-size: 64px;
+									color: var(--green)
+									
+									"
+							> 
+							VOCÊ VENCEU!! </h1>
+							<button class="btn" style="color:var(--green); border-color: var(--green)" onclick="reset_game()">JOGAR NOVAMENTE</button>
+						</div>
+					`;
+			},
+			200);
+	}
+	function show_failure_screen() {
+		InputBlocked = true;
+		setTimeout(
+			() => {
+				document.getElementById('board_container').innerHTML = `
+					<div class="bord"
+							style="margin-top: auto;
+							margin-bottom: auto;
+							border-width: 5px;
+							border-color: var(--red);
+							padding: 12px;
+							background-color: var(--bg);
+							">
+							<h1
+								style="
+									width: 350px;
+									font-size: 64px;
+									color: var(--red)
+									
+									"
+							> 
+							FIM DE JOGO! </h1>
+							<button class="btn" style="color:var(--red); border-color: var(--red)" onclick="reset_game()">JOGAR NOVAMENTE</button>
+						</div>
+					`;
+			},
+			500);
+	}
+
+	function showCorrectLetter(c) {
+		correct_guesses.push(c);
+		document.getElementById('')
+	}
+	function show_local_library() {
+		let r = `
+			<div 
+				style="
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					margin-top: 20px;
+				"
+			>
+				`;
+
+		for (let especie in local_library) {
+			r += `<div class="bord" 
+					style="
+						flex : 1;
+						background-color : var(--bg2);
+						margin-top: 20px;
+						min-width: 380px
+						"
+					>
+				   <h2>${especie}</h2>
+				   <div  
+						style="
+							margin-top: 20px
+							display: flex;
+							flex-direction: row;
+							justify-content: center;
+							background-color: transparent"
+							height: 20px;
+							
+							
+					>
+						<input 
+							class = "in"
+							style = "
+								max-width: 300px;
+								margin-top: 2px;
+								margin-bottom: 20px
+								"
+							id = "input_add_${especie}"
+							value=''
+							placeholder="Adicionar Item"
+							>
+						</input>
+						<button class="btn" onclick="addItem('${especie}','input_add_${especie}')" 
+							style="
+								border-radius: 20px;
+								border-width: 2px;
+								border-color:var(--green);
+								color:var(--green);
+								background-color:transparent;
+								
+								
+								"
+						>Add</button>
+						
+					</div>
+
+
+
+				`;
+			let indx = 0;
+			for (let personagem of local_library[especie]) {
+				r += `
+					<div style="
+							border : 2px solid transparent;
+							margin : 0px;
+							min-height : 20px;
+							background-color : transparent;
+						"
+					>
+					</div>
+					<div 
+						id="pers_${personagem.id}"	
+						style="
+							display: flex;
+							flex-direction: row;
+							justify-content: center;
+							background-color: var(--bg3)"
+					>
+						<div class="vcent hcent"
+							style="
+								width:70px;
+								height:70px;
+								display:flex;
+								flex-direction: row;
+								background-color:transparent
+								">
+						<img class="vcent hcent"
+							src="${personagem["image"]}"
+							style="width:50px;height:50px"
+						></img>
+						</div>
+					    <input 
+							class = "in vcent"
+							x
+							style = "
+								max-width: 120px;
+								"
+							id = "input_${especie}_${indx}"
+							value='${personagem["name"]}'
+							placeholder="EXCLUIR ITEM!!"
+							></input>
+						<button class="btn" onclick="updateItem('${especie}',${indx},'input_${especie}_${indx}')">Update</button>
+						<button class="btn" 
+							style="
+								background-color: var(--bg2);
+								color: var(--red);
+								font-weight: 700;
+								font-size: 20px;
+								border-color: var(--red);
+								border-width: 2px;
+								" onclick="deleteItem('${especie}',${indx},'input_${especie}_${indx}')">X</button>
+							 
+					</div>`;
+				indx++;
+			}
+			r += '</div>';
+		}
+		r += '</div';
+
+		document.getElementById('board_container').innerHTML = r;
+	}
+// ==================================================
+	function updateItem(especie, index, id) {//FUNÇÃO QUE FARÁ EDIÇÕES NA API
+		let novo_nome = document.getElementById(id).value.trim();
+		if(novo_nome.length===0) return deleteItem(especie,index,id);
+		local_library[especie][index]["name"] = novo_nome;
+	}
+	function deleteItem(especie, index, id) {//FUNÇÃO QUE FARÁ EDIÇÕES NA API
+		if(!confirm("Tem certeza que quer excluir o registro? ")) return;
+		local_library[especie].splice(index,1);
+		show_local_library();
+	}
+	function addItem(especie,id){
+		let novo_valor = document.getElementById(id).value.trim();
+		//console.log('NV> "'+novo_valor.length+'"')
+
+		if(novo_valor.length===0) return;
+		//pegar uma imagem aleatoria
+		
+		const img = local_library[especie]
+		[parseInt(Math.random()*1000%local_library[especie].length)]
+		["image"];
+		local_library[especie].push({"name":novo_valor, "image":img});
+		
+
+		show_local_library();
+	}
+
+</script>
+
+</html>

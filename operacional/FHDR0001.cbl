@@ -11,7 +11,7 @@
 
         INPUT-OUTPUT SECTION.
          FILE-CONTROL.
-          SELECT IN-FL ASSIGN 'C:\Users\F9329132\operacional\LOG_01.txt'
+          SELECT IN-FL ASSIGN ".\..\fls\in0001.txt"
           ORGANIZATION IS LINE SEQUENTIAL.
       *   SELECT OUT-FL ASSIGN ''.
        DATA DIVISION.
