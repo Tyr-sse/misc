@@ -21,15 +21,19 @@
         FILE SECTION.
          FD OUT-FL.
          01 OUT-REC.
-           03 D PIC 99.
-           03 M PIC 99.
-           03 Y PIC 9999.
+           03 LN                    PIC 9999.
+           03 F0                    PIC XXX VALUE ' : '.
+           03 D                     PIC 99.
+           03 F1                    PIC X VALUE '/'.
+           03 M                     PIC 99.
+           03 F2                    PIC X VALUE '/'.
+           03 Y                     PIC 9999.
          FD IN-FL.
           01 IN-RC.
            03 RC-DT.
-            04 RC-DT-D               PIC 99   VALUE ZEROS.
-            04 RC-DT-M               PIC 99   VALUE ZEROS.
             04 RC-DT-Y               PIC 9999 VALUE ZEROS.
+            04 RC-DT-M               PIC 99   VALUE ZEROS.
+            04 RC-DT-D               PIC 99   VALUE ZEROS.
 
            03 FILLER                 PIC X.
            03 RC-DESC.
@@ -43,6 +47,8 @@
           03 CT-03                   PIC 99  VALUE ZEROS.
           03 CT-04                   PIC 99  VALUE ZEROS.
           03 CT-001                  PIC 999 VALUE ZEROS.
+
+
 
 
        PROCEDURE DIVISION.
@@ -60,36 +66,39 @@
          OPEN OUTPUT OUT-FL.
          MOVE 1     TO CT-01.
          MOVE ZEROS TO CT-02.
-
+         DISPLAY ' START'.
          PERFORM 205-PROCESS-LINE
           UNTIL CT-01 EQUALS 1000 OR
                 CT-02 EQUALS 1.
-
-
-
-         CLOSE OUT-FL.
-         CLOSE IN-FL.
-
+         DISPLAY ' FINISH'.
          205-PROCESS-LINE.
-      *   ADD 1 TO CT-01.
+         ADD 1 TO CT-01.
           READ IN-FL
            AT END
             MOVE 1 TO CT-03
            NOT AT END
             ADD 1 TO CT-01
             MOVE 0 TO CT-03
+            PERFORM  206-MOUT-OUT-REC
           END-READ.
-          DISPLAY CT-01 '=' RC-DT-D '/'RC-DT-M '/'RC-DT-Y.
-          MOVE RC-DT-D TO D.
-          MOVE RC-DT-M TO M.
-          MOVE RC-DT-Y TO Y.
-      *   MOVE 'DESCRICAO QUALQUER>>'TO DESCR.
-          WRITE OUT-REC.
 
+
+
+          206-MOUT-OUT-REC.
+      *    DISPLAY 'WRT'.
+           MOVE CT-01 TO LN.
+           MOVE ' : ' TO F0.
+           MOVE RC-DT-D TO D.
+           MOVE '/' TO F1.
+           MOVE RC-DT-M TO M.
+           MOVE '/' TO F2.
+           MOVE RC-DT-Y TO Y.
+           WRITE OUT-REC.
 
 
 
         300-END.
          DISPLAY 'END-PROGRAM: FHDR0003'.
+
          STOP RUN.
        END PROGRAM FHDR0002.
