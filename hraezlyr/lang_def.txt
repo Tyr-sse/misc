@@ -1,0 +1,4 @@
+lang def:
+ -the compiler does not see spaces and line breaks;
+ -minimize the number of reserved words.
+ -paragraphs from cobol
