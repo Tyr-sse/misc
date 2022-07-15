@@ -1,0 +1,23 @@
+//data 
+ input_record{
+  id:1;
+  name:128;
+  cpf:11;
+  birth: 
+ } 
+ eof:1; 
+
+//procedure
+ eof = read(x); //reads next character in io stream and gives it to x. returns 1 if it is the end of file;
+ if(eof){
+  print("end of file"); 
+ }else{
+  print("read char:"x);
+ }
+  
+ 
+
+
+
+
+//end

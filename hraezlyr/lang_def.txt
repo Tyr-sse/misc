@@ -1,4 +1,54 @@
 lang def:
- -the compiler does not see spaces and line breaks;
- -minimize the number of reserved words.
- -paragraphs from cobol
+ -the compiler ignores spaces and line breaks;
+ -minimize the number of reserved words:
+  01 if
+  02 else
+  03 elif
+  04 do
+  05 while
+  06 until
+  07 in
+  08 of
+  09 is
+  10 null
+  11 undefined
+  12 txt 
+  13 adress
+  14 and
+  15 or
+  16 not 
+  17 struct
+  18 private
+  19 public
+  20 static
+
+ -operators:
+  + sum
+  - subtraction
+  * multiplication
+  / division
+  = set
+  == equals 
+
+ -declaring variables:
+  name = "initial value";
+  
+
+ -logical operations: 
+    and  &&
+     or  ||
+     not  !
+  -blocks: 
+    blockName{ }
+  -comments can be written: /* */ or // OR * at the beggining
+
+  
+
+ if(value){A}else{B}
+ if(value){A}elif{B}
+ while(value){A}
+ do{A}while(value)
+ do{A}until(value)
+
+
+ 
