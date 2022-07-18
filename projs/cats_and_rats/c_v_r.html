@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style id="stl">
+		:root {
+			--bg: #222222;
+			--bg2: #333333;
+			--softBg: #999999;
+			--txt: #eeeedd;
+
+			--tint01: #0dc2e2;
+			--tint02: #ce810d;
+			--tint02: #ce810d;
+
+			--red: #dd3030;
+			--green: #11dd11;
+			--golden: #eedd11;
+
+		}
+
+
+		* {
+			background-color: var(--bg);
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+		div {
+
+			flex: 1;
+			display: flex;
+			background-color: #aabbcc00;
+
+
+		}
+
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 32px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 16px;
+			color: var(--tint01);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 2px;
+			border-radius: 5px;
+
+			height: 30px;
+
+
+			font-size: 16px;
+
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 12px;
+
+
+		}
+
+
+		.btn {
+			color: var(--txt);
+			background-color: #aabbcc00;
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 35px;
+			min-width: 35px;
+			transition: background-color 0.2s;
+		}
+
+		.btn:hover {
+			background-color: var(--bg2);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.inv {
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+
+
+
+
+		.coloredA {
+			background-color: var(--tint01);
+			color: var(--bg);
+		}
+
+		.row {
+			text-align: center;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			flex-direction: column;
+
+			--align-items: center;
+		}
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+
+		.scr {
+			border-color: red;
+			vertical-align: middle;
+		}
+
+		[h] {
+			display: none;
+		}
+	</style>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<title>Miscelaneous Functionalities</title>
+</head>
+
+<body id="body" class="bord" style="width:95%; ">
+	<div id="screen" style="
+			min-height: 600px;
+			min-width: 280px;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-evenly;
+			">
+		<div id="screen01" class="scr bord vcent hcent col">
+			<div class="bord vcent hcent" style="
+				min-height: 20px;
+				max-height: 100px;
+				visibility: hidden;"></div>
+
+			<div class="bord vcent hcent col" style="
+				min-width: 200px;
+				min-height: 200px;
+				max-height:250px;
+			">
+				<p class="hcent" style="
+					
+					font-size: 28px;
+					vertical-align: middle;
+				"> Menu principal</p>
+				<button class="btn">INICIAR</button>
+			</div>
+
+			<div class="bord vcent hcent" style="
+				min-height: 20px;
+				max-height: 100px;
+				visibility: hidden;"></div>
+
+
+
+		</div>
+
+
+
+
+	</div>
+
+</body>
+<script>
+	const alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+	const algarismos = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+	let gamestate = 'not_started';
+	function iniciar_jogo() {
+		//hide screen 01
+		//show screen 02
+		//set gamestate to started
+
+
+	}
+
+	function cats_walk() {
+
+
+	}
+
+	function cats_threaten() {
+
+	}
+
+	function rats_turn(){
+
+
+	}
+
+
+</script>
+
+</html>
