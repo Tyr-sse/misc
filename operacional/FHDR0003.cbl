@@ -68,16 +68,14 @@
          MOVE ZEROS TO CT-02.
          DISPLAY ' START'.
          PERFORM 205-PROCESS-LINE
-          UNTIL CT-01 EQUALS 1000 OR
-                CT-02 EQUALS 1.
-         DISPLAY ' FINISH'.
+          UNTIL CT-01 EQUALS 1000 OR CT-02 EQUALS 1.
+         DISPLAY ' FINISH process'.
          205-PROCESS-LINE.
           READ IN-FL
-           AT END
-            MOVE 1 TO CT-03
+
            NOT AT END
             ADD 1 TO CT-01
-            MOVE 0 TO CT-03
+            MOVE 0 TO CT-02
             PERFORM  206-MOUT-OUT-REC
           END-READ.
 
@@ -85,6 +83,7 @@
 
           206-MOUT-OUT-REC.
       *    DISPLAY 'WRT'.
+
            MOVE CT-01 TO LN.
            MOVE ' : ' TO F0.
            MOVE RC-DT-D TO D.
@@ -92,6 +91,7 @@
            MOVE RC-DT-M TO M.
            MOVE '/' TO F2.
            MOVE RC-DT-Y TO Y.
+           display 'wrt' ct-01 ': ' out-rec.
            WRITE OUT-REC.
 
 

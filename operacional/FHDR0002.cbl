@@ -59,7 +59,6 @@
         201-WRITE-FILE.
          DISPLAY 'WRT FILE'.
          OPEN OUTPUT OUT-FL.
-
          PERFORM 202-WRITE-LINES.
          CLOSE OUT-FL.
         202-WRITE-LINES.
