@@ -5,7 +5,7 @@
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-        PROGRAM-ID. FHDR0002.
+        PROGRAM-ID. FHDR0004.
        ENVIRONMENT DIVISION.
         CONFIGURATION SECTION.
 
@@ -14,7 +14,7 @@
 
           SELECT IN-FL ASSIGN ".\..\fls\in0001.txt"
            ORGANIZATION IS LINE SEQUENTIAL.
-          SELECT OUT-FL ASSIGN ".\..\fls\out0003.txt"
+          SELECT OUT-FL ASSIGN ".\..\fls\out0004.txt"
            ORGANIZATION IS LINE SEQUENTIAL.
       *   SELECT OUT-FL ASSIGN ''.
        DATA DIVISION.
@@ -22,11 +22,11 @@
          FD OUT-FL.
          01 OUT-REC.
            03 LN                    PIC 9999.
-           03 F0                    PIC XXX VALUE ' : '.
+           03 FILLER                    PIC XXX VALUE ' : '.
            03 D                     PIC 99.
-           03 F1                    PIC X VALUE '/'.
+           03 FILLER                    PIC X VALUE '/'.
            03 M                     PIC 99.
-           03 F2                    PIC X VALUE '/'.
+           03 FILLER                    PIC X VALUE '/'.
            03 Y                     PIC 9999.
          FD IN-FL.
           01 IN-RC.
@@ -53,15 +53,15 @@
 
        PROCEDURE DIVISION.
         000-MAIN.
-         DISPLAY 'MAIN: FHDR0003'.
+         DISPLAY 'MAIN: FHDR0004'.
          PERFORM 100-INIT.
          PERFORM 200-PROCESS.
          PERFORM 300-END.
         100-INIT.
-         DISPLAY 'INIT: FHDR0003'.
+         DISPLAY 'INIT: FHDR0004'.
 
         200-PROCESS.
-         DISPLAY 'PROCESS: FHDR0003'.
+         DISPLAY 'PROCESS: FHDR0004'.
          OPEN INPUT IN-FL.
          OPEN OUTPUT OUT-FL.
          MOVE 1     TO CT-01.
@@ -72,11 +72,11 @@
                 CT-02 EQUALS 1.
          DISPLAY ' FINISH'.
          205-PROCESS-LINE.
+         ADD 1 TO CT-01.
           READ IN-FL
            AT END
             MOVE 1 TO CT-03
            NOT AT END
-            ADD 1 TO CT-01
             MOVE 0 TO CT-03
             PERFORM  206-MOUT-OUT-REC
           END-READ.
@@ -84,20 +84,22 @@
 
 
           206-MOUT-OUT-REC.
-      *    DISPLAY 'WRT'.
-           MOVE CT-01 TO LN.
-           MOVE ' : ' TO F0.
-           MOVE RC-DT-D TO D.
-           MOVE '/' TO F1.
-           MOVE RC-DT-M TO M.
-           MOVE '/' TO F2.
-           MOVE RC-DT-Y TO Y.
+           STRING
+            CT-01 DELIMITED BY SIZE
+            ' : ' DELIMITED BY SIZE
+            RC-DT-D DELIMITED BY SIZE
+
+            '/' DELIMITED BY SIZE
+            RC-DT-M DELIMITED BY SIZE
+            '/' DELIMITED BY SIZE
+            RC-DT-Y DELIMITED BY SIZE
+           INTO OUT-REC.
            WRITE OUT-REC.
 
 
 
         300-END.
-         DISPLAY 'END-PROGRAM: FHDR0003'.
+         DISPLAY 'END-PROGRAM: FHDR0004'.
 
          STOP RUN.
-       END PROGRAM FHDR0002.
+       END PROGRAM FHDR0004.
