@@ -6,8 +6,12 @@
 		:root {
 			--bg: #222222;
 			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+
 			--softBg: #999999;
 			--txt: #eeeedd;
+			--txt2: #888888;
 
 			--tint01: #0dc2e2;
 			--tint02: #ce810d;
@@ -44,25 +48,31 @@
 		h1 {
 			background-color: #aabbcc00;
 			font-size: 32px;
-			color: var(--txt);
+			color: inherit;
 		}
 
 		h2 {
 			background-color: #aabbcc00;
 			font-size: 20px;
-			color: var(--txt);
+			color: inherit;
 		}
 
 		h3 {
 			background-color: #aabbcc00;
 			font-size: 20px;
-			color: var(--txt);
+			color: inherit;
 		}
 
 		h4 {
 			background-color: #aabbcc00;
 			font-size: 16px;
-			color: var(--tint01);
+			color: inherit;
+		}
+
+		h5 {
+			background-color: #aabbcc00;
+			font-size: 10px;
+			color: inherit;
 		}
 
 
@@ -165,13 +175,109 @@
 
 
 		.scr {
-			border-color: red;
-			vertical-align: middle;
+			border-color: blue;
+			height: 90%;
+			margin-left: auto;
+			margin-right: auto;
+			align-self: center;
+			flex: 1;
 		}
 
 		[h] {
 			display: none;
 		}
+
+		.h {
+			display: none;
+		}
+
+		[g] {
+			background: linear-gradient(to top, var(--tint01) 0%, var(--bg), 100%);
+			background-image: linear-gradient(0deg, var(--tint01), var(--bg));
+		}
+
+
+		.turn_card {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 18px;
+			background-color: var(--txt);
+			width: 80px;
+			height: 90px;
+			color: var(--bg);
+			justify-items: center;
+			vertical-align: middle;
+			justify-content: center;
+			margin-left: 2px;
+			margin-right: 2px;
+		}
+
+		.turn_card.r {
+			flex-direction: column;
+
+		}
+
+		.rat_dot {
+			max-height: 8px;
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 18px;
+			background-color: var(--bg3);
+			height: 20px;
+			max-width: 20px;
+			margin-left: 2px;
+			margin-right: 2px;
+			margin-bottom: 25px;
+			transition: background-color 2s;
+		}
+
+		.rat_dot.x {
+			background-color: red;
+		}
+		.tile_line{
+			flex: 1;
+			background-color: transparent;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-evenly;
+
+
+		}
+
+		.tile{
+			flex:1;
+			background-color: var(--bg2);
+			border-width: 1px;
+			border-color: #11111144;
+			border-radius: 0px;
+		}
+		.tile:hover{
+			transition: background-color 50ms;
+			background-color: var(--bg4);
+
+		}
+		.tile[w]{
+			border-width: 0px;
+			background-color: var(--bg);
+		}
+		.tile[rat]{
+			border-width: 0px;
+			background-color: var(--tint01);
+		}
+		.tile[cat]{
+			border-width: 0px;
+			background-color: var(--red);
+		}
+		.tile[goal]{
+			border-width: 0px;
+			background-color: var(--golden);
+		}
+		[n]{
+			display:none;
+		}
+
 	</style>
 
 	<meta charset="UTF-8" />
@@ -183,41 +289,15 @@
 
 <body id="body" class="bord" style="width:95%; ">
 	<div id="screen" style="
-			min-height: 600px;
-			min-width: 280px;
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
-			align-items: center;
-			">
-		<div id="screen01" class="scr bord vcent hcent col">
+		min-height: 600px;
+		min-width: 280px;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		
+		">
 
-			<div class="bord vcent col" 
-				style="
-				min-width: 200px;
-				min-height: 200px;
-				max-height: 250px;
-				align-items: center;
-				"
-			>
-				<p class="hcent" style="
-					font-size: 28px;
-					vertical-align: middle;
-				"> Menu principal</p>
-				<button class="btn" style="min-width: 150px">INICIAR</button>
-			</div>
-
-			<div class="bord vcent hcent" style="
-				min-height: 20px;
-				max-height: 100px;
-				visibility: hidden;"></div>
-
-
-
-		</div>
-
-
+		
 
 
 	</div>
@@ -226,14 +306,244 @@
 <script>
 	const alfabeto = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 	const algarismos = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+	const html_templates = {
+		"screen01": `
+	<div id="screen01" class="bord" 
+		style="
+				justify-content: center;
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+			"
+		>	
+			<span style="height: 5%; visibility: hidden;">Filler</span>
+			<div class="bord" 
+				style="
+				all:inherit;
+				width: 260px;
+				margin-left: auto;
+				margin-right: auto;
+				background-image: linear-gradient(0deg, var(--tint01), var(--bg));
+				" 
+				g
+			> 
+				<p class="hcent" style="
+						font-size: 28px;
+						vertical-align: middle;
+						align-self: center;
+						background-color: transparent;
+						color: var(--txt);
+						font-weight: 700;
+				"> Menu principal</p>
+				<button class="btn" 
+					style="
+					min-width: 150px;
+					max-width: 200px;
+					align-self: center;
+					border-width:  2px;
+					font-weight: 700;
+					"
+					onclick="start_game()"
+				>INICIAR</button>
+			</div>
+			<span  style="height: 400px; visibility: hidden;">Filler</span>
+
+
+		</div>
+		`,
+	}
+
+
 	let gamestate = 'not_started';
-	function iniciar_jogo() {
-		//hide screen 01
-		//show screen 02
-		//set gamestate to started
+
+	document.getElementById('screen').innerHTML = html_templates["screen01"];
+
+	const field_size = [10, 10];
+	function newCat(pos){
 
 
 	}
+
+
+	let cats = [];
+	let rats = [];
+	let M = [];
+	//initialize M
+
+	function initialize_M() {
+		let l = [];
+		for (let y = 0; y < field_size[1]; y++) {
+			l = [];
+			for (let x = 0; x < field_size[0]; x++) {
+				l.push('.');
+			}
+			M.push(l);
+		}
+		//console.table(M);
+		for(let i=0; i<field_size[0];i++){
+			M[0][i] = 'w';
+			M[field_size[1]-1][i] = 'w';
+		}
+		for(let i=0; i<field_size[1];i++){
+			M[i][0] = 'w';
+			M[i][field_size[0]-1] = 'w';
+		}
+		M[3][3]='R';
+		M[3][5]='C';
+		
+		M[1][field_size[0]-2] = 'G';
+
+
+		//console.table(M);
+		
+	}
+	
+	function start_game() {
+		initialize_M();
+		console.log('ASD');
+		document.getElementById('screen').innerHTML = html_templates["screen01"];
+		//hide screen 01
+		//show screen 02
+		//set gamestate to started
+		generateFieldScreen()
+
+
+	}
+
+	function generateFieldScreen(){
+		let r = `<div id="head" style="
+				background-color: var(--bg);
+				min-height: 100px;
+				max-height: 100px;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+				align-items: center;
+				padding-left: 20px;
+				padding-right: 20px;
+			">
+			<div class="bord turn_card">
+				<h2 style="color:inherit">Rats</h2>
+			</div>
+			<div class="bord turn_card">
+				<h2 style="color:inherit">CATS</h2>
+			</div>
+			<div class="bord turn_card r">
+				<div style="color:inherit">
+					<h2 style="align-self: center; margin-left: auto; margin-right: auto;">Rats</h2>
+				</div>
+				<div style="
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+					align-items: center;
+					color: inherit;
+					">
+					<div class="rat_dot"> </div>
+					<div class="rat_dot"> </div>
+					<div class="rat_dot x "> </div>
+					<div class="rat_dot"> </div>
+
+
+
+				</div>
+			</div>
+
+		</div>
+		<div id="bd" style="
+				background-color: var(--bg2);
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			">
+			<div id="chars" style="
+					background-color: transparent;
+					flex:1;
+					max-width: 20%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-evenly;
+				">
+				<div>Cat_01</div>
+				<div>Cat_02</div>
+				<div>Cat_03</div>
+
+
+			</div>
+			<div id="bf" style="
+					background-color: black;
+					min-width: 40%;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-evenly;
+				">
+				`
+			let bf = ``;
+			let x=0, y=0;
+			
+			for(let line of M){
+				bf+='<div class="tile_line"> '
+				for(let tile of line){
+					let props = '';
+					if(M[y][x]=='w') props+= ' w';
+					if(M[y][x]=='P') props+= ' p';
+					if(M[y][x]=='G') props+= ' goal';
+					
+					bf+=`
+						<div 
+							id="tile_${x}_${y}"
+							class="tile"
+							${M[y][x]=='w'?' w':' '}
+							${M[y][x]=='G'?' goal':' '}
+							${M[y][x]=='R'?' rat':' '}
+							${M[y][x]=='C'?' cat':' '}
+							
+							
+							
+							onclick="clickTile(${x},${y},'tile_${x}_${y}')"
+						> 
+							<span id="tile_${x}_${y}" n>
+								{"x":${x}, "y":${y}}
+							</span>
+							${
+								M[y][x]=='G'?
+								`<div style="
+									border-color: var(--txt);
+									border-style: solid;
+									border-width: 0px;
+									border-radius: 18px;
+									background-color: var(--bg3);
+									"
+								>S</div>':' 
+								`
+							}
+						
+						
+						</div>`;
+					x+=1;
+				}
+					
+				bf+='</div>'
+				y+=1; 
+				x=0;
+
+			}
+
+	r+= bf+`
+			</div>
+			<div id="cts" style="
+					background-color: transparent;
+					flex:1;
+					max-width: 20%;
+				">
+				
+			</div>
+		</div>`
+		document.getElementById('screen').innerHTML = r;
+	}
+
 
 	function cats_walk() {
 
@@ -244,10 +554,20 @@
 
 	}
 
-	function rats_turn(){
+	function rats_turn() {
 
 
 	}
+
+
+
+
+
+	function clickTile(x,y,id){
+		console.log('X> ',x,"Y> ", y);
+
+	}
+
 
 
 </script>
