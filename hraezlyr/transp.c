@@ -8,6 +8,12 @@ int main(){
 	while(i<100 && scanf("%c",&c)!=EOF){
 		printf("> '%c'",c);
 		fprintf(w,"%c",c);
+		//ignore comments
+		
+		
+		
+		
+		
 		
 		i++;
 	}

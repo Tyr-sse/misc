@@ -496,7 +496,6 @@
 							id="tile_${x}_${y}"
 							class="tile"
 							${M[y][x]=='w'?' w':' '}
-							${M[y][x]=='G'?' goal':' '}
 							${M[y][x]=='R'?' rat':' '}
 							${M[y][x]=='C'?' cat':' '}
 							
@@ -504,20 +503,30 @@
 							
 							onclick="clickTile(${x},${y},'tile_${x}_${y}')"
 						> 
-							<span id="tile_${x}_${y}" n>
+							<span id="tile_info_${x}_${y}" n>
 								{"x":${x}, "y":${y}}
 							</span>
 							${
 								M[y][x]=='G'?
 								`<div style="
-									border-color: var(--txt);
 									border-style: solid;
 									border-width: 0px;
-									border-radius: 18px;
-									background-color: var(--bg3);
+									border-radius: 50%;
+									background-color: var(--golden);
 									"
-								>S</div>':' 
-								`
+									>
+										<div style="
+										border-style: solid;
+										border-width: 0px;
+										border-radius: 50%;
+										height: 90%;
+										width: 2px;
+										margin: auto;
+										background-color: var(--bg);
+										"
+										></div>
+									</div>`:' '
+								
 							}
 						
 						
