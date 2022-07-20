@@ -1,6 +1,30 @@
+Cursos Obrigatórios para o Homeoffice
 [X] 2179
 [X] 3770
 [ ] 5953
 [ ] 6546
 [ ] 7636
 [ ] 7905
+
+
+Cursos Obrigatórios para Os 3 meses de treinamento:
+Tecnologia
+	7791 Introdução ao Teste de Software
+	5609 Sinapse Noções da Plataforma Mainframe no BB
+
+Trilha Estratégica 5h de Escolha Livre
+
+Trilha RSA 5h de Escolha Livre
+
+Mentoria
+	6835 Mentoria 5h
+	6892 Mentoria BB
+	8503 MEntoria
+	5856 Sapiência - 4 Minutos sobre Mentoria
+	8504 Webinar sobre Mentoria: Práticas
+	201881 Mentoria- desenvolvendo pessoas e compartilhando experiências
+
+Guildas
+	5h terças e Quintas
+Minipalestras
+	10h Terças e Quintas
