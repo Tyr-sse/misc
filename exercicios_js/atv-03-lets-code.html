@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style id="stl">
+		:root {
+			--bg: #222222;
+			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+
+			--softBg: #999999;
+			--txt: #eeeedd;
+
+			--tint01: #ed7411;
+			--tint02: #555555;
+
+			--red: #bb3030;
+			--green: #11ee11;
+			--golden: #ffff11;
+
+			background-color: var(--bg);
+		}
+
+		* {
+			background-color: transparent;
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 32px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		p,
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 14px;
+			color: var(--txt);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 2px;
+			border-radius: 5px;
+
+			margin-left: 20px;
+			margin-right: 20x;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			height: 30px;
+			width: 50;
+
+			font-size: 16px;
+
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 12px;
+
+
+		}
+
+		[x]::placeholder {
+			color: red;
+			font-size: 16px;
+		}
+
+		.btn {
+			color: var(--txt);
+			background-color: var(--bg4);
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 35px;
+			min-width: 35px;
+			transition: background-color 0.2s;
+		}
+
+		.btn[del] {
+			color: var(--red);
+			border-width: 3px;
+			font-weight: 700;
+			border-color: var(--red);
+			border-radius: 5px;
+
+
+		}
+
+		.btn:hover {
+			background-color: var(--bg2);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.row {
+			text-align: center;
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+
+			align-items: center;
+		}
+
+		.q_input {
+			margin-left: auto;
+			margin-right: auto;
+			width: 60%;
+
+		}
+
+		.item {
+			flex: 1;
+			margin: 2px;
+			display: flex;
+			vertical-align: center;
+			vertical-align: middle;
+
+		}
+
+		.qBtn {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-width: 400px;
+			margin-top: 5px;
+		}
+
+		.out {
+			background-color: #999999;
+		}
+
+		td {
+			background-color: #aabbcc00;
+			border-radius: 3px;
+			border: 2px solid;
+			margin-left: auto;
+
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.lrg {
+			width: 200px;
+			padding: 5px;
+
+		}
+	</style>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<title>Atividade 03 Lets-Code</title>
+</head>
+
+<body id="body" class="bord" style="width:95%;">
+	<div class="col bord " style="min-height: 580px; width: 100%; ">
+
+
+		<h1 class="bord" style="
+				width: 50%;
+				color:var(--bg);
+				background-color:var(--txt);
+				padding:5px;
+			">Formas</h1>
+
+		<div id="board_container" class="col bord" style="
+					background-color: transparent;
+					width: 90%;
+					height: 400px;
+					min-height: 340px;
+					border-width: 3px; margin-bottom: 20px;
+					background-color: #aabbcc00;
+					">a
+			<canvas id="canvasId" style="
+				width: 400px;
+				height: 400px;"></canvas>
+		</div>
+	</div>
+</body>
+<script>
+	main();
+
+	var canv = document.getElementById('canvasId');
+	var ctxt = canv.getContext('2d');
+
+	function main() {
+		//init;
+
+
+	}
+
+
+	function init() {
+		canv = document.getElementById('canvasId');
+		ctxt = canv.getContext('2d');
+		console.log('canv ', canv)
+		ctxt.beginPath();
+		ctxt.rect(20, 20, 2, 3);
+		ctxt.fillStyle = 'green';
+		ctxt.fill();
+
+		ctxt.stroke();
+
+	}
+
+
+	class Point {
+		x;
+		y;
+		constructor (x,y){
+			this.x = x;
+			this.y = y;
+		}
+	}
+
+	class Geometric {
+		id;
+		origin = new Point;
+		type = 'geometric';
+
+		#isObj = {};
+		is(type) {
+			return type in this.#isObj;
+		}
+		addIsObj(type) {
+			this.#isObj[type] = 'yes';
+		}
+
+
+
+		static num_of_instances = 0;
+		constructor(id = 'GeometricId', type = null) {
+			Geometric.num_of_instances++;
+			this.id = id;
+			if (type != null) {
+				this.addIsObj(type);
+				this.type = type;
+			};
+			console.log('instance: ', this);
+
+		}
+
+	}
+	class Polygon extends Geometric {
+		points = [];
+		n_of_points = 0;
+		#setPoints(max_n,...points) {
+			if(points.filter((it)=> !(it instanceof Point)).length>0) return 0;
+			if(max_n == -1) max_n = points.length;
+			let n = max_n;
+			for (let point of points) {
+				this.points.push(point);
+				n--;
+			}
+			this.n_of_points = n;
+
+		}
+
+
+
+		constructor(id = 'PolygonId', type = 'polygon', ...points) {
+			super(id, type);
+			let n = 0;
+			this.#setPoints(-1,...points);
+			
+
+			for (let point of points) {
+				if (n == 0) {
+					this.origin = point;
+					continue;
+				}
+				this.points.push(point);
+				n++;
+			}
+			this.n_of_points = n;
+		}
+
+	}
+	class Circle extends Geometric {
+		radius;
+		constructor(id = 'circleId') {
+			super(id, 'circle');
+		}
+
+	}
+	class Square extends Polygon {
+
+		constructor(id = 'SquareId') {
+			super(id, 'square', []);
+			this.addIsObj('square');
+
+		}
+
+	}
+	class Triangle extends Polygon {
+
+		constructor(id = 'TriangleId', ...points) {
+			super(id, 'triangle', origin, ...points);
+			this.addIsObj('triangle');
+
+		}
+
+	}
+
+	let g01 = new Geometric();
+	let g02 = new Geometric('g02');
+
+	let p01 = new Polygon('p01');
+	let s01 = new Square('s01');
+	let c01 = new Circle('c01');
+	let t01 = new Triangle('t01',new Point(2,3), [new Point(2,4),new Point(3,3)]);
+
+
+	console.log('B<', s01.is('square'), p01.is('square'));
+
+
+
+
+
+
+</script>
+
+</html>
