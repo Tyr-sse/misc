@@ -1,0 +1,49 @@
+Notas da minipalestra 04 Cloud BB:
+ 
+
+Pessoal, segue o os conhecimentos da área de nuvem que mostrei:
+
+Conhecimentos básicos
+ Lógica de programação (expressões condicionais, loops, lógica booleana, variáveis, aritmética, funções)
+ Estruturas de Dados e Algoritmos
+ Expressões Regulares
+ Conceitos de Orientação a Objetos e SOLID
+ Design Patterns
+Práticas, técnicas e cultura
+ Scrum
+ Kanban
+ Domain Driven Design
+ DevOps
+ Code Review
+ Blameless Postmortem
+ Trunk based development
+ Discussões (RFC) e decisões arquiteturais (ADRs) em issues
+ SRE - Site Reliability Engineering (SLI/SLO/SLA, error budget, toil elimination, 4 golden signals)
+ Certificação: DevOps Institute Site Reliability Engineering (SRE) Foundation
+ Software Delivery Performance (DORA 4 key metrics)
+ Desenvolvimento de Comunidades
+Conhecimentos Nuvem
+ Java 11; ou
+ Certificação: Oracle Certified Professional: Java SE 11 Developer
+ Java 17
+ Certificação: Oracle Certified Professional: Java SE 17 Developer
+ Gerenciamento de Dependências (maven)
+ Testes Automatizados (JUnit)
+ Estratégias de teste (unidade, integração, sistema, fumaça, sonda, dry run, carga, performance, mutante)
+ Git/GitLab/Github (clone, commit, push, pull, branch, issue, merge/pull request)
+ Integração contínua (CI) e entrega contínua (CD)
+ Estratégias de implantação (canário, blue-green, rolling, feature flag, teste A/B)
+ Bancos de Dados Relacionais (SQL, formas normais, ACID)
+ Bancos de Dados Não Relacionais (colunar, chave-valor, orientado a documentos, orientado a grafo, séries temporais)
+ Linux (terminal, shell script)
+ Redes (endereçamento ip, DNS, http, TLS/mTLS, proxy reverso)
+ REST API (resources, methods, response codes, HATEOAS)
+ OpenAPI/Swagger
+ Quarkus/Eclipse MicroProfile
+ Certificação: Red Hat Certified Cloud-Native Developer
+ Container (docker, podman)
+ Kubernetes
+ Certificação: Certified Kubernetes Application Developer (CKAD)
+ Computação Distribuída (teorema CAP, consistência eventual, escala horizontal, idempotência, consenso, balanceamento de carga, padrão saga, map/reduce)
+ Metodologia 12 Factor App
+ Observabilidade de Aplicações (logs, metrics, tracing, alerting)

@@ -1,7 +1,7 @@
 Cursos Obrigatórios para o Homeoffice
 [X] 2179
 [X] 3770
-[ ] 5953
+[X] 5953 - Ergonomia - Orientações Posturais
 [ ] 6546
 [ ] 7636
 [ ] 7905
@@ -13,8 +13,27 @@ Tecnologia
 	5609 Sinapse Noções da Plataforma Mainframe no BB
 
 Trilha Estratégica 5h de Escolha Livre
+ escolhas
+  202462 06h SQL
+  
+ candidatos
+  201909     UX
+  201766 10h Python Data Science 
+  201109 06h Data Science
+  201758 12h Excel
+  7636       Segurança Cibernética no BB
+  8143       Open Banking
+  7899       Open Banking
+  201334     Alavancas de gestão do conhecimento
+
+
 
 Trilha RSA 5h de Escolha Livre
+ escolhas
+  
+ candidatos
+  8943
+  8942
 
 Mentoria
 	6835 Mentoria 5h

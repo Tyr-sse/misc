@@ -242,143 +242,64 @@
 	</div>
 </body>
 <script>
-	main();
-
-	var canv = document.getElementById('canvasId');
-	var ctxt = canv.getContext('2d');
-
-	function main() {
-		//init;
-
-
-	}
-
-
-	function init() {
-		canv = document.getElementById('canvasId');
-		ctxt = canv.getContext('2d');
-		console.log('canv ', canv)
-		ctxt.beginPath();
-		ctxt.rect(20, 20, 2, 3);
-		ctxt.fillStyle = 'green';
-		ctxt.fill();
-
-		ctxt.stroke();
-
-	}
-
-
 	class Point {
 		x;
 		y;
-		constructor (x,y){
+		constructor(x = 0, y = 0) {
 			this.x = x;
 			this.y = y;
 		}
+		distance = (to = new Point()) => Math.sqrt((x - to.x) * (x - to.x) + (y - to.y) * (y - to.y));
+		midpoint = (to = new Point()) => new Point((x + to.x) / 2, (y + to.y) / 2);
 	}
-
 	class Geometric {
-		id;
-		origin = new Point;
-		type = 'geometric';
 
-		#isObj = {};
-		is(type) {
-			return type in this.#isObj;
+		origin = new Point();
+		#types = [];
+		getTypes = () => this.#types;
+		addType = (val) => {
+			if (this.getTypes().includes(val)) return;
+			if (typeof val != 'string' && !val instanceof String) return; 
+			this.#types.push(val);
 		}
-		addIsObj(type) {
-			this.#isObj[type] = 'yes';
+		#removeType(val){
+			if (!this.getTypes().includes(val)) return;
+			this.#types.splice(this.#types.indexOf(val), 1);
 		}
 
-
-
-		static num_of_instances = 0;
-		constructor(id = 'GeometricId', type = null) {
-			Geometric.num_of_instances++;
+		static nOfInstances = 0;
+		id = 'geometricId';
+		constructor(id = 'geometricId', origin = new Point()) {
+			Geometric.nOfInstances++;
+			this.origin = origin;
 			this.id = id;
-			if (type != null) {
-				this.addIsObj(type);
-				this.type = type;
-			};
-			console.log('instance: ', this);
-
+			this.addType('geometric')
+			console.log('instance> ' + Geometric.nOfInstances, this)
 		}
 
+
 	}
+
 	class Polygon extends Geometric {
-		points = [];
-		n_of_points = 0;
-		#setPoints(max_n,...points) {
-			if(points.filter((it)=> !(it instanceof Point)).length>0) return 0;
-			if(max_n == -1) max_n = points.length;
-			let n = max_n;
-			for (let point of points) {
-				this.points.push(point);
-				n--;
-			}
-			this.n_of_points = n;
 
-		}
-
-
-
-		constructor(id = 'PolygonId', type = 'polygon', ...points) {
-			super(id, type);
-			let n = 0;
-			this.#setPoints(-1,...points);
-			
-
-			for (let point of points) {
-				if (n == 0) {
-					this.origin = point;
-					continue;
-				}
-				this.points.push(point);
-				n++;
-			}
-			this.n_of_points = n;
-		}
-
-	}
-	class Circle extends Geometric {
-		radius;
-		constructor(id = 'circleId') {
-			super(id, 'circle');
-		}
-
-	}
-	class Square extends Polygon {
-
-		constructor(id = 'SquareId') {
-			super(id, 'square', []);
-			this.addIsObj('square');
-
+		constructor(id = "polygonId", ...points) {
+			//let origin = media dos pontos
+			let origin = 'orig';
+			super(id, origin);
+			this.addType('polygon')
 		}
 
 	}
 	class Triangle extends Polygon {
-
-		constructor(id = 'TriangleId', ...points) {
-			super(id, 'triangle', origin, ...points);
-			this.addIsObj('triangle');
+		constructor(id = 'triangleId', ...points) {
+			super(id, ...points);
+			this.addType('triangle');
 
 		}
 
 	}
 
-	let g01 = new Geometric();
-	let g02 = new Geometric('g02');
-
-	let p01 = new Polygon('p01');
-	let s01 = new Square('s01');
-	let c01 = new Circle('c01');
-	let t01 = new Triangle('t01',new Point(2,3), [new Point(2,4),new Point(3,3)]);
-
-
-	console.log('B<', s01.is('square'), p01.is('square'));
-
-
-
+	let t01 = new Triangle('thiag', new Point(2, 3), new Point(6, 3), new Point(2, 4));
 
 
 

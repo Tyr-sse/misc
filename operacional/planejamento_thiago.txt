@@ -1,0 +1,45 @@
+*12341212121212Planejamento Calendário Thiago Arcanjo:........................................................................................|
+/* ACONTECEU
+ano : 2022 
+  
+ mes : 06
+  dia : 
+   10 - Tecnotour
+   22 - Aula Magna
+   24 - 01 - Lets Code
+   27 - 02 - Lets Code
+   29 - 03 - Lets Code
+   30 - Minipalestra Ouvidoria e IN 383
+   01 - 04 - Lets Code
+   04 - 05 - Lets Code
+   05 - Minipalestra - Visão Geral Arquitetura BB
+   06 - 06 - Lets Code
+   08 - 07 - Lets Code
+ 
+   11 - 08 - Lets Code
+   12 - Minipalestra Arquitetura Mainframe
+   13 - 09 - Lets Code
+   14 - Minipalestra - Arquitetura de Integração
+   15 - 10 - Lets Code
+   18 - 11 - Lets Code
+   20 - 12 - Lets Code
+ 
+   21 - Minipalestra - Cloud BB
+
+
+
+
+
+*/
+
+/* AINDA NÃO ACONTECEU
+
+
+
+
+
+*/
+
+
+*12341212121212 ........| ........| ........| ........| ........| ........| ........| ........| ........| ........| ........| ........| ......|
+
