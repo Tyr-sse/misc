@@ -259,10 +259,10 @@
 		getTypes = () => this.#types;
 		addType = (val) => {
 			if (this.getTypes().includes(val)) return;
-			if (typeof val != 'string' && !val instanceof String) return; 
+			if (typeof val != 'string' && !val instanceof String) return;
 			this.#types.push(val);
 		}
-		#removeType(val){
+		#removeType(val) {
 			if (!this.getTypes().includes(val)) return;
 			this.#types.splice(this.#types.indexOf(val), 1);
 		}
@@ -282,9 +282,26 @@
 
 	class Polygon extends Geometric {
 
+		init_points(...points) {
+			if (points.length) {
+				console.log('s');
+				let sum_x = 0;
+				let sum_y = 0;
+				let i = 0;
+				for (let pt of points) {
+					sum_x += pt.x;
+					sum_y += pt.y;
+					i++;
+				}
+				origin = new Point(sum_x / i, sum_y / i);
+			} // há mais de um ponto
+
+		}
+
 		constructor(id = "polygonId", ...points) {
 			//let origin = media dos pontos
-			let origin = 'orig';
+			let origin = new Point();
+
 			super(id, origin);
 			this.addType('polygon')
 		}
@@ -300,6 +317,39 @@
 	}
 
 	let t01 = new Triangle('thiag', new Point(2, 3), new Point(6, 3), new Point(2, 4));
+	let t02 = new Polygon('thiag');
+
+	let list = [10, 20, 30, 40, 50, 60, 70];
+	function maiorSoma(L, n) {
+		let keep = 1;
+		let ol = 1;
+		let i = 0;
+		let j = 0;
+		let bs=0;
+		let s=0;
+
+		do {
+			//outer loop
+			if (ol) {
+				i++
+				ol = 0;
+				j = 0;
+				s=0;
+				continue;
+			}
+			//inner loop
+			if(j>n){
+				ol=1;
+				
+			}
+			s+=L[i+j];
+			j++;
+			if (i >= L.length) keep = 0;
+		} while (keep);
+
+
+
+	}
 
 
 
