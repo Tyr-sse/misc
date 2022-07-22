@@ -249,12 +249,65 @@
 			this.x = x;
 			this.y = y;
 		}
-		distance = (to = new Point()) => Math.sqrt((x - to.x) * (x - to.x) + (y - to.y) * (y - to.y));
-		midpoint = (to = new Point()) => new Point((x + to.x) / 2, (y + to.y) / 2);
-	}
-	class Geometric {
+		distance = function (to = new Point()) {
+			return Math.sqrt((this.x - to.x) * (this.x - to.x) + (this.y - to.y) * (this.y - to.y));
+		}
+		midpoint = function (to = new Point()) {
+			return new Point((this.x + to.x) / 2, (this.y + to.y) / 2);
+		}
 
+		//halfArea = (to = new Point()) => (this.x-to.x)*(this.y-to.y)/2;
+	}
+	let triangleArea = function (points) {
+		if (points.length != 3) return 0;
+
+		//console.log('POINTS: ', this.points);
+		let min_x, max_x, min_y, max_y, i = 0;
+		for (let pt of points) {
+			if (i === 0) {
+				min_x = pt.x;
+				max_x = pt.x;
+				min_y = pt.y;
+				max_y = pt.y;
+			}
+			if (pt.x < min_x) min_x = pt.x;
+			if (pt.x > max_x) max_x = pt.x;
+
+			if (pt.y < min_y) min_y = pt.y;
+			if (pt.y > max_y) max_y = pt.y;
+			i++;
+		}
+		let A = (max_x - min_x) * (max_y - min_y);
+		A = Math.abs(A);
+		A -=
+			(Math.abs(points[0].x - points[1].x) * Math.abs(points[0].y - points[1].y) * 0.5) +
+			(Math.abs(points[1].x - points[2].x) * Math.abs(points[1].y - points[2].y) * 0.5) +
+			(Math.abs(points[2].x - points[0].x) * Math.abs(points[2].y - points[0].y) * 0.5);
+
+		//console.log("area ", A)
+		return A;
+
+	}
+
+
+
+	class Geometric {
 		origin = new Point();
+		#perimeter = 0;
+		getPerimeter = function () {
+			return this.#perimeter;
+		}
+		setPerimeter = function (val) {
+			this.#perimeter = val;
+		}
+		#area = 0;
+		getArea = function () {
+			return this.#area;
+		}
+		setArea = function (val) {
+			this.#area = val;
+		}
+
 		#types = [];
 		getTypes = () => this.#types;
 		addType = (val) => {
@@ -266,6 +319,12 @@
 			if (!this.getTypes().includes(val)) return;
 			this.#types.splice(this.#types.indexOf(val), 1);
 		}
+
+		computeArea = () => {
+			return 0;
+		}
+
+
 
 		static nOfInstances = 0;
 		id = 'geometricId';
@@ -280,77 +339,181 @@
 
 	}
 
+
+
+	class Circle extends Geometric {
+
+		constructor(id = 'circleId', origin = new Point(), radius = 0) {
+			super(id, origin);
+			this.setArea(Math.PI * radius * radius);
+			this.setPerimeter(2 * Math.PI * radius);
+
+		}
+
+	}
+
+
+
 	class Polygon extends Geometric {
 
-		init_points(...points) {
-			if (points.length) {
-				console.log('s');
+
+		#init_points(...points) {//compute perimeter and origin
+
+			if (points.length) {// há ao menos um ponto
 				let sum_x = 0;
 				let sum_y = 0;
 				let i = 0;
+				let lp = null;
+				this.#perimeter = 0;
 				for (let pt of points) {
+					//computar soma
 					sum_x += pt.x;
 					sum_y += pt.y;
+					//computar perimetro
+					if (lp != null) this.#perimeter += pt.distance(lp);
+					lp = pt;
 					i++;
 				}
+				//somar ultimo lado do poligono
+				this.#perimeter += lp.distance(points[0]);
+
 				origin = new Point(sum_x / i, sum_y / i);
-			} // há mais de um ponto
+			}
+			this.points = points;
 
 		}
 
 		constructor(id = "polygonId", ...points) {
-			//let origin = media dos pontos
 			let origin = new Point();
-
 			super(id, origin);
+			this.#init_points(...points);
 			this.addType('polygon')
 		}
 
 	}
 	class Triangle extends Polygon {
+		#trianglePerimeterComputer() {
+			this.setPerimeter(
+				this.points[0].distance(this.points[1]) +
+				this.points[1].distance(this.points[2]) +
+				this.points[0].distance(this.points[2])
+			);
+		}
+		// #triangleAreaComputer() {
+		// 	//console.log('POINTS: ', this.points);
+		// 	let min_x, max_x, min_y, max_y, i = 0;
+		// 	for (let pt of this.points) {
+		// 		if (i === 0) {
+		// 			min_x = pt.x;
+		// 			max_x = pt.x;
+		// 			min_y = pt.y;
+		// 			max_y = pt.y;
+		// 		}
+		// 		if (pt.x < min_x) min_x = pt.x;
+		// 		if (pt.x > max_x) max_x = pt.x;
+
+		// 		if (pt.y < min_y) min_y = pt.y;
+		// 		if (pt.y > max_y) max_y = pt.y;
+		// 		i++;
+		// 	}
+		// 	let A = (max_x - min_x) * (max_y - min_y);
+		// 	A = Math.abs(A);
+		// 	A -=
+		// 		(Math.abs(this.points[0].x - this.points[1].x) * Math.abs(this.points[0].y - this.points[1].y) * 0.5) +
+		// 		(Math.abs(this.points[1].x - this.points[2].x) * Math.abs(this.points[1].y - this.points[2].y) * 0.5) +
+		// 		(Math.abs(this.points[2].x - this.points[0].x) * Math.abs(this.points[2].y - this.points[0].y) * 0.5);
+
+		// 	//console.log("area ", A)
+
+		// }
+
 		constructor(id = 'triangleId', ...points) {
 			super(id, ...points);
 			this.addType('triangle');
+			this.computeArea = triangleArea;
+			this.setArea(this.computeArea(points));
+			//this.computePerimeter = this.#trianglePerimeter;
+			//this.computePerimeter();
+
+
 
 		}
 
 	}
 
-	let t01 = new Triangle('thiag', new Point(2, 3), new Point(6, 3), new Point(2, 4));
-	let t02 = new Polygon('thiag');
+	class Square extends Polygon {
+		#deducePoints(points) {
+			if (points.length != 2) return points;
+			let mp = points[1].midpoint(points[0]);
+			//let D = new Point(points[1].x - points[0].x, points[1].y - points[0].y);
+			let D2 = new Point((points[0].x - points[1].x) * 0.5 + mp.x, (points[1].y - points[0].y) * 0.5 + mp.y);
 
-	let list = [10, 20, 30, 40, 50, 60, 70];
-	function maiorSoma(L, n) {
-		let keep = 1;
-		let ol = 1;
-		let i = 0;
-		let j = 0;
-		let bs=0;
-		let s=0;
+			// 0  1
+			//-1  0
 
-		do {
-			//outer loop
-			if (ol) {
-				i++
-				ol = 0;
-				j = 0;
-				s=0;
-				continue;
+		}
+		#squarePerimeterComputer() {
+			this.setPerimeter(
+				this.points[0].distance(this.points[1]) +
+				this.points[1].distance(this.points[2]) +
+				this.points[0].distance(this.points[2])
+			);
+		}
+		#squareAreaComputer() {
+			//console.log('POINTS: ', this.points);
+			let min_x, max_x, min_y, max_y, i = 0;
+			for (let pt of this.points) {
+				if (i === 0) {
+					min_x = pt.x;
+					max_x = pt.x;
+					min_y = pt.y;
+					max_y = pt.y;
+				}
+				if (pt.x < min_x) min_x = pt.x;
+				if (pt.x > max_x) max_x = pt.x;
+
+				if (pt.y < min_y) min_y = pt.y;
+				if (pt.y > max_y) max_y = pt.y;
+				i++;
 			}
-			//inner loop
-			if(j>n){
-				ol=1;
-				
-			}
-			s+=L[i+j];
-			j++;
-			if (i >= L.length) keep = 0;
-		} while (keep);
+			let A = (max_x - min_x) * (max_y - min_y);
+			A = Math.abs(A);
+			A -=
+				(Math.abs(this.points[0].x - this.points[1].x) * Math.abs(this.points[0].y - this.points[1].y) * 0.5) +
+				(Math.abs(this.points[1].x - this.points[2].x) * Math.abs(this.points[1].y - this.points[2].y) * 0.5) +
+				(Math.abs(this.points[2].x - this.points[0].x) * Math.abs(this.points[2].y - this.points[0].y) * 0.5);
+
+			//console.log("area ", A)
+
+		}
+
+		constructor(id = 'squareId', ...points) {
+			// points = this.#deducePoints(points);
+			super(id, ...points);
+			// this.addType('square');
+			// this.computeArea = this.#squareAreaComputer;
+			// this.computeArea();
+			// this.computePerimeter = this.#squareAreaComputer;
+			// this.computePerimeter();
+			// this
 
 
+		}
 
 	}
 
+
+	let t01 = new Triangle('thiags', new Point(), new Point(-1, 1), new Point(-1, -1));
+	let t02 = new Triangle('thiagd', new Point(), new Point(3, 0), new Point(3, 4));
+	let sq01 = new Square('sqr', new Point(), new Point(2, 0));
+
+
+
+	let p01 = new Polygon('thiagx');
+	let p02 = new Polygon('triang', new Point(), new Point(3, 0), new Point(3, 4));
+
+//https://www.educba.com/typescript-type-vs-interface/
+//https://www.typescriptlang.org/docs/handbook/interfaces.html
 
 
 </script>
