@@ -2,9 +2,10 @@
   "name": "y",
   "version": "1.0.0",
   "description": "api_for_something",
-  "main": "main.ts",
+  "main": "main.js",
   "scripts": {
-    "test": "test"
+    
+    "devStart":"nodemon main.js"
   },
   "repository": {
     "type": "git",

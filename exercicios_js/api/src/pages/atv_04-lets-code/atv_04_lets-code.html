@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style id="stl">
+		:root {
+			--bg: #222222;
+			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+
+			--softBg: #999999;
+			--txt: #eeeedd;
+
+			--tint01: #ed7411;
+			--tint02: #555555;
+
+			--red: #bb3030;
+			--green: #11ee11;
+			--golden: #ffff11;
+
+			background-color: var(--bg);
+		}
+
+		* {
+			background-color: transparent;
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 32px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		p,
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 14px;
+			color: var(--txt);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 2px;
+			border-radius: 5px;
+
+			margin-left: 20px;
+			margin-right: 20x;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			height: 30px;
+			width: 50;
+
+			font-size: 16px;
+
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 12px;
+
+
+		}
+
+		[x]::placeholder {
+			color: red;
+			font-size: 16px;
+		}
+
+		.btn {
+			color: var(--txt);
+			background-color: var(--bg4);
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 35px;
+			min-width: 35px;
+			transition: background-color 0.2s;
+		}
+
+		.btn[del] {
+			color: var(--red);
+			border-width: 3px;
+			font-weight: 700;
+			border-color: var(--red);
+			border-radius: 5px;
+
+
+		}
+
+		.btn:hover {
+			background-color: var(--bg2);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.row {
+			text-align: center;
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+
+			align-items: center;
+		}
+
+		.q_input {
+			margin-left: auto;
+			margin-right: auto;
+			width: 60%;
+
+		}
+
+		.item {
+			flex: 1;
+			margin: 2px;
+			display: flex;
+			vertical-align: center;
+			vertical-align: middle;
+
+		}
+
+		.qBtn {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-width: 400px;
+			margin-top: 5px;
+		}
+
+		.out {
+			background-color: #999999;
+		}
+
+		td {
+			background-color: #aabbcc00;
+			border-radius: 3px;
+			border: 2px solid;
+			margin-left: auto;
+
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.lrg {
+			width: 200px;
+			padding: 5px;
+
+		}
+
+		.terrain_row {
+			flex: 1;
+			display: flex;
+			background-color: var(--softBg);
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+		.terrain_it {
+			flex: 1;
+			display: flex;
+			background-color: var(--softBg);
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script defer>
+		let terreno = [];
+		function range(x) {
+			R = [];
+			for (let i = 0; i < x; i++) R.push(i);
+			return R;
+		}
+
+		class Activity{
+			static n_of_activities = 0;
+			#description;
+			#category;
+			#priority;
+			#stage;
+			constructor(description, category, priority=3, stage=0){
+				this.#category = category;
+				this.#description = description;
+				this.#priority = priority;
+				this.#stage = stage;
+				Activity.n_of_activities++;
+				
+			}
+
+		}
+
+
+		const lib = [
+			new Activity('descr_001','categ_001',1),
+		]
+		function showList(){
+			for(let el of range())
+
+		}
+
+/*
+
+Atividade 04:
+PRINCIPAL (700XP)
+- Utilizar obrigatoriamente typescript no lugar de js para este trabalho;
+
+- Criar uma aplicação para Adição, Remoção e Atualização de uma TODO LIST (Lista de Afazeres);
+- Os afazeres devem poder ser separados em categorias (podem olhar como o site Todoist é feito);
+- Deve ser alterado o status da tarefa para "feita" através de um checkbox;
+- Deve haver uma data associada a cada tarefa e todas elas devem ser salvas no Storage.
+
+EXTRA (200XP)
+- O usuário deve ser avisado quando a tarefa estiver atrasada (alert ou algo do tipo);
+- Montem usando OO ao invés de programação funcional.
+
+
+
+*/
+
+
+
+
+	</script>
+
+	<title>Atividade 03 Lets-Code</title>
+</head>
+
+<body id="body" class="bord" style="width:95%;">
+	<div class="col bord " style="min-height: 580px; width: 100%; ">
+
+
+		<h1 class="bord" style="
+				width: 50%;
+				color:var(--bg);
+				background-color:var(--txt);
+				padding:5px;
+			">TO DO LIST</h1>
+		<div class="bord" style="height: 40px; width: 70%;"> </div>
+
+		<div id="board_container" class="col bord" style="
+					background-color: transparent;
+					width: 90%;
+					height: 400px;
+					min-height: 340px;
+					border-width: 3px; margin-bottom: 20px;
+					background-color: #aabbcc00;
+					">
+
+
+		</div>
+	</div>
+</body>
+
+
+</html>

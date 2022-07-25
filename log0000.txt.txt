@@ -1,3 +1,27 @@
-{
-	"version":0.0.0.3;
-}
+1 - Faça o login em:
+http://atf.intranet.bb.com.br/
+
+2 - Pesquise por "bb-npm-repo" (na aba Set Me Up).
+
+3 – Mesmo logado, Digite o password no campo  “Type password to insert your credentials to the code snippets.”
+
+4 -  No Prompt de Comando, digite:
+      npm config set registry http://atf.intranet.bb.com.br/artifactory/api/npm/bb-npm-repo/
+
+obs: Não será necessário realizar aquelas instruções do Artifactory relacionadas a projetos com escopo (SCOPE) nem as relacionados ao Deploy.
+
+5 - Na sua pasta de usuário do seu pc (FXXXXXX), procure o arquivo .npmrc e edite no bloco de notas para inserir o snippet gerado automaticamente no Artifactory.  O snippet terá esse formato:
+
+_auth = ZjkzMjkxMzQ6QVxxxA5VkJCV2UxxxxyWEpuY1xxxRm
+email = email@bb.com.br
+always-auth = true
+
+6 - No Prompt de Comando, digite:
+              npm login
+              chave F
+              senha SISBB
+              email@bb.com.br
+
+
+
+https://www.c-sharpcorner.com/blogs/typescript-you-first-program-in-ts
