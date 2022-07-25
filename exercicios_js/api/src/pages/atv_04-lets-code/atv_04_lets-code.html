@@ -12,8 +12,8 @@
 			--softBg: #999999;
 			--txt: #eeeedd;
 
-			--tint01: #ed7411;
-			--tint02: #555555;
+			--tint01: #ee22ee;
+			--tint02: #552255;
 
 			--red: #bb3030;
 			--green: #11ee11;
@@ -208,18 +208,37 @@
 
 		}
 
-		.terrain_row {
+		.cat_card {
+			background-color: var(--bg3);
+			color: var(--tint01);
+			border-color: var(--tint01);
+			border-width: 2px;
+
 			flex: 1;
 			display: flex;
-			background-color: var(--softBg);
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
+
+			margin-top: 8px;
+			margin-bottom: 8px;
+
+			max-height: 100px;
+			width: 94%;
+			max-width: 240px;
+			min-width: 100px;
+			transition: background-color 0.3s, max-width 0.3s, color 0.2s;
 		}
+
+		.cat_card:hover {
+			background-color: var(--tint01);
+			color: var(--txt) max-width: 230px;
+		}
+
 		.terrain_it {
 			flex: 1;
 			display: flex;
-			background-color: var(--softBg);
+			background-color: var(--tint01);
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
@@ -228,63 +247,7 @@
 
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<script defer>
-		let terreno = [];
-		function range(x) {
-			R = [];
-			for (let i = 0; i < x; i++) R.push(i);
-			return R;
-		}
 
-		class Activity{
-			static n_of_activities = 0;
-			#description;
-			#category;
-			#priority;
-			#stage;
-			constructor(description, category, priority=3, stage=0){
-				this.#category = category;
-				this.#description = description;
-				this.#priority = priority;
-				this.#stage = stage;
-				Activity.n_of_activities++;
-				
-			}
-
-		}
-
-
-		const lib = [
-			new Activity('descr_001','categ_001',1),
-		]
-		function showList(){
-			for(let el of range())
-
-		}
-
-/*
-
-Atividade 04:
-PRINCIPAL (700XP)
-- Utilizar obrigatoriamente typescript no lugar de js para este trabalho;
-
-- Criar uma aplicação para Adição, Remoção e Atualização de uma TODO LIST (Lista de Afazeres);
-- Os afazeres devem poder ser separados em categorias (podem olhar como o site Todoist é feito);
-- Deve ser alterado o status da tarefa para "feita" através de um checkbox;
-- Deve haver uma data associada a cada tarefa e todas elas devem ser salvas no Storage.
-
-EXTRA (200XP)
-- O usuário deve ser avisado quando a tarefa estiver atrasada (alert ou algo do tipo);
-- Montem usando OO ao invés de programação funcional.
-
-
-
-*/
-
-
-
-
-	</script>
 
 	<title>Atividade 03 Lets-Code</title>
 </head>
@@ -298,22 +261,135 @@ EXTRA (200XP)
 				color:var(--bg);
 				background-color:var(--txt);
 				padding:5px;
+				
 			">TO DO LIST</h1>
-		<div class="bord" style="height: 40px; width: 70%;"> </div>
 
-		<div id="board_container" class="col bord" style="
-					background-color: transparent;
+		<div id="board" class="col bord" style="
+					background-color: var(--softBg);
 					width: 90%;
 					height: 400px;
 					min-height: 340px;
 					border-width: 3px; margin-bottom: 20px;
-					background-color: #aabbcc00;
+					flex-direction: row;
 					">
-
-
+			<div id="categs" class="col" style="
+					background-color: var(--tint02);
+					max-width: 40%;
+					margin-right: auto;
+					margin-top: auto;
+					margin-bottom: auto;
+					
+					
+					height: 400px;
+					">
+			</div>
+			<div id="categ" class="col" style="
+					background-color: transparent;
+					width: 40%;
+					margin-right: auto;
+					margin-top: auto;
+					margin-bottom: auto;
+					flex:1;
+					
+					
+					height: 400px;
+					"
+			>
+				asd
+			</div>
 		</div>
 	</div>
 </body>
+<script>
 
+
+	let lib = [];
+	let categories = ['cat_001', 'cat_002', 'cat_003', 'cat_004'];
+	let categ_lists_cache = {};
+	let terreno = [];
+	class Activity {
+		static n_of_activities = 0;
+		#description;
+		#category;
+		#priority;
+		#stage;
+		constructor(description, category, priority = 3, stage = 0) {
+			this.#category = category;
+			if (!categories.includes(category)) categories.push(category);
+			this.#description = description;
+			this.#priority = priority;
+			this.#stage = stage;
+			Activity.n_of_activities++;
+
+		}
+
+	}
+
+	function range(x) {
+		R = [];
+		for (let i = 0; i < x; i++) R.push(i);
+		return R;
+	}
+
+
+
+
+	const categs = document.getElementById('categs');
+	showList();
+	function showList() {
+		//console.log(document.getElementById('field'));
+		let r = `<h2> Categorias </h2>`;
+		for (let cat of categories) {
+			r += `<div class="cat_card"> 
+				<p style="color:inherit; font-weight: 900"
+					onclick="showCategory('${cat}')"	
+				>${cat.toUpperCase()}</p>
+				`;
+			console.log('ASD')
+			r += '</div>';
+		}
+		categs.innerHTML = r;
+	}
+
+	function showCategory(category = '${cat}') {
+		
+		
+
+		let r = `<h2> Categorias </h2>`;
+		for (let it of categories.indexOf(category)) {
+			r += `<div class="cat_card"> 
+				<p style="color:inherit; font-weight: 900"
+					onclick="showCategory('${cat}')"	
+				>${cat.toUpperCase()}</p>
+				`;
+			console.log('ASD')
+			r += '</div>';
+		}
+
+		field.innerHTML = r;
+	}
+	/*
+	
+	Atividade 04:
+	PRINCIPAL (700XP)
+	- Utilizar obrigatoriamente typescript no lugar de js para este trabalho;
+	
+	- Criar uma aplicação para Adição, Remoção e Atualização de uma TODO LIST (Lista de Afazeres);
+	- Os afazeres devem poder ser separados em categorias (podem olhar como o site Todoist é feito);
+	- Deve ser alterado o status da tarefa para "feita" através de um checkbox;
+	- Deve haver uma data associada a cada tarefa e todas elas devem ser salvas no Storage.
+	
+	EXTRA (200XP)
+	- O usuário deve ser avisado quando a tarefa estiver atrasada (alert ou algo do tipo);
+	- Montem usando OO ao invés de programação funcional.
+	
+	
+	
+	*/
+
+
+
+
+</script>
 
 </html>
