@@ -1,0 +1,12 @@
+
+Atividade 04:
+PRINCIPAL (700XP)
+- Utilizar obrigatoriamente typescript no lugar de js para este trabalho;
+- Criar uma aplicação para Adição, Remoção e Atualização de uma TODO LIST (Lista de Afazeres);
+- Os afazeres devem poder ser separados em categorias (podem olhar como o site Todoist é feito);
+- Deve ser alterado o status da tarefa para "feita" através de um checkbox;
+- Deve haver uma data associada a cada tarefa e todas elas devem ser salvas no Storage.
+
+EXTRA (200XP)
+- O usuário deve ser avisado quando a tarefa estiver atrasada (alert ou algo do tipo);
+- Montem usando OO ao invés de programação funcional.

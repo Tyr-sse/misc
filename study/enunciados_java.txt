@@ -1,0 +1,466 @@
+
+Enunciado
+
+Dada uma lista de Strings, determine qual a maior sequência de letras em ordem alfabética crescente.
+
+Entrada:
+
+acbda, fasdlkh, poiwqd, zxcqwtop, qfgophl
+
+Saída:
+
+fgop
+
+///
+
+Projeto do módulo
+
+Crie uma aplicação que simule uma app bancária. Os clientes podem ser pessoa física ou jurídica, sendo que para PJ existe a cobrança de uma taxa de 0.5% para cada saque ou transferência. Além do produto conta-corrente, os clientes PF podem abrir uma conta-poupança e conta-investimento. Clientes PJ não abrem poupança, mas seus rendimentos em conta-investimento rendem 2% a mais que a PF.
+
+Conta-poupanca rende 0.5% Conta-investimento PF rende 1% Para fins didaticos, o rendimento pode ser calculado quando ha in investimento, Qualquer outro tipo de calculo de investimento sera valido para este exercicio. Pode usar a imaginacao.
+
+Crie as funcionalidades: abrir conta, sacar, depositar, transferência, investir e consultar saldo (poupança e corrente).
+
+Use a classe "Aplicacao" para criar seu método "main" e demonstrar o funcionamento do seu código.
+
+Entrega
+
+A entrega deverá ser feita fornecendo o link Github do projeto (link unico para o grupo).
+
+Prazo: 11/07
+
+Avaliação
+
+Serão avaliados os seguintes quesitos:
+
+Completude das funcionalidades Aplicação das regras de negócio Modelagem de domínio orientado a objetos Aplicação de encapsulamento Abstração e polimorfismo
+
+///
+
+Enunciado
+Nota
+
+Crie um programa que receba dois números como parâmetros e escreva todos os números do intervalo (ordem crescente) e também a soma deles.
+
+    Entrada: 3 1
+    Saida: 1, 2, 3 Soma: 6
+    Entrada: 2 6
+    Saida: 2, 3, 4, 5, 6 Soma: 20
+
+NÃO USAR: Collections, Arrays, nem métodos utilitários de ordenação
+
+///
+
+Enunciado
+Nota
+
+Exercício (prof. W. Alexandre)
+
+Uma chapa metálica tem seus quatro lados mantidos a temperaturas constantes, podendo ser diferentes ou não. A temperatura no interior da chapa, inicialmente valendo 0°C, tem seu valor modificado de acordo com a vizinhança de cada ponto. Suponha que, a cada etapa/round, a temperatura de um ponto interno seja a média dos seus quatro vizinhos (os dois da vertical – acima e abaixo - e os dois da horizontal – à esquerda e à direita). Nesse problema, todos os pontos serão atualizados ao mesmo tempo, não utilizando as novas temperaturas dos pontos internos enquanto todos não tiverem sido calculados. Os pontos dessa chapa podem ser representados em uma grade com linhas e colunas.
+
+(obs.: O "erro" a cada iteração será o maior valor absoluto da diferença das temperaturas da chapa entre duas etapas consecutivas. O "erro máximo aceitável" é o maior "erro" (entre etapas consecutivas) que o programa aceita como equilíbrio térmico (erros maiores que esse indicam que a chapa ainda não entrou em equilíbrio térmico). Para o "erro máximo aceitável", pode-se usar valores double do tipo 1e-n, onde n é um número inteiro.)
+
+A respeito do contexto acima, faça programa(s) em Java para responder às seguintes questões (obs1.: construa métodos auxiliares que julgar necessários, importantes ou úteis. Obs2.: utilize os tipos primitivos para exercitar a lógica de programação):
+
+1) Considere que a temperatura inicial seja dada da seguinte forma: a) Primeira coluna: 100°C b) Última coluna: -3°C c) Primeira linha: 20°C d) Última linha: 20°C
+
+Para uma chapa com 6 linhas e 5 colunas, após quantas iterações a chapa entrará em equilíbrio térmico (isto é, as temperaturas de todos os pontos serão constantes)? Considere as temperaturas com duas casas decimais. (obs.: as temperaturas das quinas ou vértices não serão relevantes, e podem assumir o valor dado inicialmente nas linhas).
+
+2) Faça uma versão do programa anterior que, dados um número máximo de iteração e um erro máximo aceitável, itere até um desses dois casos acontecer. Compare o resultado com o exercício 1).
+
+3) Faça uma versão dos programas anteriores que permita ao usuário: a) Digitar as dimensões da chapa (linhas e colunas) b) Digitar os valores das temperaturas dos lados c) Digitar o número máximo de iterações d) Digitar o erro máximo aceitável e) Digitar o número de casas decimais que serão mostrados os resultados
+
+Feito isso, utilizando os dados do exercício 1, após quantas iterações a chapa apresentará um erro máximo aceitável abaixo de 1e-7?
+
+///
+
+  Enunciado
+Nota
+
+Uma construtora está loteando terrenos que são representados numa matriz m x n 2D binária, onde '1' representa um terreno vendido e '0' um terreno disponível. Sabendo que, se um proprietário comprar dois terrenos adjacentes será considerada uma única propriedade, a construtora deseja determinar a quantidade de propriedades no loteamento.
+
+Exemplo:
+
+0  0  0  0  0
+0  1  0  1  0
+0  0  1  0  0
+0  0  1  0  0
+
+Resultado: 3 propriedades.
+
+
+class Solucao {
+    public int numTerrenos(char[][] terrenos) {
+
+    }
+}
+
+///
+
+Enunciado
+Nota
+
+Um cachorro (Mel), caiu do caminhao de mudança e agora precisa achar o caminho para a casa de seu dono. O caminho de onde Mel caiu ate a casa de seu dono sera representado por uma matriz X Y (bidimensional).
+
+Nosso intrépido herói começa com pontos de vida, que serao representados por um inteiro positivo (Integer). Se os pontos de vida caem para 0 ou menos voce perde o jogo.
+
+O cachorro começa no canto superior esquerdo da matriz e deve enfrentar outros cachorros briguentos no caminho. E a casa de seu dono esta no canto inferior direito da matriz.
+
+Os espaços da matriz podem ser representados de 3 maneiras:
+
+    Com os cachorros briguentos sao representados por um inteiro negativo, que devem ser descontados dos pontos de vida de Mel.
+    Com nada, valor 0
+    Com biscoitos caninos, valores inteiros positivos, que restauram os pontos de vida
+
+Para chegar a casa de seu dono o mais rápido possível, Mel precisa se mover somente para direita ou para baixo em cada passo.
+
+Note que todos os espaços podem conter cachorros briguentos, nada ou biscoitos caninos. Mesmo na casa de seus donos.
+
+Retorne a quantidade minima de pontos de vida que Mel precisa ter para chegar em seu destino.
+
+ 4   -3    3
+-12  -8    2
+ 15   25  -6
+
+Exemplo 1:
+
+Entrada: caminho = [[-4,-3,3],[-12,-8,2],[15,25,-6]]
+
+Saida: 9
+
+Mel precisa ter 9 pontos de vida para chegar com 1 ponto de vida no seu destino.
+
+Melhor caminho: DIREITA, DIREITA, BAIXO, BAIXO
+
+(-4) + (-3) + 3 + 2 + (-6) = -8
+
+Exemplo 2:
+
+Entrada: caminho = [[0]]
+
+Saida: 1
+
+///
+
+Enunciado
+Nota
+
+Una dois arrays de inteiros em um único array Regras: - Não é permitido uso de Collections ou java.util.Arrays - Não é permitido uso de arrays temporários, com exceção do arrayConsolidado Ex.: ENTRADA [1, 3, 5, 7] [2, 4, 6, 8, 12, 15]
+
+SAIDA [1, 2, 3, 4, 5, 6, 7, 8, 12, 15]
+
+public void juntarArrays(int[] array1, int[] array2, 
+    int[] arrayConsolidado) {
+
+}
+
+///
+
+Enunciado
+Nota
+
+Inverter numeros
+
+Uma empresa do ramo de fotografia lhe contratou para criar um aplicativo para desfazer o erro de um dos funcionários. O almoxarifado desta empresa continha milhares de arquivos fotográficos, cada um com seu código numérico. No entanto este código estava escrito em fotolito (uma lâmina transparente). O fato de estar transparente causou uma confusão tal que todos os códigos numéricos foram armazenados invertidos no banco de dados.Você, como desenvolvedor Java, precisa criar um programa que reverta o código numérico para seu estado original.
+
+ENTRADA 1 98765
+
+SAIDA 1 56789
+
+Entrada 2 -8674
+
+SAIDA 2 -4768
+
+Os códigos variam de -2^31 a 2^31-1
+
+class Solucao {
+    public int inverter(int numero) {
+
+    }
+}
+
+///
+
+Enunciado
+Nota
+
+Dado um array de inteiros e um número de combinaçoes, encontre a maior combinaçao de números vizinhos.
+
+Ex. 1:
+
+ENTRADA
+
+array: {15,30,100,50,23}
+
+numero: 3
+
+SAIDA
+
+180, porque a maior combinacao de números 3 seguidos é 30,100 e 50
+
+Ex. 2:
+
+ENTRADA
+
+array: {1000,1,500,600,100}
+
+numero: 2
+
+SAIDA
+
+1110, porque a maior combinacao de números 2 seguidos é 500 e 600
+
+Ex. 3:
+
+ENTRADA
+
+array: {1000,1,500,600,100}
+
+numero: 10
+
+SAIDA
+
+-1, porque nao ha elementos suficientes no array
+
+Complexidade de tempo requerida: O(n)
+
+Restriçoes:
+
+Nao utilizar usar Collections
+
+Nao utilizar loops aninhados (for dentro de for, ou recursoes dentro de loops). Somente O(n) é aceitável.
+
+ public int maximoCombinacoes(int array[], int num) {
+
+}
+
+///
+
+Enunciado
+Nota
+
+Escreva uma calculadora com as seguintes operacoes:
+
+    Soma
+    Subtracao
+    Multiplicacao
+    Divisao
+
+Alem de calcular, esta calculadora tambem imprime a conta no console, conforme exemplo:
+
+5.5 - 2 = 3.5
+
+Para cada calculo, deve-se imprimir o valor anterior(5.5), o operador(- subtracao), o novo valor (2), o operador (=) e o resultado (3.5)
+
+Use polimorfismo e padroes de projeto que voce conhece concluir este desafio.
+
+Nao ha somente resposta certa, o gabarito é apenas uma sugestao de implementaçao.
+
+No entanto é importante que se use polimorfismo e que a Saída no console seja a mesma da descrita abaixo.
+
+A resposta pode ser um link do github ou um arquivo zipado contento apenas os arquivos .java
+
+Sugestao de como seria o main, no entanto o aluno pode escolher outra forma similar:
+
+public static void main(String[] args) {
+
+    Calculadora calculadora = new CalculadoraImpressora(new CalculadoraSimples());
+
+    final double resultadoSubtracao = calculadora
+            .iniciar(5.5)
+            .operacao(OperadorType.SUBTRACAO)
+            .calcular(2)
+            .operacao(OperadorType.SOMA)
+            .calcular(10.3456)
+            .iniciar(20)
+            .operacao(OperadorType.DIVISAO)
+            .calcular(10)
+            .operacao(OperadorType.MULTIPLICACAO)
+            .calcular(3)
+            .concluir();
+}
+
+Saída no console:
+
+5.5 - 2 = 3.5
+3.5 + 10.3456 = 13.8456
+20 / 10 = 2
+2 * 3 = 6
+Resultado final 6
+
+///
+
+Enunciado
+Nota
+
+Dado um array de números inteiros ordenados e um numero alvo, retorne os índices do array que correspondem a soma do número alvo.
+
+Entrada:
+
+array: {2,4,7,8,12}
+
+alvo: 9
+
+Saída:
+
+{0, 2}
+
+Porque o índice 0 contém 2 e o índice 2 contém 7. 2+7=9
+
+class Solucao {
+    public int[] somaDois(int[] nums, int alvo) {
+
+    }
+}
+
+///
+
+Enunciado
+Nota
+20
+
+1) Crie uma classe chamada Funcionario. Escreva os atributos pessoais de um funcionário de uma empresa. Esta classe possuirá dois métodos, calcularPLR e calcularFerias. Após isto, crie uma classe Gerente uma classe Estagiario, que herdem os atributos e métodos da classe Funcionario.
+2) Adapte os metodos calculo de PLR, seguindo os seguintes requisitos
+
+A PLR dde um funcionario é de 3 vezes seu salário A PLR de um estagiário é de 2 vezes seu salario A PLR de um gerente é de 4 vezes seu salário
+
+///
+Enunciado
+Nota
+
+Una dois arrays de inteiros em um unico array
+
+Regras:
+
+    Nao é permitido uso de Collections ou java.util.Arrays
+    Nao é permitido uso de arrays temporários, com exceçao do arrayConsolidado
+
+Ex.: ENTRADA
+
+    [1, 3, 5, 7]
+    [2, 4, 6, 8, 12, 15]
+
+SAIDA
+
+    [1, 2, 3, 4, 5, 6, 7, 8, 12, 15]
+
+public static void juntarArrays(int[] array1, int[] array2, int[] arrayConsolidado) {
+
+}
+
+///
+
+Enunciado
+Nota
+
+Escreva um algoritmo que receba um parâmetro String.
+
+    Verificar se há 3 letras "X" em sequência entre dois números que somam 8.
+
+Exemplo: frdts2XXX6xxbl2XXXeee5
+
+Retorna true pois a String possui a combinação "2XXX6" (Sequencia de 3 "X" entre os números 6 e 2 que somam 8).
+Resposta
+
+public class DesafioStringXXX { public static boolean possuiSequencia(String entrada) { for (int i = 2; i < entrada.length()-2; i++) { boolean XXX = entrada.charAt(i)=='X' && entrada.charAt(i-1)=='X'&&entrada.charAt(i+1)=='X'; boolean equals8 = Character.getNumericValue(entrada.charAt(i-2))+Character.getNumericValue(entrada.charAt(i+2))==8; if (XXX && equals8) { return true; }
+
+    }
+
+    return false;
+}
+public static void main(String[] args) {
+    String entrada = "frdts3XXX5xxbl2XXXeee5";
+    System.out.println(possuiSequencia(entrada));
+}
+
+}
+
+///
+
+Enunciado
+Nota
+
+Um cachorro (Mel), caiu do caminhao de mudança e agora precisa achar o caminho para a casa de seu dono. O caminho de onde Mel caiu ate a casa de seu dono sera representado por uma matriz X Y (bidimensional).
+
+Nosso intrépido herói começa com pontos de vida, que serao representados por um inteiro positivo (Integer). Se os pontos de vida caem para 0 ou menos voce perde o jogo.
+
+O cachorro começa no canto superior esquerdo da matriz e deve enfrentar outros cachorros briguentos no caminho. E a casa de seu dono esta no canto inferior direito da matriz.
+
+Os espaços da matriz podem ser representados de 3 maneiras:
+
+    Com os cachorros briguentos sao representados por um inteiro negativo, que devem ser descontados dos pontos de vida de Mel.
+    Com nada, valor 0
+    Com biscoitos caninos, valores inteiros positivos, que restauram os pontos de vida
+
+Para chegar a casa de seu dono o mais rápido possível, Mel precisa se mover somente para direita ou para baixo em cada passo.
+
+Note que todos os espaços podem conter cachorros briguentos, nada ou biscoitos caninos. Mesmo na casa de seus donos.
+
+Retorne a quantidade minima de pontos de vida que Mel precisa ter para chegar em seu destino.
+
+ 4   -3    3
+-12  -8    2
+ 15   25  -6
+
+Exemplo 1:
+
+Entrada: caminho = [[-4,-3,3],[-12,-8,2],[15,25,-6]]
+
+Saida: 9
+
+Mel precisa ter 9 pontos de vida para chegar com 1 ponto de vida no seu destino.
+
+Melhor caminho: DIREITA, DIREITA, BAIXO, BAIXO
+
+(-4) + (-3) + 3 + 2 + (-6) = -8
+
+Exemplo 2:
+
+Entrada: caminho = [[0]]
+
+Saida: 1
+
+public int calcularCaminhoMinimo(int[][] caminho) {
+
+}
+
+///
+
+Enunciado
+
+Crie um programa que recebe duas listas de números separadas por vírgula. Criar uma terceira lista para unir as duas listas recebidas, eliminando os itens repetidos. Imprimir a lista final em ordem decrescente.
+
+Entrada:
+
+    Lista 1 => 1,2,3,4
+    Lista 2 => 2,5
+    Saida: 5,4,3,2,1
+
+///
+
+Enunciado
+
+Criar um programa que converta moedas. Dado um número limitado de conversões:
+
+USD - AUD: 1.44
+USD - BRL: 5.15
+BRL - EUR: 0.18
+EUR - GBP: 0.86
+
+Encontre a conversão para outras combinações não listadas:
+
+Entrada:
+
+USD - AUD: 1.44
+USD - BRL: 5.15
+BRL - EUR: 0.18
+EUR - GBP: 0.86
+
+GBP - USD
+
+Saida:
+
+GBP - USD: 1.25
+
+
+

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<style id="stl">
+		:root {
+			--bg: #222222;
+			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+
+			--softBg: #999999;
+			--txt: #eeeedd;
+
+			--tint01: #ed7411;
+			--tint02: #555555;
+
+			--red: #bb3030;
+			--green: #11ee11;
+			--golden: #ffff11;
+
+			background-color: var(--bg);
+		}
+
+		* {
+			background-color: transparent;
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 32px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		p,
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 14px;
+			color: var(--txt);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 2px;
+			border-radius: 5px;
+
+			margin-left: 20px;
+			margin-right: 20x;
+			margin-top: 10px;
+			margin-bottom: 10px;
+
+			height: 30px;
+			width: 50;
+
+			font-size: 16px;
+
+			background-color: var(--txt);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 12px;
+
+
+		}
+
+		[x]::placeholder {
+			color: red;
+			font-size: 16px;
+		}
+
+		.btn {
+			color: var(--txt);
+			background-color: var(--bg4);
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 35px;
+			min-width: 35px;
+			transition: background-color 0.2s;
+		}
+
+		.btn[del] {
+			color: var(--red);
+			border-width: 3px;
+			font-weight: 700;
+			border-color: var(--red);
+			border-radius: 5px;
+
+
+		}
+
+		.btn:hover {
+			background-color: var(--bg2);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.row {
+			text-align: center;
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+
+			align-items: center;
+		}
+
+		.q_input {
+			margin-left: auto;
+			margin-right: auto;
+			width: 60%;
+
+		}
+
+		.item {
+			flex: 1;
+			margin: 2px;
+			display: flex;
+			vertical-align: center;
+			vertical-align: middle;
+
+		}
+
+		.qBtn {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			min-width: 400px;
+			margin-top: 5px;
+		}
+
+		.out {
+			background-color: #999999;
+		}
+
+		td {
+			background-color: #aabbcc00;
+			border-radius: 3px;
+			border: 2px solid;
+			margin-left: auto;
+
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+
+		.lrg {
+			width: 200px;
+			padding: 5px;
+
+		}
+	</style>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script defer>
+		class Point {
+			x;
+			y;
+			constructor(x = 0, y = 0) {
+				this.x = x;
+				this.y = y;
+			}
+			distance = function (to = new Point()) {
+				return Math.sqrt((this.x - to.x) * (this.x - to.x) + (this.y - to.y) * (this.y - to.y));
+			}
+			midpoint = function (to = new Point()) {
+				return new Point((this.x + to.x) / 2, (this.y + to.y) / 2);
+			}
+		}
+	
+	
+	
+	
+		class Geometric {
+			static instances = [];
+			
+			
+			origin = new Point();
+			points = [];
+	
+			#perimeter = 0;
+			computePerimeter = function () {
+				this.#perimeter = 0;
+			}
+			getPerimeter = function () {
+				return this.#perimeter;
+			}
+			setPerimeter = function (val) {
+				this.#perimeter = val;
+			}
+	
+			#area = 0;
+			computeArea = function () {
+				this.#area = 0;
+			}
+			getArea = function () {
+				return this.#area;
+			}
+			setArea = function (val) {
+				this.#area = val;
+			}
+	
+	
+	
+			
+			show = function () {
+				console.log('MOSTRAR FIGURA', this)
+			}
+			static nOfInstances = 0;
+			id = 'geometricId';
+			constructor(id = 'geometricId', origin = new Point()) {
+				this.origin = origin;
+				this.id = id;
+				Geometric.instances.push(this);
+				Geometric.nOfInstances++;
+			}
+		}
+	
+	
+	
+		class Circle extends Geometric {
+			getCircumference = function () {
+				return this.getPerimeter();
+			}
+			setCircumference = function(val){
+				setPerimeter(val);
+			}
+			constructor(id = 'circleId', origin = new Point(), radius = 0) {
+				super(id, origin);
+				this.setArea(Math.PI * radius * radius);
+				this.setPerimeter(2 * Math.PI * radius);
+			}
+	
+		}
+	
+	
+	
+		class Polygon extends Geometric {
+	
+	
+			computePerimeter = function () {//compute perimeter and origin
+				let points = this.points;
+				if (points.length) {// há ao menos um ponto
+					let sum_x = 0;
+					let sum_y = 0;
+					let i = 0;
+					let lp = null;
+					this.setPerimeter(0);
+					let perim = 0;
+					for (let pt of points) {
+						//computar soma
+						sum_x += pt.x;
+						sum_y += pt.y;
+						//computar perimetro
+						if (lp != null) perim += pt.distance(lp);
+						lp = pt;
+						i++;
+					}
+					perim += lp.distance(points[0]);
+					this.setPerimeter(perim);
+					//somar ultimo lado do poligono
+	
+					origin = new Point(sum_x / i, sum_y / i);
+				}
+				this.points = points;
+	
+			}
+	
+			constructor(id = "polygonId", ...points) {
+				let origin = new Point();
+				super(id, origin);
+				this.points = points;
+				this.computePerimeter();
+			}
+	
+		}
+		class Triangle extends Polygon {
+			computeArea = function () {
+				let points = this.points;
+				if (points.length != 3) return 0;
+				let min_x, max_x, min_y, max_y, i = 0;
+				for (let pt of points) {
+					if (i === 0) {
+						min_x = pt.x;
+						max_x = pt.x;
+						min_y = pt.y;
+						max_y = pt.y;
+					}
+					if (pt.x < min_x) min_x = pt.x;
+					if (pt.x > max_x) max_x = pt.x;
+	
+					if (pt.y < min_y) min_y = pt.y;
+					if (pt.y > max_y) max_y = pt.y;
+					i++;
+				}
+				let A = (max_x - min_x) * (max_y - min_y);
+				A = Math.abs(A);
+				A -=
+					(Math.abs(points[0].x - points[1].x) * Math.abs(points[0].y - points[1].y) * 0.5) +
+					(Math.abs(points[1].x - points[2].x) * Math.abs(points[1].y - points[2].y) * 0.5) +
+					(Math.abs(points[2].x - points[0].x) * Math.abs(points[2].y - points[0].y) * 0.5);
+	
+				//console.log("area ", A)
+				this.setArea(A);
+	
+			}
+			// computePerimeter = function () {
+			// 	this.setPerimeter(
+			// 		this.points[0].distance(this.points[1]) +
+			// 		this.points[0].distance(this.points[2]) +
+			// 		this.points[2].distance(this.points[1])
+			// 	);
+			// }
+			constructor(id = 'triangleId', ...points) {
+				super(id, ...points);
+				this.computeArea();
+				this.computePerimeter();
+	
+	
+			}
+	
+		}
+	
+		class Square extends Polygon {
+			deducePoints = function () {
+				let A = this.points.pop();
+				let B = this.points.pop();
+				this.origin = A.midpoint(B);
+				let C = new Point(
+					A.y - origin.y + origin.x,
+					origin.x - A.x + origin.y
+				);
+				let D = new Point(
+					B.y - origin.y + origin.x,
+					origin.x - B.x + origin.y
+				);
+				this.points = [A, C, B, D];
+				//console.log('>>> ', this.points);
+			}
+			computeArea = function () {
+				this.setArea(this.points[0].distance(this.points[1]) * this.points[0].distance(this.points[3]));
+				//console.log('AREA ', this.getArea());
+	
+			}
+			// computePerimeter = function () {
+			// 	this.setPerimeter(2);
+			// }
+	
+			constructor(id = 'squareId', ...points) {
+				super(id, ...points);
+				if (this.points.length === 2) this.deducePoints();
+				this.computeArea();
+				this.computePerimeter();
+	
+	
+	
+	
+	
+			}
+	
+		}
+	
+	
+		//let t01 = new Triangle('thiags', new Point(), new Point(-1, 1), new Point(-1, -1));
+		//let t02 = new Triangle('thiagd', new Point(), new Point(3, 0), new Point(3, 4));
+		//t02.show();
+		//let sq01 = new Square('sqr', new Point(), new Point(1, 0));
+	
+	
+	
+		//let p01 = new Polygon('thiagx');
+		let p02 = new Polygon('triang', new Point(), new Point(3, 0), new Point(3, 4));
+		p02.show();
+		let c01 = new Circle('circ', new Point(), 3);
+		c01.show();
+		let sq02 = new Square('jorg', new Point(1, 1), new Point(-1, -1));
+		sq02.show();
+		//console.log(p02);
+		//https://www.educba.com/typescript-type-vs-interface/
+		//https://www.typescriptlang.org/docs/handbook/interfaces.html
+	
+	
+		// let canvas = document.getElementById('canvasId');
+		// let cosntext = canvas.getContext('2d');
+	
+		// draw();
+	
+	
+		// const dil = 10;
+		// function drawLine(point1, point2) {
+		// 	//console.log('         a')
+		// 	//console.log(document.getElementById('canvasId').getContext("2d"))
+		// 	let context = document.getElementById('canvasId').getContext("2d");
+		// 	context.beginPath();
+		// 	//context.fillStyle = 'red';
+		// 	context.moveTo(point1.x, point1.y);
+		// 	context.lineTo(point2.x, point2.y);
+		// 	context.stroke();
+		// }
+		// function draw() {
+		// 	//console.log(Geometric.instances);
+	
+		// 	for (let shape of Geometric.instances) {
+		// 		let lp = null;
+		// 		for (let point of shape.points) {
+		// 			if (!lp) {
+		// 				console.log('A ', point)
+		// 				lp = point;
+		// 				continue
+		// 			};
+		// 			drawLine([point.x, point.y], [lp.x, lp.y]);
+		// 			console.log('B ', point, lp);
+		// 		}
+	
+	
+		// 	}
+	
+		// }
+	
+	</script>
+
+	<title>Atividade 03 Lets-Code</title>
+</head>
+
+<body id="body" class="bord" style="width:95%;">
+	<div class="col bord " style="min-height: 580px; width: 100%; ">
+
+
+		<h1 class="bord" style="
+				width: 50%;
+				color:var(--bg);
+				background-color:var(--txt);
+				padding:5px;
+			">Formas</h1>
+
+		<div id="board_container" class="col bord" style="
+					background-color: transparent;
+					width: 90%;
+					height: 400px;
+					min-height: 340px;
+					border-width: 3px; margin-bottom: 20px;
+					background-color: #aabbcc00;
+					">
+			<canvas id="canvasId" style="
+				width: 400px;
+				height: 400px;
+				margin-top: auto;
+				margin-bottom: auto;
+				border:1px solid var(--txt);
+				background-color: var(--softBg);
+				"></canvas>
+		</div>
+	</div>
+</body>
+
+
+</html>
