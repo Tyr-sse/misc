@@ -1,0 +1,38 @@
+Lets code>
+
+REPLIT: https://replit.com/teams/join/otmhuogxtgtwprmxlqdiykbymvzulows-878-cerberus-mobile
+AULAS: https://us02web.zoom.us/j/82895766614?pwd=e9WmT3t_8yHl7SgbJOIDW6tk
+Olá Cerberus!
+
+Segue a oportunidade para inscrição:
+
+TODOS devem se inscrever na oportunidade: 
+	CFC220052 - Ditec - Assessor III TI UE 
+e marcar a sua gerência conforme a planilha 
+disponibilizada acima.
+
+grupo atv02 
+ Rafael Bispo Andrade - F8365967
+ Felipe Yuri
+ Thiago Dantas
+ Caio Castro
+ Thiago (Arcanjo) de Oliveira
+
+	Mobile: 
+	Meetups:
+		LINKS: https://us02web.zoom.us/j/85168668826?pwd=hqPEkx3kjZ3mFxfoVHrshk11eeqGgH.1
+	[x]     1° - 28-06: Testes unitários 
+	[x]     2° - 05-07: UX UI
+	[x]     3° - 19-07: Fundamentos da Programação Funcional (hooks)
+	[ ]	4° - 26-07: Arquitetura para React
+	[ ]	5° - 05-08: Conteinerização
+	[ ]	6° - 16-08: Login Social no React Native com múltiplos provedores de autenticação.
+	[ ]	7° - 25-08: Observability (Prometheus e Grafana)
+	[ ]	8° - 30-09: Data fetching: REST / GraphQL e server side state management com React Query
+
+
+CLASS.LETSCODE
+7Primatas#@
+
+
+ 

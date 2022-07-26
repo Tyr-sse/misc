@@ -8,6 +8,8 @@
 			--bg2: #333333;
 			--bg3: #444444;
 			--bg4: #555555;
+			--bg5: #535353;
+
 
 			--softBg: #999999;
 			--txt: #eeeedd;
@@ -32,6 +34,11 @@
 			border-width: 0px;
 			border-radius: 12px;
 
+		}
+
+		div {
+			color: inherit;
+			font-size: inherit;
 		}
 
 		h1 {
@@ -208,6 +215,57 @@
 
 		}
 
+		.it {
+			background-color: transparent;
+			width: 100%;
+			min-width: 300px;
+			max-width: 400px;
+			height: 30px;
+
+			margin-bottom: 1px;
+			
+			border-radius: 4px;
+
+			display: flex;
+			flex-direction: row;
+			max-width: 100px;
+			margin-left: auto;
+			margin-right: auto;
+
+			transition: background-color 0.3s;
+		}
+
+		.it:hover {
+			background-color: red;
+		}
+
+
+		.it_detail {
+			display: block;
+			background-color: inherit;
+			min-height: 100px;
+			width: 300px;
+
+			display: flex;
+			justify-content: space-evenly;
+
+		}
+
+		.it_detail.hdn {
+			display: none;
+		}
+
+		.dt_it {
+			font-size: 14px;
+			color: var(--bg);
+			margin: 1px;
+			background-color: transparent;
+			color: inherit;
+			justify-content: center;
+			flex: 1;
+		}
+
+
 		.cat_card {
 			background-color: var(--bg3);
 			color: var(--tint01);
@@ -262,7 +320,7 @@
 				background-color:var(--txt);
 				padding:5px;
 				
-			">TO DO LIST</h1>
+			" onclick="show_cache()">TO DO LIST</h1>
 
 		<div id="board" class="col bord" style="
 					background-color: var(--softBg);
@@ -274,7 +332,7 @@
 					">
 			<div id="categs" class="col" style="
 					background-color: var(--tint02);
-					max-width: 40%;
+					max-width: 20%;
 					margin-right: auto;
 					margin-top: auto;
 					margin-bottom: auto;
@@ -293,9 +351,7 @@
 					
 					
 					height: 400px;
-					"
-			>
-				asd
+					">
 			</div>
 		</div>
 	</div>
@@ -303,23 +359,130 @@
 <script>
 
 
+
+	class Dt {
+		#Y;
+		#M;
+		#D;
+		#h;
+		#m;
+		#s;
+		#ms;
+
+		number = function () {
+			return 100;
+		};
+		get() {
+			return {
+				"Y": this.#Y,
+				"M": this.#M,
+				"D": this.#D,
+				"h": this.#h,
+				"m": this.#m,
+				"s": this.#s,
+				"ms": this.#ms,
+				"txt": `${this.#Y}/${this.#M}/${this.#D} - ${this.#h}:${this.#m}:${this.#s},${this.#ms}`
+
+			}
+
+		}
+
+
+		constructor(...args) {
+			let inp = '';
+			if (typeof args[0] == 'number') inp = args[0] + '';
+			console.log('Date: ', inp.substring(0, 4));
+			this.#Y = +inp.substring(0, 4)
+			this.#M = +inp.substring(4, 6)
+			this.#D = +inp.substring(6, 8)
+			this.#h = +inp.substring(8, 10)
+			this.#m = +inp.substring(10, 12)
+			this.#s = +inp.substring(12, 14)
+			this.#ms = +inp.substring(14, 17)
+
+
+		}
+
+	}
+
 	let lib = [];
 	let categories = ['cat_001', 'cat_002', 'cat_003', 'cat_004'];
-	let categ_lists_cache = {};
 	let terreno = [];
 	class Activity {
+		#id = 0;
+		getId = function () { return this.#id };
+		setId = function (val) {
+			if (typeof val != 'number') return;
+			this.#id = val;
+		};
 		static n_of_activities = 0;
+
+		#creationDate;
+		getCreationDate = function () { return this.#creationDate };
+		#dueDate;
+		getDueDate = function () { return this.#dueDate };
+		setDueDate = function (val) {
+			if (typeof val != 'number') return;
+			this.#dueDate = val;
+		};
+
+
+		#title;
+		getTitle = function () { return this.#title };
+		setTitle = function (val) {
+			if (typeof val != 'number') return;
+			this.#title = val;
+		};
 		#description;
+		getDescription = function () { return this.#description };
 		#category;
+		getCategory = function () { return this.#category };
 		#priority;
+		getPriority = function () { return this.#priority };
 		#stage;
-		constructor(description, category, priority = 3, stage = 0) {
+		getStage = function () { return this.#stage };
+		setStage = function (val) {
+			if (typeof val != 'number') return;
+			this.#stage = val;
+		};
+
+		self = function () {
+			let inf = {};
+			inf.id = getId();
+			inf.description = getDescription();
+			inf.category = getCategory();
+			inf.priority = getPriority();
+			inf.creationDate = getCreationDate();
+			inf.dueDate = getDueDate();
+			inf.stage = getStage();
+			return inf;
+		}
+		info = function () {
+			return `{
+				"id": 			'${this.getId()}',
+				"description":  '${this.getDescription()}',
+				"category": 	'${this.getCategory()}',
+				"priority":		'${this.getPriority()}',
+				"creationDate": '${this.getCreationDate()}',
+				"dueDate": 	    '${this.getDueDate()}',
+				"stage":	    '${this.getStage()}'
+			}`;
+
+		}
+
+		constructor(title, description, category, priority = 3, due_date = new Dt(), stage = 0) {
+			console.log('>', title)
+			this.#title = title ? title : 'titulo' + Activity.n_of_activities;
 			this.#category = category;
 			if (!categories.includes(category)) categories.push(category);
 			this.#description = description;
 			this.#priority = priority;
+			this.#dueDate = due_date;
 			this.#stage = stage;
+
 			Activity.n_of_activities++;
+			this.#id = Activity.n_of_activities + 1000;
+			//console.log('inst> ', this);
 
 		}
 
@@ -332,42 +495,200 @@
 	}
 
 
+	start_lib();
+	function start_lib() {
+		for (let i of range(30)) {
+			lib.push(new Activity(
+				'TITULO_' + (i + 44),//title
+				'descr_00' + i,//description
+				categories[Math.floor((Math.random() * 10) % categories.length)],//categ
+				(i + 3 > 4) ? i + 3 : 4,//prioridade,
+				new Dt(Math.floor(Math.random() * 100000000000000)),//due dt
+				(Math.floor((Math.random() * 10)) % 2) ? 0 : 2)//estagio
+			)
+			console.log(lib[lib.length - 1])
+		}
+
+		show_all();
+	}
+
+	function showList(L) {
+		let r = `<h3> Tarefas </h3>`;
+		let i = 0;
+		for (let el of L) {
+			let due_date = el.getDueDate().get();
+			
+			let id = `it_${el.getId()}`
+			r += `
+		<span 
+			id="${id}"  style="border-color: blue" 
+			onclick="expand_it_details('it_detail_${id}')">
+			<div class='it bord' 
+				style="
+				${!i?'':'margin-top: 20px;'}
+			
+				background-color: ${i & 1 ? 'var(--bg5)' : 'var(--softBg)'};
+				border-color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
+				color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
+				padding-top: auto;
+				padding-bottom: auto;
+				
+				">
+				<div 
+					style="
+					color:inherit;
+					padding:2px;
+					flex:1;
+					max-width: 30px;
+					margin-top: auto;
+					margin-bottom: auto;
+					margin-right: 15px
+					"
+				>${el.getId()}</div>
+				<div 
+					style="
+					flex:1;
+					max-width: 80px;
+					font-size: 12px;
+					margin-left: 2px;
+					margin-top:auto;
+					margin-bottom: auto
+					"
+				>${el.getTitle()}</div>
+				<div 
+					style="
+					flex:1;
+					font-size: 12px;
+					margin-left: 4px;
+					margin-top:auto;
+					margin-bottom: auto
+					"
+				>${due_date.D} / ${due_date.M} / ${due_date.Y}</div>
+				<div 
+					style="
+					flex:1;
+					max-width: 80px;
+					font-size: 12px;
+					margin-left: 2px;
+					margin-top:auto;
+					margin-bottom: auto
+					"
+				>${el.getCategory()}</div>
+			</div>
+			<span id="it_detail_${id}" class="it_detail col bord"
+			style= "
+				border-color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
+				background-color: ${i & 1 ? 'var(--bg5)' : 'var(--softBg)'};
+				color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
+			"
+			>
+				<span class='dt_it row' 
+					style="
+					width: 290px;
+					">
+					<span filler style="flex:1; min-width:45px;max-width:45px; " ></span>
+						
+					<span style="color:inherit;flex:1">
+						${due_date.D}/${due_date.M}/${due_date.Y}
+					</span>
+					
+					<span filler style="flex:1; min-width:5px;max-width:8px; " ></span>
+					
+					<span style="color:inherit; flex:1">
+							${due_date.h}:${due_date.m}:${due_date.s}
+					</span>
+					
+					<span filler style="flex:1; min-width:45px;max-width:45px; " ></span>
+					
+						
+				</span>
+				<span class='dt_it'>
+						a
+				</span>
+				<span class='dt_it'>
+						a
+				</span>
+				
+
+				
+			</span>
+		</span>
+		`;
+			i++;
+		}
+		document.getElementById('categ').innerHTML = r;
 
 
-	const categs = document.getElementById('categs');
-	showList();
-	function showList() {
+	}
+
+
+	function show_all() {
+		showCategoryList();
+		showList(lib);
+
+
+	}
+
+	function showCategoryList() {
 		//console.log(document.getElementById('field'));
 		let r = `<h2> Categorias </h2>`;
 		for (let cat of categories) {
-			r += `<div class="cat_card"> 
-				<p style="color:inherit; font-weight: 900"
-					onclick="showCategory('${cat}')"	
-				>${cat.toUpperCase()}</p>
+			r += `
+				<div class="cat_card" onclick="showCategory('${cat}')"> 
+					<p style="color:inherit; font-weight: 900">
+						${cat}
+					</p>
+					<span class='cat_btn_marker_container'></span>
 				`;
-			console.log('ASD')
-			r += '</div>';
+
+			r += '</div> \n';
 		}
-		categs.innerHTML = r;
+		document.getElementById('categs').innerHTML = r;
 	}
+
+
+	let cache = {
+		"queries": {
+
+
+		}
+
+	}
+	function show_cache() {
+		console.clear();
+		console.log('CACHE> ', cache);
+	}
+
+
+
 
 	function showCategory(category = '${cat}') {
-		
-		
+		console.log('CAT>> ', category);
+		console.log('cat> ', categories.indexOf(category), categories[categories.indexOf(category)]);
+		//check if already exists on cache
 
-		let r = `<h2> Categorias </h2>`;
-		for (let it of categories.indexOf(category)) {
-			r += `<div class="cat_card"> 
-				<p style="color:inherit; font-weight: 900"
-					onclick="showCategory('${cat}')"	
-				>${cat.toUpperCase()}</p>
-				`;
-			console.log('ASD')
-			r += '</div>';
+		//mount list
+		let L = [];
+		if (cache.queries[category]) {
+			L = cache.queries['category=' + category];
 		}
-
-		field.innerHTML = r;
+		else {
+			for (let atv of lib)
+				if (atv.getCategory() === category) L.push(atv);
+			console.log('>1>', L);
+			cache.queries['category=' + category] = [...L];
+		}
+		showList(L);
 	}
+
+	function expand_it_details(id, el) {
+
+		console.log('>> ', id)
+
+
+	}
+
+
 	/*
 	
 	Atividade 04:
