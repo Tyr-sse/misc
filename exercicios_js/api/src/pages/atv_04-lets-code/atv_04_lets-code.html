@@ -9,12 +9,12 @@
 			--bg3: #444444;
 			--bg4: #555555;
 			--bg5: #535353;
-
+			--bg6: #888888;
 
 			--softBg: #999999;
 			--txt: #eeeedd;
 
-			--tint01: #ee22ee;
+			--tint01: #000000;
 			--tint02: #552255;
 
 			--red: #bb3030;
@@ -36,6 +36,7 @@
 			border-radius: 12px;
 
 		}
+		
 
 		div {
 			color: inherit;
@@ -76,13 +77,13 @@
 			border-width: 2px;
 			border-radius: 5px;
 
-			margin-left: 20px;
-			margin-right: 20x;
-			margin-top: 10px;
-			margin-bottom: 10px;
+			margin: 2px;
 
-			height: 30px;
-			width: 50;
+			min-height: 30px;
+			max-height: 30px;
+
+			min-width: 50px;
+			max-width: 250px;
 
 			font-size: 16px;
 
@@ -101,6 +102,41 @@
 			color: red;
 			font-size: 16px;
 		}
+		.cbxOuterWrap{
+			background-color: transparent;
+			min-height: 20px;
+			max-height: 20px;
+			min-width:  20px;
+			max-width:  20px;
+
+			border-radius: 2px;
+			border-style: solid;
+			border-width: 0px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.cbxWrap{
+			background-color: transparent;
+			min-height: 10px;
+			max-height: 10px;
+
+			min-width: 10px;
+			max-width: 10px;
+
+			border-radius: 2px;
+			border-style: solid;
+			border-width: 2px;
+		}
+		.cbx{
+			min-height: 10px;
+			max-height: 10px;
+			border-radius: 5px;
+			min-width: 10px;
+			max-width: 10px;
+			display:flex;
+			
+		}
 
 		.btn {
 			color: var(--txt);
@@ -115,8 +151,12 @@
 			margin-top: auto;
 			margin-bottom: auto;
 
-			min-height: 35px;
-			min-width: 35px;
+			min-height: 30px;
+			max-height: 30px;
+
+			min-width: 50px;
+			max-width: 250px;
+
 			transition: background-color 0.2s;
 		}
 
@@ -216,91 +256,54 @@
 
 		}
 
-		.it {
-			background-color: transparent;
-			width: 100%;
-			min-width: 240px;
-			max-width: 240px;
-			height: 30px;
-
-			margin-bottom: 1px;
-			
-			border-radius: 4px;
-
+		.rcrd {
 			display: flex;
 			flex-direction: row;
-			max-width: 100px;
-			margin-left: auto;
-			margin-right: auto;
-
-			transition: background-color 0.3s;
-		}
-
-		.it:hover {
-			background-color: red;
-		}
-
-
-		.it_detail {
-			display: block;
-			background-color: inherit;
-			min-height: 100px;
-			width: 250px;
-
-			display: flex;
-			justify-content: space-evenly;
-
-		}
-
-		.it_detail.hdn {
-			display: none;
-		}
-
-		.dt_it {
-			font-size: 14px;
-			color: var(--bg);
-			margin: 1px;
-			background-color: transparent;
-			color: inherit;
-			justify-content: center;
+			align-items: center;
+			min-width: 100%;
 			flex: 1;
-		}
-
-
-		.cat_card {
+			padding: 2px;
+			margin: 2px;
+			border-radius: 3px;
 			background-color: var(--bg3);
-			color: var(--tint01);
-			border-color: var(--tint01);
-			border-width: 2px;
+			color: var(--softBg);
 
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
 
-			margin-top: 8px;
-			margin-bottom: 8px;
-
-			max-height: 100px;
-			width: 94%;
-			max-width: 240px;
-			min-width: 100px;
-			transition: background-color 0.3s, max-width 0.3s, color 0.2s;
 		}
 
-		.cat_card:hover {
-			background-color: var(--tint01);
-			color: var(--txt) max-width: 230px;
+		.rcrd.inv {
+			background-color: var(--softBg);
+			color: var(--bg3);
+			border-color: var(--bg3);
+
 		}
 
-		.terrain_it {
+		.rcrd {
+
+			min-width: 100%;
 			flex: 1;
-			display: flex;
-			background-color: var(--tint01);
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
+			padding: 2px;
+			margin: 2px;
+			border-radius: 3px;
+			background-color: var(--bg3);
+			color: var(--softBg);
+
+
+		}
+
+		.info {
+			border-radius: 2px;
+			background-color: inherit;
+			color: inherit;
+			border-color: inherit;
+			padding-left: 5px;
+			padding-right: 5px;
+
+		}
+
+
+		.hdn{
+			display: none;
 		}
 	</style>
 
@@ -308,418 +311,222 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-	<title>Atividade 03 Lets-Code</title>
+	<title>Atividade 04 Lets-Code</title>
 </head>
 
-<body id="body" class="bord" style="width:95%;">
-	<div class="col bord " style="min-height: 580px; width: 100%; ">
+<body id="body" style="width:95%; background-color: var(--bg2);">
+	<div id="add_item" class="bord" style="min-width: 270px;
+		max-width: 270px;
+		padding: 12px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		margin-left: auto;
+		margin-right: auto;
+		">
+		<h3>Criar nova tarefa</h3>
 
-
-		<h1 class="bord" style="
-				width: 50%;
-				color:var(--bg);
-				background-color:var(--txt);
-				padding:5px;
-				
-			" onclick="show_cache()">TO DO LIST</h1>
-
-		<div id="board" class="col bord" style="
-					background-color: var(--softBg);
-					width: 96%;
-					min-height: 340px;
-					border-width: 1px; margin-bottom: 20px;
-					flex-direction: row;
-					">
-			
-			<div id="categ" class="col" style="
-					background-color: transparent;
-					width: 40%;
-					margin-right: auto;
-					margin-top: auto;
-					margin-bottom: auto;
-					flex:1;
-					
-					
-					height: 400px;
-					">
-			</div>
-		</div>
+		<input id="ttl" type="text" placeholder="Título" class="in"></input>
+		<input id="dscr" type="text" placeholder="Descrição" class="in"></input>
+		<h4>Data de Criação: </h4>
+		<button class="btn" onclick="add_task()">Adicionar Atividade</button>
 	</div>
+	<div id="items_list" class="bord" style="min-width: 270px;
+	max-width: 270px;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+	">
+	</div>
+
+
 </body>
 <script>
-
-
-
-	class Dt {
-		#Y;
-		#M;
-		#D;
-		#h;
-		#m;
-		#s;
-		#ms;
-
-		number = function () {
-			return 100;
-		};
-		get() {
-			return {
-				"Y": this.#Y,
-				"M": this.#M,
-				"D": this.#D,
-				"h": this.#h,
-				"m": this.#m,
-				"s": this.#s,
-				"ms": this.#ms,
-				"txt": `${this.#Y}/${this.#M}/${this.#D} - ${this.#h}:${this.#m}:${this.#s},${this.#ms}`
-
-			}
-
-		}
-
-
-		constructor(inp="20220725300714230") {
-			console.log('Date: ', inp.substring(0, 4));
-			this.#Y = +inp.substring(0, 4);
-			this.#M = +inp.substring(4, 6);
-			this.#D = +inp.substring(6, 8);
-			this.#h = +inp.substring(8, 10);
-			this.#m = +inp.substring(10, 12);
-			this.#s = +inp.substring(12, 14);
-			this.#ms = +inp.substring(14, 17);
-			
-
-		}
-
-	}
-
-	let lib = [];
-	let categories = ['cat_001', 'cat_002', 'cat_003', 'cat_004'];
-	let terreno = [];
-	class Activity {
-		#id = 0;
-		getId = function () { return this.#id };
-		setId = function (val) {
-			if (typeof val != 'number') return;
-			this.#id = val;
-		};
-		static n_of_activities = 0;
-
-		#creationDate;
-		getCreationDate = function () { return this.#creationDate };
-		#dueDate;
-		getDueDate = function () { return this.#dueDate };
-		setDueDate = function (val) {
-			if (typeof val != 'number') return;
-			this.#dueDate = val;
-		};
-
-
-		#title;
-		getTitle = function () { return this.#title };
-		setTitle = function (val) {
-			if (typeof val != 'number') return;
-			this.#title = val;
-		};
-		#description;
-		getDescription = function () { return this.#description };
-		#category;
-		getCategory = function () { return this.#category };
-		#priority;
-		getPriority = function () { return this.#priority };
-		#status;
-		getStage = function () { return this.#status };
-		setStage = function (val) {
-			if (typeof val != 'number') return;
-			this.#status = val;
-		};
-
-		self = function () {
-			let inf = {};
-			inf.id = getId();
-			inf.description = getDescription();
-			inf.category = getCategory();
-			inf.priority = getPriority();
-			inf.creationDate = getCreationDate();
-			inf.dueDate = getDueDate();
-			inf.status = getStage();
-			return inf;
-		}
-		info = function () {
-			return `{
-				"id": 			'${this.getId()}',
-				"description":  '${this.getDescription()}',
-				"category": 	'${this.getCategory()}',
-				"priority":		'${this.getPriority()}',
-				"creationDate": '${this.getCreationDate()}',
-				"dueDate": 	    '${this.getDueDate()}',
-				"status":	    '${this.getStage()}'
-			}`;
-
-		}
-
-		constructor(title, description, category, priority = 3, due_date = new Dt(), status = 0) {
-			console.log('>', title)
-			this.#title = title ? title : 'titulo' + Activity.n_of_activities;
-			this.#category = category;
-			if (!categories.includes(category)) categories.push(category);
-			this.#description = description;
-			this.#priority = priority;
-			this.#dueDate = due_date;
-			this.#status = status;
-
-			Activity.n_of_activities++;
-			this.#id = Activity.n_of_activities + 1000;
-			this.#creationDate = new Dt('20220729164533');
-			//console.log('inst> ', this);
-
-		}
-
-	}
-
 	function range(x) {
 		R = [];
 		for (let i = 0; i < x; i++) R.push(i);
 		return R;
 	}
+	function leftZeroes(val, n) {
+		let str = val + '';
+		let r = '';
+		for (let i of range(n - str.length)) r += '0';
+		return r + str;
+	}
 
 
-	start_lib();
-	function start_lib() {
-		for (let i of range(30)) {
-			lib.push(new Activity(
-				'Title' + (i + 13),//title
-				'descr_00' + i,//description
-				categories[Math.floor((Math.random() * 10) % categories.length)],//categ
-				(i + 3 > 4) ? i + 3 : 4,//prioridade,
-				new Dt('20220817125630900'),//due dt
-				(Math.floor((Math.random() * 10)) % 2) ? 1 : 0)//status
-			)
-			//console.log(lib[lib.length - 1]);
+	class Task {
+		static #n_of_instances = 0;
+		#id;
+		getId = function () {
+			return this.#id;
 		}
 
-		show_all();
-	}
-	
-	function showList(L) {
-		let r = ``;
-		let i = 0;
-		for (let el of L) {
-			let due_date = el.getDueDate().get();
-			let creationDate = el.getCreationDate().get();
-			
-			let id = `it_${el.getId()}`
-			r += `
-		<span 
-			id="${id}"  style="border-color: blue" 
-			onclick="expand_it_details('it_detail_${id}')">
-			<div class='it bord' 
-				style="
-				${!i?'':'margin-top: 20px;'}
-			
-				background-color: ${i & 1 ? 'var(--bg5)' : 'var(--softBg)'};
-				border-color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
-				color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
-				padding-top: auto;
-				padding-bottom: auto;
-				
-				">
-				<div 
-					style="
-					color:inherit;
-					padding:2px;
-					flex:1;
-					max-width: 30px;
-					margin-top: auto;
-					margin-bottom: auto;
-					margin-right: 15px;
-					font-size: 16px;
-					font-weight: 800;
-					"
-				>${el.getId()}</div>
-				<div 
-					style="
-					flex:1;
-					max-width: 80px;
-					font-size: 12px;
-					margin-left: 2px;
-					margin-top:auto;
-					margin-bottom: auto
-					"
-				>${el.getTitle()}</div>
-				<div 
-					style="
-					flex:1;
-					font-size: 9px;
-					font-weight: 600;
-					margin-left: 4px;
-					margin-top:auto;
-					margin-bottom: auto;
-					
-					
-					"
-				>${due_date.D} / ${due_date.M} / ${due_date.Y}</div>
-				<div 
-					style="
-					flex: 1;
-					max-width: 80px;
-					font-size: 12px;
-					margin-left: 2px;
-					margin-top: auto;
-					margin-bottom: auto;
-					"
-				>${el.getCategory()}</div>
-			</div>
-			<span id="it_detail_${id}" class="it_detail col bord"
-			style= "
-				border-color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
-				background-color: ${i & 1 ? 'var(--bg5)' : 'var(--softBg)'};
-				color: ${i & 1 ? 'var(--softBg)' : 'var(--bg5)'};
-			"
-			>
-				<span class='dt_it row' 
-					style="
-					width: 290px;
-					">
-					<span filler style="flex:1; min-width:45px;max-width:45px; " ></span>
-						
-					<span style="color:inherit; flex:1">
-						<span style="font-weight: 900; color: inherit">Criação:</span>
-						${creationDate.h}:${creationDate.m}:${creationDate.s}
-					</span>
-					
-					<span filler style="flex:1; min-width:5px;max-width:8px; " ></span>
-					
-					<span style="color:inherit;flex:1; ">
-						<span style="font-weight: 900; color: inherit">Entrega:</span>
-						${due_date.D}/${due_date.M}/${due_date.Y}
-					</span>
-					
-					<span filler style="flex:1; min-width:45px;max-width:45px; " ></span>
-					
-						
-				</span>
-				
-				<span class='dt_it row'>
-					<span style="color:inherit;flex:1;">
-						<div class="bord" 
-							style="
-							min-height: 10px;
-							max-height: 10px;
-							min-width:  10px;
-							max-width:  10px;
-							border-radius: 2px;
-							border-color: inherit;
-							align-items: center;
-							${el.getStage()? 'border-width: 1px':''}
-							
-							"
-						>
-							${el.getStage()?
-							`
-							<div class="bord" 
-								style="
-								min-height: 10px;
-								max-height: 10px;
-								min-width:  10px;
-								max-width:  10px;
-								border-radius: 1px;
-								border-color: inherit;
-								background-color: var(--bg3);
-							"></div>
-							`:''
-							}
-							
-							
-						</div>
-						<span style="font-weight: 900; color: inherit">Status:</span>
-							${el.getStage()?'Completa':'incompleta'}
-						</span>
-						
-					</span>
-					
-				</span>
-				
-				
+		#title;
+		getTitle = function () {
+			return this.#title;
+		}
+		setTitle = function (val) {
+			if (typeof val != 'string') return;
+			this.#title = val;
+		}
 
-				
-			</span>
-		</span>
+		#description;
+		getDescription = function () {
+			return this.#description;
+		}
+		setDescription = function (val) {
+			if (typeof val != 'string') return;
+			this.#description = val;
+		}
+		#status;
+		getStatus= function () {
+			return this.#status;
+		}
+		setStatus = function (val) {
+			console.log(this.#status, '> st stts ',val)
+			if(val===0||val===1) {
+				this.#status = val;
+				console.log('woof', this.#status)
+			}
+		}
+		
+
+
+
+		constructor(title, description,status) {
+
+			Task.#n_of_instances += 1;
+			this.#id = leftZeroes(Task.#n_of_instances, 4);
+			this.setTitle(title);
+			this.setDescription(description);
+			this.setStatus(status)
+		}
+
+		get = function () {
+			return {
+				"id": this.getId(),
+				"title": this.getTitle(),
+				"description": this.getDescription(),
+				"status": this.getStatus(),
+			}
+		}
+
+
+	}
+
+	let lib = [];
+	start_lib(10);
+	let alphabet =
+		[
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+			'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
+			's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+		].map((x)=>x.toUpperCase());
+	console.log(alphabet)
+
+	function start_lib(n) {
+		for (let i of range(n)) {
+			lib.push(
+				new Task('title_' + i, 'descrp_00' + i, Math.floor(Math.random()*10%2))
+			);
+		}
+		console.log(lib);
+		localStorage.setItem('lib', JSON.stringify(lib));
+		draw_all();
+
+	}
+
+	function add_task() {
+		let ttl = document.getElementById('ttl').value;
+		
+		if (!ttl.length) return;
+		let dscr = document.getElementById('dscr').value;
+		if (!dscr.length) return;
+
+
+		let rsp = {
+			'title': ttl.toUpperCase(),
+			'dscr': dscr.toUpperCase(),
+			'status': 0
+		}
+
+		//console.log(rsp);
+
+
+	}
+	function htmlCheckbox(b, i, id, stts){
+		return `
+
+
 		`;
-			i++;
+
+	}
+
+	function draw_all() {
+		let lst = document.getElementById('items_list');
+		let i = 0;
+		
+		for (let el of lib) {
+
+			let obj = el.get();
+			console.log(obj.status)
+
+			let record = document.createElement('span');
+			record.id = 'idd_' + i;
+			record.classList.add('rcrd', 'bord');
+			if (i & 1) record.classList.add('inv');
+			r = `
+				<span class="info" style="font-weight: 600; max-width: 30px"> 
+					${obj.id}
+				</span>
+				<span class="info" style="font-weight: 500; min-width: 60px;max-width: 60px; margin-left: 12px"> 
+					${obj.title}
+				</span>
+				<span class="info"> 
+					${obj.description}
+				</span>
+				${htmlCheckbox(i, )}
+				<span class="cbxOuterWrap" style="background-color: #ff000044" onclick='toggleFinalizada(${i},"cbx_${leftZeroes(i,3)}", ${obj.status?'1':'0'})'> 
+					<span class="cbxWrap" style="border-color: ${i&1?'var(--bg4)':'var(--softBg)'}">
+						<span id="cbx_${leftZeroes(i,3)}" class="cbx ${obj.status?'':'hdn'}" style="background-color: ${i&1?'var(--bg4)':'var(--softBg)'}"> </span>
+					</span>
+				</span>
+
+			`;
+
+			record.innerHTML = r;
+
+			// console.log(obj)
+			// for (let k in obj) {
+			// 	console.log('K> ', k, obj[k]);
+			// 	let info = document.createElement('div');
+			// 	info.classList.add('info', 'bord');
+			// 	info.id = 'info_' + i + 'k';
+			// 	info.textContent = obj[k] + '';
+			// 	record.appendChild(info)
+			// }
+
+
+			lst.appendChild(record);
+			i++
 		}
-		document.getElementById('categ').innerHTML = r;
+
+	}
+	function toggleFinalizada(i,cbxId, b){
+		lib[i].setStatus(b?0:1);
+		if(b) document.getElementById(cbxId).classList.add('hdn')
+		else  document.getElementById(cbxId).classList.remove('hdn')
+		
+		
 
 
 	}
-
-
-	function show_all() {
-		//showCategoryList();
-		showList(lib);
-
-
-	}
-
-	function showCategoryList() {
-		//console.log(document.getElementById('field'));
-		let r = `<h2> Categorias </h2>`;
-		for (let cat of categories) {
-			r += `
-				<div class="cat_card" onclick="showCategory('${cat}')"> 
-					<p style="color:inherit; font-weight: 900">
-						${cat}
-					</p>
-					<span class='cat_btn_marker_container'></span>
-				`;
-
-			r += '</div> \n';
-		}
-		document.getElementById('categs').innerHTML = r;
-	}
-
-
-	let cache = {
-		"queries": {
-
-
-		}
-
-	}
-	function show_cache() {
-		console.clear();
-		console.log('CACHE> ', cache);
-	}
-
-
-
-
-	function showCategory(category = '${cat}') {
-		console.log('CAT>> ', category);
-		console.log('cat> ', categories.indexOf(category), categories[categories.indexOf(category)]);
-		//check if already exists on cache
-
-		//mount list
-		let L = [];
-		if (cache.queries[category]) {
-			L = cache.queries['category=' + category];
-		}
-		else {
-			for (let atv of lib)
-				if (atv.getCategory() === category) L.push(atv);
-			console.log('>1>', L);
-			cache.queries['category=' + category] = [...L];
-		}
-		showList(L);
-	}
-
-	function expand_it_details(id, el) {
-
-		console.log('>> ', id)
-
-
-	}
-
 
 	/*
 	
