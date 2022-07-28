@@ -15,7 +15,7 @@
 			--bg6: #888888;
 
 			--softBg: #999999;
-			--txt: #888888;
+			--txt: #eeeedd;
 
 			--tint01: #000000;
 			--tint02: #552255;
@@ -158,14 +158,12 @@
 
 			transition: background-color 0.2s;
 		}
-
 		.btn.expand {
-			font-weight: 300;
+			font-weight: 900;
 			min-width: 25px;
 			margin-left: auto;
-			margin-right: 30px;
-
-
+			
+			
 
 		}
 
@@ -181,7 +179,7 @@
 		}
 
 		.btn:hover {
-			background-color: var(--bg);
+			background-color: var(--bg2);
 		}
 
 		.bord {
@@ -345,16 +343,14 @@
 		<h4>Data de Criação: </h4>
 		<button class="btn" onclick="addTask()">Adicionar Atividade</button>
 	</div>
-	<div id="items_list" class="bord">
+	<div id="items_list" style="background-color: red;">
+	
 	</div>
 
 
 </body>
-
-
-<script id="UTIL">
-	console.log(" __UTIL");
-
+<script>
+	let i = 0;
 	function range(x) {
 		R = [];
 		for (let i = 0; i < x; i++) R.push(i);
@@ -366,190 +362,30 @@
 		for (let i of range(n - str.length)) r += '0';
 		return r + str;
 	}
-	function dateParse(dt) {
-		if (!(dt instanceof Date)) return;
-		return '' +
-			dt.getFullYear() +
-			leftZeroes(dt.getMonth() + 1, 2) +
-			leftZeroes(dt.getDay(), 2) +
-			leftZeroes(dt.getHours(), 2) +
-			leftZeroes(dt.getMinutes(), 2) +
-			leftZeroes(dt.getSeconds(), 2)
-	}
-
-</script>
 
 
+	
 
-<script id="MODEL">
-	console.log('_MODEL')
-	class Task {
-		static #n_of_instances = 0;
-		#id;
-		getId = function () {
-			return this.#id;
-		}
-
-		#title;
-		getTitle = function () {
-			return this.#title;
-		}
-		setTitle = function (val) {
-			if (typeof val != 'string') return;
-			this.#title = val;
-		}
-
-		#description;
-		getDescription = function () {
-			return this.#description;
-		}
-		setDescription = function (val) {
-			if (typeof val != 'string') return;
-			this.#description = val;
-		}
-		#status;
-		getStatus = function () {
-			return this.#status;
-		}
-		setStatus = function (val) {
-			if (val === 0 || val === 1) {
-				this.#status = val;
-			}
-		}
-		#category;
-		getCategory = function () {
-			return this.#category;
-		}
-		setCategory = function (val) {
-			if (val === 0 || val === 1) {
-				this.#category = val;
-			}
-		}
-
-		#dueDate;
-		getDueDate = function () {
-			return this.#dueDate;
-		}
-		setDueDate = function (val) {
-			this.#dueDate = val;
-		}
-		#creationDate;
-		getCreationDate = function () {
-			return this.#creationDate;
-		}
-		setCreationDate = function (val) {
-			this.#creationDate = val;
-
-		}
-
-
-		constructor({ title, description, category, status, dueDate }) {
-
-			Task.#n_of_instances += 1;
-			this.#id = leftZeroes(Task.#n_of_instances, 4);
-			this.setTitle(title);
-			this.setDescription(description);
-			this.setCategory(category);
-			this.setStatus(status);
-			let now = new Date();
-
-			//console.log(''+now.getFullYear()+ leftZeroes(now.getMonth()+1,2)+leftZeroes(now.getDay(),2) );
-			this.setCreationDate(dateParse(new Date()));
-			this.setDueDate(dueDate);
-		}
-
-		get = function () {
-			return {
-				"id": this.getId(),
-				"title": this.getTitle(),
-				"description": this.getDescription(),
-				"dueDate": this.getDueDate(),
-				"status": this.getStatus(),
-			}
-		}
-
-
-	}
-
-</script>
-
-
-
-<script id="DB">
-	console.log(" __DB");
 	let lib = [];
 
+	generate_lib(100);
 
 
+	function generate_lib(n) {
+		for (let i of range(n)) {
+			lib.push(
+				new Task('TITULO' + i, 'DESCRIÇÃO' + i, Math.floor(Math.random() * 10 % 2))
+			);
+		}
+		updateLS(lib)
+		showList();
 
-
+	}
 	function updateLS(val) {
 		localStorage.setItem('lib', JSON.stringify(val));
 	}
 
-
-
+	
 </script>
-
-<script id="PROC">
-	console.log(" __PROC");
-	generate_lib(20);
-	function generate_lib(n) {
-		for (let i of range(n)) {
-			lib.push(
-				//title, description, category, status
-
-				new Task({
-					title: 'TITULO' + i, //
-					description: 'DESCRIÇÃO' + i,
-					id: 0,
-					category: 'cat_' + i,
-					status: Math.floor(Math.random() * 10 % 2),
-					dueDate:
-						'2022' +//Y
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//M
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//D
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//h
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//m
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//s
-						leftZeroes(Math.floor(Math.random() * 1000 % 1000), 3) //ms
-					//Math.floor(Math.random() * 10 % 2),
-				}
-				)
-			);
-		}
-		updateLS(lib);
-		showList();
-
-	}
-	function showList() {
-		for (let el of lib) {
-			//console.log('>>', el.get());
-			let obj = el.get();
-			let rcrd = document.createElement('span');
-			rcrd.innerHTML = `
-				<span class="row rcrd">
-					<span class="info">${JSON.stringify(obj)}</span>
-					<span class="info">${obj.id}</span>
-					<span class="info">${obj.priority}</span>
-					<span class="info">${obj.id}</span>
-					<span class="info">${obj.id}</span>
-					
-				</span>
-			`;
-
-			document.getElementById('items_list').append(rcrd);
-		}
-
-
-	}
-
-
-
-</script>
-
-
-
-
 
 </html>
