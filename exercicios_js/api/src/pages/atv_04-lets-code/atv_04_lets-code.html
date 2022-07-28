@@ -74,7 +74,7 @@
 		.in {
 			border-color: var(--softBg);
 			border-style: solid;
-			border-width: 2px;
+			border-width: 0px;
 			border-radius: 5px;
 
 			margin: 2px;
@@ -82,18 +82,17 @@
 			min-height: 30px;
 			max-height: 30px;
 
-			min-width: 50px;
-			max-width: 250px;
+			min-width: 20px;
 
 			font-size: 16px;
 
-			background-color: var(--txt);
+			background-color: var(--softBg);
 			color: var(--bg);
 		}
 
 		::placeholder {
 			color: var(--tint010);
-			font-size: 12px;
+			font-size: 14px;
 
 
 		}
@@ -389,10 +388,8 @@
 			return this.#status;
 		}
 		setStatus = function (val) {
-			console.log(this.#status, '> st stts ',val)
 			if(val===0||val===1) {
 				this.#status = val;
-				console.log('woof', this.#status)
 			}
 		}
 		
@@ -423,12 +420,12 @@
 	let lib = [];
 	start_lib(10);
 	let alphabet =
-		[
-			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-			'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-			's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-		].map((x)=>x.toUpperCase());
-	console.log(alphabet)
+		['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
+		 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+ 		 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+		];
+		
+	//console.log(alphabet)
 
 	function start_lib(n) {
 		for (let i of range(n)) {
@@ -460,12 +457,21 @@
 
 
 	}
-	function htmlCheckbox(b, i, id, stts){
-		return `
-
-
-		`;
-
+	
+	function toggleFinalizada(i,cbxId){
+		lib[i].setStatus(lib[i].getStatus()?0:1);
+		if(lib[i].getStatus()) document.getElementById(cbxId).classList.add('hdn')
+		else  document.getElementById(cbxId).classList.remove('hdn')
+		
+	}
+	
+	
+	function htmlCheckbox(b, i){
+		return `<span  class="cbxOuterWrap" style="background-color: #ff000044" mrkA onclick='toggleFinalizada(${i},"cbx_${leftZeroes(i,3)}")' mrkA > 
+					<span class="cbxWrap" style="border-color: ${i&1?'var(--bg4)':'var(--softBg)'}">
+						<span id="cbx_${leftZeroes(i,3)}" class="cbx ${b?'':'hdn'}" style="background-color: ${i&1?'var(--bg4)':'var(--softBg)'}"> </span>
+					</span>
+				</span>`;
 	}
 
 	function draw_all() {
@@ -473,10 +479,8 @@
 		let i = 0;
 		
 		for (let el of lib) {
-
 			let obj = el.get();
-			console.log(obj.status)
-
+			
 			let record = document.createElement('span');
 			record.id = 'idd_' + i;
 			record.classList.add('rcrd', 'bord');
@@ -491,42 +495,20 @@
 				<span class="info"> 
 					${obj.description}
 				</span>
-				${htmlCheckbox(i, )}
-				<span class="cbxOuterWrap" style="background-color: #ff000044" onclick='toggleFinalizada(${i},"cbx_${leftZeroes(i,3)}", ${obj.status?'1':'0'})'> 
-					<span class="cbxWrap" style="border-color: ${i&1?'var(--bg4)':'var(--softBg)'}">
-						<span id="cbx_${leftZeroes(i,3)}" class="cbx ${obj.status?'':'hdn'}" style="background-color: ${i&1?'var(--bg4)':'var(--softBg)'}"> </span>
-					</span>
+				<span id='tgl_container_${i}'>
+					${htmlCheckbox(obj.status,i)}
 				</span>
-
 			`;
 
 			record.innerHTML = r;
 
-			// console.log(obj)
-			// for (let k in obj) {
-			// 	console.log('K> ', k, obj[k]);
-			// 	let info = document.createElement('div');
-			// 	info.classList.add('info', 'bord');
-			// 	info.id = 'info_' + i + 'k';
-			// 	info.textContent = obj[k] + '';
-			// 	record.appendChild(info)
-			// }
-
-
+		
 			lst.appendChild(record);
 			i++
 		}
 
 	}
-	function toggleFinalizada(i,cbxId, b){
-		lib[i].setStatus(b?0:1);
-		if(b) document.getElementById(cbxId).classList.add('hdn')
-		else  document.getElementById(cbxId).classList.remove('hdn')
-		
-		
-
-
-	}
+	
 
 	/*
 	
