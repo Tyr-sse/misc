@@ -418,15 +418,14 @@
 	}
 
 	let lib = [];
-	start_lib(10);
+	
 	let alphabet =
 		['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
 		 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
  		 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
 		];
 		
-	//console.log(alphabet)
-
+	start_lib(10);
 	function start_lib(n) {
 		for (let i of range(n)) {
 			lib.push(
@@ -445,51 +444,46 @@
 		if (!ttl.length) return;
 		let dscr = document.getElementById('dscr').value;
 		if (!dscr.length) return;
-
-
-		let rsp = {
-			'title': ttl.toUpperCase(),
-			'dscr': dscr.toUpperCase(),
-			'status': 0
-		}
-
-		//console.log(rsp);
-
-
+		
+		//new Task('title_' + i, 'descrp_00' + i, Math.floor(Math.random()*10%2))
+			
+		let rsp = new Task(
+			ttl.toUpperCase(),
+			dscr.toUpperCase(),
+			0
+		);
+		
+		
 	}
 	
-	function toggleFinalizada(i,cbxId){
+	function toggleStatus(i,cbxId){
 		lib[i].setStatus(lib[i].getStatus()?0:1);
-		if(lib[i].getStatus()) document.getElementById(cbxId).classList.add('hdn')
-		else  document.getElementById(cbxId).classList.remove('hdn')
-		
+		if(lib[i].getStatus()) document.getElementById(cbxId).classList.add('hdn');
+		else  document.getElementById(cbxId).classList.remove('hdn');
 	}
 	
 	
 	function htmlCheckbox(b, i){
-		return `<span  class="cbxOuterWrap" style="background-color: #ff000044" mrkA onclick='toggleFinalizada(${i},"cbx_${leftZeroes(i,3)}")' mrkA > 
+		return `<span  class="cbxOuterWrap" style="background-color: #ff000044" mrkA onclick='toggleStatus(${i},"cbx_${leftZeroes(i,3)}")' mrkA > 
 					<span class="cbxWrap" style="border-color: ${i&1?'var(--bg4)':'var(--softBg)'}">
 						<span id="cbx_${leftZeroes(i,3)}" class="cbx ${b?'':'hdn'}" style="background-color: ${i&1?'var(--bg4)':'var(--softBg)'}"> </span>
 					</span>
 				</span>`;
 	}
-
-	function draw_all() {
-		let lst = document.getElementById('items_list');
-		let i = 0;
-		
-		for (let el of lib) {
-			let obj = el.get();
-			
-			let record = document.createElement('span');
-			record.id = 'idd_' + i;
-			record.classList.add('rcrd', 'bord');
-			if (i & 1) record.classList.add('inv');
-			r = `
+	
+	function htmlItem(el,i){
+		let obj = el.get();
+		return `
 				<span class="info" style="font-weight: 600; max-width: 30px"> 
 					${obj.id}
 				</span>
-				<span class="info" style="font-weight: 500; min-width: 60px;max-width: 60px; margin-left: 12px"> 
+				<span class="info" 
+					style="
+						font-weight: 500;
+						min-width: 60px;
+						max-width: 60px;
+						margin-left: 12px"
+				> 
 					${obj.title}
 				</span>
 				<span class="info"> 
@@ -498,12 +492,24 @@
 				<span id='tgl_container_${i}'>
 					${htmlCheckbox(obj.status,i)}
 				</span>
-			`;
-
-			record.innerHTML = r;
-
+		`;
+	}
+	function appendRecord(el, i){
+		let record = document.createElement('span');
+		record.id = 'idd_' + i;
+		record.classList.add('rcrd', 'bord');
+		if (i & 1) record.classList.add('inv');
+		record.innerHTML = htmlItem(el,i);
+		document.getElementById('items_list').appendChild(record);
 		
-			lst.appendChild(record);
+	}
+	let i = 0;
+	function draw_all() {
+		let lst = document.getElementById('items_list');
+		//let i = 0;
+		
+		for (let el of lib) {
+			appendRecord(el, i);
 			i++
 		}
 
