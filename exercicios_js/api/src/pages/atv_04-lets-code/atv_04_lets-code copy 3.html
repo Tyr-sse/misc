@@ -14,17 +14,14 @@
 			--bg5: #535353;
 			--bg6: #888888;
 
-			--softBg: #aaaaaa;
+			--softBg: #999999;
 			--txt: #888888;
 
 			--tint01: #000000;
 			--tint02: #552255;
 
 			--red: #bb3030;
-			--red2: #ff3030;
-			--green: #11aa11;
-			--green2: #11ee11;
-			
+			--green: #11ee11;
 			--golden: #caca11;
 			--blue: #55ffff;
 
@@ -79,19 +76,18 @@
 
 		.in {
 			border-color: var(--softBg);
-			font-size: 14px;
 			border-style: solid;
 			border-width: 0px;
 			border-radius: 5px;
 
-			margin: 1px;
+			margin: 2px;
 
-			min-height: 16px;
-			max-height: 16px;
+			min-height: 30px;
+			max-height: 30px;
 
-			min-width: 5px;
-			max-width: 60px;
-			font-size: 12px;
+			min-width: 20px;
+
+			font-size: 16px;
 
 			background-color: var(--softBg);
 			color: var(--bg);
@@ -143,8 +139,6 @@
 		}
 
 		.btn {
-			font-weight: 600;
-			font-size: 10px;
 			color: inherit;
 			background-color: inherit;
 			border-color: inherit;
@@ -163,39 +157,6 @@
 			min-width: 20px;
 
 			transition: background-color 0.2s;
-		}
-		.btn.dark {
-			background-color: var(--bg);
-			border-color: var(--softBg);
-			color: var(--softBg);
-		}
-		.btn.red{
-			background-color: var(--red);
-			color: var(--bg);
-			border-color: var(--bg);
-
-		}
-		.btn.red:hover{
-			background-color: var(--red2);
-			color: var(--bg);
-			border-color: var(--bg);
-
-		}
-		.btn.green{
-			background-color: var(--green);
-			color: var(--bg);
-			border-color: var(--bg);
-
-		}
-		.btn.green:hover{
-			background-color: var(--green2);
-			color: var(--bg);
-			border-color: var(--bg);
-
-		}
-		.btn.dark:hover {
-			background-color: var(--bg2);
-			
 		}
 
 		.btn.expand {
@@ -230,33 +191,23 @@
 			border-radius: 12px;
 			background-color: #aabbcc00;
 		}
-
-		.bord.semi {
+		.bord.semi{
 			border-top: 0px;
 			border-bottom: 0px;
 			border-width: 2px;
-
+			
 		}
 
-		tr {
-			color: inherit;
+		tr{
+			
+			background-color: inherit;
+			color:inherit;
+
 
 		}
-
-		.hvrable {
-			background-color: var(--bg3);
-			transition: background-color 0.5s;
-		}
-
-		.hvrable:hover {
-			background-color: var(--bg2);
-			color: inherit;
-		}
-
-		th {
+		th{
 			font-weight: 700;
 			min-width: 60px;
-			font-size: 8px;
 		}
 
 		.row {
@@ -367,8 +318,8 @@
 			display: none;
 		}
 
-		.txtArea {
-			display: flex;
+		.txtArea{
+			display:flex;
 			flex: 1;
 			min-height: 120px;
 
@@ -425,37 +376,11 @@
 <body id="body" style="background-color: var(--bg2);">
 	<div id="add_item">
 		<h3>Criar nova tarefa</h3>
-		<table class="bord" style="margin:2px">
-			<tr>
-				<th>ID</th>
-				<th>Prioridade</th>
-				<th>Título</th>
-				<th>Data a Ser Entregue</th>
-				<th>Categoria</th>
-				<th>Descrição</th>
-				
-				<th>Ações</th>
-				
-			</tr>
-			<tr>
-				<td></td>
-				<td class="bord"> __</td>
-				<td><input placeholder="Título" class="in" id="ttl_${rcrd.obj.title}" type="text" value=""/></td>
-				<td><input class="in" id="cat_${rcrd.obj.category}" type="date" value=""/></td>
-				<td><input placeholder="Categoria" class="in" id="prior_${rcrd.obj.priority}" type="text" value=""/></td>
-				
-				<td><input placeholder="Descrição" class="in" id="dscr_${rcrd.obj.description}" type="text" value=""/></td>
-				
-				
-				<td>
-					<button class="btn green">ADICIONAR</button> 
-					
-				</td>
 
-			</tr>
-		
-		</table>
-	
+		<input id="ttl" type="text" placeholder="Título" class="in"></input>
+		<input id="dscr" type="text" placeholder="Descrição" class="in"></input>
+		<h4>Data de Criação: </h4>
+		<button class="btn" onclick="addTask()">Adicionar Atividade</button>
 	</div>
 	<div id="items_list" class="bord col">
 	</div>
@@ -630,14 +555,14 @@
 
 <script id="PROC">
 	console.log(" __PROC");
-	generate_lib(5);
+	generate_lib(15);
 	function generate_lib(n) {
 		for (let i of range(n)) {
 			lib.push(
 				new Task(
 					{
 						title: 'TITULO' + i, //
-						description: 'DE ' + i,
+						description: 'DESCRIÇÃO' + i,
 						id: 0,
 						category: 'cat_' + i,
 						status: Math.floor(Math.random() * 10 % 3),
@@ -661,78 +586,120 @@
 		showList();
 
 	}
+	function sttsSpan(inp, op = 0) {
+		let stts = '';
+		let sml_stl = op ? `font-size: 10px;` : '';
+		switch (inp) {
+			case 0:
+				stts = '<span style="' + sml_stl + ' color: var(--red);font-weight: 700;">__INCOMPLETA__</span>';
+				break;
+			case 1:
+				stts = '<span style="' + sml_stl + 'color: var(--golden); font-weight: 600">EM PROGRESSO</span>';
+				break;
+			default:
+				stts = '<span style="' + sml_stl + 'color: var(--green); font-weight: 600">___COMPLETA___</span>';
+				break;
 
-	function generateRow(rcrd) {
-		//console.log(rcrd, rcrd.obj);
-		return `
-		<div class="hvrable">
-			<table class="bord" style="margin:2px">
+		}
+		return stts;
+	}
+
+	function smallRcrd(obj, rcrd) {
+		return `<span class="row rcrd">
+					<span class="info">${'<span style=" font-weight: 800;">' + obj.priority + '</span>'}</span>
+					<span class="info">${obj.id}</span>
+					<span class="info" style="font-size: 11px">${dateMask(obj.dueDate, 14)}</span>
+					<span class="info" 
+						style="
+						font-size: 12px;
+						margin-left: auto;
+						margin-right: auto;
+						background-color: var(--bg2);
+						"
+					>${sttsSpan(obj.status)}</span>
+					<button class="btn" style="margin-left: auto;"
+					onclick="toggleRecord(${rcrd.id},0)"
+					
+					>Expandir</button>
+					
+				</span>`;
+
+	}
+
+
+	function showList() {
+		let i = 0;
+		for (let el of lib) {
+			i++;
+			let obj = el.get();//mount obj
+			let rcrd = document.createElement('span');
+			rcrd.id = 'rcrd_el_' + leftZeroes(i, 2);
+			rcrd.obj = obj;
+			rcrd.innerHTML = smallRcrd(obj,rcrd);
+
+			document.getElementById('items_list').append(rcrd);
+		}
+	}
+	function toggleRecord(rcrd, b) {
+		console.log(b, 'ID ', rcrd.obj.id);
+		let obj = rcrd.obj;
+		rcrd.innerHTML = b? smallRcrd(obj, rcrd) :`
+		
+		<span>
+			<table>
 				<tr>
 					<th>ID</th>
 					<th>Prioridade</th>
 					<th>Título</th>
-					<th>Data a Ser Entregue</th>
 					<th>Categoria</th>
-					<th>Descrição</th>
-					
-					<th>Ações</th>
-					
 				</tr>
 				<tr>
-					<td>${rcrd.obj.id}</td>
-
-					<td style="max-width:"><input placeholder="Prioridade" class="in" id="ttl_${rcrd.obj.title}" type="number" value="${rcrd.obj.priority}" style="width:30px"/></td>
-
-					<td><input placeholder="Titulo" class="in" id="ttl_${rcrd.obj.title}" type="number" value="${rcrd.obj.title}" style="width:90px"/></td>
-
-					<td><input class="in" id="dt_${rcrd.obj.id}" type="date" value="${rcrd.obj.category}" style="width:80px"/></td>
-
-					<td><input placeholder="Categoria" class="in" id="cat_${rcrd.obj.id}" type="text" value="${rcrd.obj.category}" style="width:80px"/></td>
-
-					<td><input placeholder="Prioridade" class="in" id="prior_${rcrd.obj.id}" type="text" value="${rcrd.obj.description}"/></td>
-					
-					<td><input placeholder="Descrição" class="in" id="dscr_${rcrd.obj.description}" type="text" value="${rcrd.obj.description}"/></td>
-					
-					
-					<td>
-						<button class="btn">ATUALIZAR</button> 
-						<button class="btn red">DELETAR</button> 
-						
-					</td>
-
+					<td>${obj.id}</td>
+					<td>${obj.priority}</td>
+					<td>${obj.title}</td>
+					<td>Categoria</td>
 				</tr>
 			
 			</table>
-		</div>`;
+		</span>
+			
+			`;
+		let x=`
+				<span class="col rcrd exp bord">
+
+					
+					<span style="flex:1">
+						<span class="info bord" 
+							style="font-weight: 900;
+							color: var(--bg2);
+							background-color:var(--txt)
+						">${obj.title}</span>
+					</span>
+					<button class="btn" style="flex:1"
+						onclick="toggleRecord(${rcrd.id},1)"
+					>Editar</button>	
+					<button class="btn" style="flex:1"
+						onclick="toggleRecord(${rcrd.id},1)"
+					>Minimizar</button>	
+					
+					<span class='row bord'>
+						<span class="info bord semi lft">${obj.id}</span>
+						<span class="info bord semi lft">${sttsSpan(obj.status, 1)}</span>
+						<span class="info bord semi" ><b>Prioridade:</b> ${obj.priority}</span>
+						<span class="info bord semi"><b>Categoria:</b> ${obj.category}</span>
+					
+						
+					</span>
+					<span class="row" style="margin 2px">
+						<textarea class="in txtArea" disabled>${obj.description}</textarea>
+					</span>	
+				</span>
+			`;
+		//console.log(rcrd.obj);
+
+
 
 	}
-
-	function appendToList(el, lst, i) {
-		let obj = el.get();//mount obj
-		let rcrd = document.createElement('span');
-		rcrd.id = 'rcrd_el_' + leftZeroes(i, 2);
-		rcrd.obj = obj;
-		rcrd.innerHTML = generateRow(rcrd);
-
-		lst.append(rcrd);
-
-	}
-
-	function showList() {
-		let lst = document.getElementById('items_list');
-		let i = 0;
-		for (let it of lib) {
-			appendToList(it, lst, i);
-			i++;
-		}
-	}
-	function addTask(dsc){
-		console.log('dsc',dsc);
-
-	}
-
-
-
 
 
 </script>
