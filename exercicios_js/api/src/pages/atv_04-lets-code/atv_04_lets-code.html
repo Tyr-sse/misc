@@ -22,7 +22,7 @@
 
 			--red: #bb3030;
 			--green: #11ee11;
-			--golden: #ffff11;
+			--golden: #caca11;
 			--blue: #55ffff;
 
 			background-color: var(--bg);
@@ -376,6 +376,18 @@
 			leftZeroes(dt.getMinutes(), 2) +
 			leftZeroes(dt.getSeconds(), 2)
 	}
+	function dateMask(str, n){
+	
+		let r = 
+				leftZeroes(str.substring(00,04),4) +' / '+
+				leftZeroes(str.substring(04,06),2) +' / '+
+				leftZeroes(str.substring(06,08),2) +' '+
+				str.substring(08,10)+':'+
+				str.substring(10,12)+':'+
+				str.substring(12,15)
+		return r.substring(0,n);
+		
+	}
 
 </script>
 
@@ -407,6 +419,7 @@
 			if (typeof val != 'string') return;
 			this.#description = val;
 		}
+		
 		#status;
 		getStatus = function () {
 			return this.#status;
@@ -416,16 +429,24 @@
 				this.#status = val;
 			}
 		}
+		
 		#category;
 		getCategory = function () {
 			return this.#category;
 		}
 		setCategory = function (val) {
-			if (val === 0 || val === 1) {
-				this.#category = val;
-			}
+			this.#category = val;
 		}
 
+		#priority;
+		getPriority = function () {
+			return this.#priority;
+		}
+		setPriority = function (val) {
+			this.#priority = val;
+		}
+		
+		
 		#dueDate;
 		getDueDate = function () {
 			return this.#dueDate;
@@ -443,7 +464,7 @@
 		}
 
 
-		constructor({ title, description, category, status, dueDate }) {
+		constructor({ title, description, category, status, dueDate, priority }) {
 
 			Task.#n_of_instances += 1;
 			this.#id = leftZeroes(Task.#n_of_instances, 4);
@@ -451,6 +472,7 @@
 			this.setDescription(description);
 			this.setCategory(category);
 			this.setStatus(status);
+			this.setPriority(priority);
 			let now = new Date();
 
 			//console.log(''+now.getFullYear()+ leftZeroes(now.getMonth()+1,2)+leftZeroes(now.getDay(),2) );
@@ -465,6 +487,7 @@
 				"description": this.getDescription(),
 				"dueDate": this.getDueDate(),
 				"status": this.getStatus(),
+				"priority": this.getPriority()
 			}
 		}
 
@@ -493,47 +516,74 @@
 
 <script id="PROC">
 	console.log(" __PROC");
-	generate_lib(20);
+	generate_lib(15);
 	function generate_lib(n) {
 		for (let i of range(n)) {
 			lib.push(
-				//title, description, category, status
-
-				new Task({
-					title: 'TITULO' + i, //
-					description: 'DESCRIÇÃO' + i,
-					id: 0,
-					category: 'cat_' + i,
-					status: Math.floor(Math.random() * 10 % 2),
-					dueDate:
-						'2022' +//Y
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//M
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//D
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//h
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//m
-						leftZeroes(Math.floor(Math.random() *  100 % 100), 2) +//s
-						leftZeroes(Math.floor(Math.random() * 1000 % 1000), 3) //ms
-					//Math.floor(Math.random() * 10 % 2),
-				}
-				)
-			);
+				new Task(
+					{
+						title: 'TITULO' + i, //
+						description: 'DESCRIÇÃO' + i,
+						id: 0,
+						category: 'cat_' + i,
+						status:    Math.floor(Math.random() * 10 %  3),
+						priority:  Math.floor(Math.random() * 10 % 10),
+						
+						dueDate: '2022' +                                           //Y
+							leftZeroes((Math.floor(Math.random() *  100 % 12) +1), 2) +//M
+							leftZeroes(Math.floor(Math.random() *  100 % 31  ), 2) +//D
+							leftZeroes(Math.floor(Math.random() *  100 % 100 ), 2) +//h
+							leftZeroes(Math.floor(Math.random() *  100 % 100 ), 2) +//m
+							leftZeroes(Math.floor(Math.random() *  100 % 100 ), 2) +//s
+							leftZeroes(Math.floor(Math.random() * 1000 % 1000), 3)  //ms
+						//Math.floor(Math.random() * 10 % 2),
+						
+					}
+				
+					)
+			)
 		}
 		updateLS(lib);
 		showList();
 
 	}
 	function showList() {
+	let i = 0;
 		for (let el of lib) {
+			i++;
 			//console.log('>>', el.get());
 			let obj = el.get();
 			let rcrd = document.createElement('span');
+			let stts = '';
+			switch(obj.status){
+				case 0:
+					stts = '<span style="color: var(--red);font-weight: 700">INCOMPLETA</span>';
+					break;
+				case 1:
+					stts = '<span style="color: var(--golden); font-weight: 600">EM PROGRESSO</span>';
+					break;
+				default:
+					stts = '<span style="color: var(--green); font-weight: 600">COMPLETA</span>';
+					break;
+				
+			}
+			rcrd.id='rcrd_el_'+leftZeroes(i,2);
+			
 			rcrd.innerHTML = `
 				<span class="row rcrd">
-					<span class="info">${JSON.stringify(obj)}</span>
+					<!-- <span class="info">${JSON.stringify(obj)}</span>-->
+					<span class="info">${'<span style=" font-weight: 800; background-color: var(--bg)">'+obj.priority+'</span>'}</span>
 					<span class="info">${obj.id}</span>
-					<span class="info">${obj.priority}</span>
-					<span class="info">${obj.id}</span>
-					<span class="info">${obj.id}</span>
+					<span class="info" style="font-size: 11px">${dateMask(obj.dueDate, 14)}</span>
+					<span class="info" 
+						style="
+						font-size: 12px;
+						background-color: var(--bg2);
+						"
+					>${stts}</span>
+					<button class="btn" style="margin-left: auto;"
+					onclick = "editRecord({rcrd: ${rcrd.id}, objj: ${obj} })"
+					>Editar</button>
 					
 				</span>
 			`;
@@ -544,7 +594,32 @@
 
 	}
 
-
+	function editRecord({rcrd, objj}){
+		//console.log('ID ',id,rcrdId);
+		//let x = document.getElementById(rcrdId);
+		rcrd.innerHTML = `
+				<span class="row rcrd">
+					<!-- <span class="info">${JSON.stringify(obj)}</span>-->
+					<span class="info">${'<span style=" font-weight: 800; background-color: var(--bg)">'+obj.priority+'</span>'}</span>
+					<span class="info">${obj.id}</span>
+					<span class="info" style="font-size: 11px">${dateMask(obj.dueDate, 14)}</span>
+					<span class="info" 
+						style="
+						font-size: 12px;
+						background-color: var(--bg2);
+						"
+					>${stts}</span>
+					<button class="btn" style="margin-left: auto;"
+					onclick = "editRecord({rcrd: ${rcrd.id} })"
+					>Editar</button>
+					
+				</span>
+			`;
+		console.log(rcrd);
+		
+		
+	
+	}
 
 </script>
 
