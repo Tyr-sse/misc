@@ -500,6 +500,10 @@
 		return r.substring(0, n);
 
 	}
+	function DatetoHtmlFormat(str){
+		return  `${str.substring(00, 04)}-${str.substring(04, 06)}-${str.substring(06, 08)}`;
+	}
+	
 
 </script>
 
@@ -645,10 +649,10 @@
 
 						dueDate: '2022' +                                           //Y
 							leftZeroes((Math.floor(Math.random() * 100 % 12) + 1), 2) +//M
-							leftZeroes(Math.floor(Math.random() * 100 % 31), 2) +//D
-							leftZeroes(Math.floor(Math.random() * 100 % 100), 2) +//h
-							leftZeroes(Math.floor(Math.random() * 100 % 100), 2) +//m
-							leftZeroes(Math.floor(Math.random() * 100 % 100), 2) +//s
+							leftZeroes(Math.floor(Math.random() * 100 % 30), 2) +//D
+							leftZeroes(Math.floor(Math.random() * 100 % 24), 2) +//h
+							leftZeroes(Math.floor(Math.random() * 100 % 60), 2) +//m
+							leftZeroes(Math.floor(Math.random() * 100 % 60), 2) +//s
 							leftZeroes(Math.floor(Math.random() * 1000 % 1000), 3)  //ms
 						//Math.floor(Math.random() * 10 % 2),
 
@@ -681,21 +685,40 @@
 				<tr>
 					<td>${rcrd.obj.id}</td>
 
-					<td style="max-width:"><input placeholder="Prioridade" class="in" id="ttl_${rcrd.obj.title}" type="number" value="${rcrd.obj.priority}" style="width:30px"/></td>
+					<td style="max-width:"><input placeholder="Prioridade" class="in" type="number" 
+					id="ttl_${rcrd.obj.id}" 
+					value="${rcrd.obj.priority}" style="width:30px"/></td>
 
-					<td><input placeholder="Titulo" class="in" id="ttl_${rcrd.obj.title}" type="number" value="${rcrd.obj.title}" style="width:90px"/></td>
+					<td><input placeholder="Titulo" class="in" 
+					id="ttl_${rcrd.obj.id}" type="number" 
+					value="${rcrd.obj.title}" style="width:90px"/></td>
 
-					<td><input class="in" id="dt_${rcrd.obj.id}" type="date" value="${rcrd.obj.category}" style="width:80px"/></td>
+					<td><input class="in"  type="date" 
+					id="dt_${rcrd.obj.id}"
+					value="${DatetoHtmlFormat(rcrd.obj.dueDate)}" style="width:80px"/></td>
 
-					<td><input placeholder="Categoria" class="in" id="cat_${rcrd.obj.id}" type="text" value="${rcrd.obj.category}" style="width:80px"/></td>
+					<td><input class="in"  type="text" 
+					id="cat_${rcrd.obj.id}"
+					value="${rcrd.obj.category}" style="width:80px"/></td>
 
-					<td><input placeholder="Prioridade" class="in" id="prior_${rcrd.obj.id}" type="text" value="${rcrd.obj.description}"/></td>
+					<td><input placeholder="Prioridade" class="in"  type="text" 
+					id="dscr_${rcrd.obj.id}"
+					value="${rcrd.obj.description}"/></td>
 					
-					<td><input placeholder="Descrição" class="in" id="dscr_${rcrd.obj.description}" type="text" value="${rcrd.obj.description}"/></td>
 					
 					
-					<td>
-						<button class="btn">ATUALIZAR</button> 
+					<td class="bord" style="background-color: var(--bg2)">
+						<button class="btn inv" 
+							onclick="updateRcrdBtn({
+									title:         'ttl_${rcrd.obj.id}',
+									dueDate:        'dt_${rcrd.obj.id}',
+									category:      'cat_${rcrd.obj.id}',
+									priority:    'prior_${rcrd.obj.id}',
+									description:  'dscr_${rcrd.obj.id}',
+									
+								}
+								"
+						>ATUALIZAR</button> 
 						<button class="btn red">DELETAR</button> 
 						
 					</td>
@@ -706,6 +729,11 @@
 		</div>`;
 
 	}
+
+	function updateRcrdBtn(inp){
+		console.log(JSON.stringify(inp));
+	}
+
 
 	function appendToList(el, lst, i) {
 		let obj = el.get();//mount obj
