@@ -10,3 +10,11 @@ PRINCIPAL (700XP)
 EXTRA (200XP)
 - O usuário deve ser avisado quando a tarefa estiver atrasada (alert ou algo do tipo);
 - Montem usando OO ao invés de programação funcional.
+
+
+RESPONDER
+https://forms.gle/dsqr6iCdkkUNf6AP9
+Autoavaliação: https://forms.gle/Aru1r91NjVCwmZNMA
+
+let x = ('b'+'a'+ + 'a'+'a').toLowerCase()
+console.log(x)

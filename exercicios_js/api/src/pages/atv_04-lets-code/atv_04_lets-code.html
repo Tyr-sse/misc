@@ -7,8 +7,8 @@
 
 	<style id="stl">
 		:root {
-			--bg: #222222;
-			--bg2: #333333;
+			--bg: #151511;
+			--bg2: #222222;
 			--bg3: #444444;
 			--bg4: #555555;
 			--bg5: #535353;
@@ -24,9 +24,12 @@
 			--red2: #ff3030;
 			--green: #11aa11;
 			--green2: #11ee11;
-			
+
 			--golden: #caca11;
-			--blue: #55ffff;
+			--yellow: #aa303044;
+
+			--blue: #44aaaa;
+			--blue2: #44eeee;
 
 			background-color: var(--bg);
 		}
@@ -43,6 +46,19 @@
 
 		}
 
+
+
+
+		.inhrt {
+			background-color: inherit;
+			color: inherit;
+			border-color: inherit;
+
+		}
+
+		.chngd {
+			background-color: var(--yellow);
+		}
 
 		div {
 			color: inherit;
@@ -99,7 +115,7 @@
 
 		::placeholder {
 			color: var(--tint010);
-			font-size: 14px;
+			font-size: 12px;
 
 
 		}
@@ -164,49 +180,38 @@
 
 			transition: background-color 0.2s;
 		}
-		.btn.dark {
-			background-color: var(--bg);
-			border-color: var(--softBg);
-			color: var(--softBg);
+
+
+		.btn.dark:hover {
+			background-color: var(--bg2);
+
 		}
-		.btn.red{
+
+		.red {
 			background-color: var(--red);
 			color: var(--bg);
 			border-color: var(--bg);
 
 		}
-		.btn.red:hover{
-			background-color: var(--red2);
-			color: var(--bg);
-			border-color: var(--bg);
 
-		}
-		.btn.green{
-			background-color: var(--green);
-			color: var(--bg);
-			border-color: var(--bg);
 
-		}
-		.btn.green:hover{
+
+
+
+		.btn.green:hover {
 			background-color: var(--green2);
 			color: var(--bg);
 			border-color: var(--bg);
-
-		}
-		.btn.dark:hover {
-			background-color: var(--bg2);
-			
 		}
 
-		.btn.expand {
-			font-weight: 300;
-			min-width: 25px;
-			margin-left: auto;
-			margin-right: 30px;
 
 
-
+		.btn.blue:hover {
+			background-color: var(--blue2);
+			color: var(--bg);
+			border-color: var(--bg);
 		}
+
 
 
 		.btn[del] {
@@ -303,6 +308,38 @@
 			width: 200px;
 			padding: 5px;
 
+		}
+
+
+		.inv {
+			background-color: var(--txt);
+			color: var(--bg);
+			border-color: var(--bg);
+		}
+
+		.green {
+			background-color: var(--green);
+			color: var(--bg);
+			border-color: var(--bg);
+		}
+
+		.btn.red:hover {
+			background-color: var(--red2);
+			color: var(--bg);
+			border-color: var(--bg);
+
+		}
+
+		.blue {
+			background-color: var(--blue);
+			color: var(--bg);
+			border-color: var(--bg);
+		}
+
+		.dark {
+			background-color: var(--bg);
+			border-color: var(--softBg);
+			color: var(--softBg);
 		}
 
 		.rcrd {
@@ -427,35 +464,35 @@
 		<h3>Criar nova tarefa</h3>
 		<table class="bord" style="margin:2px">
 			<tr>
-				<th>ID</th>
 				<th>Prioridade</th>
 				<th>Título</th>
 				<th>Data a Ser Entregue</th>
 				<th>Categoria</th>
 				<th>Descrição</th>
-				
+
 				<th>Ações</th>
-				
+
 			</tr>
 			<tr>
-				<td></td>
-				<td class="bord"> __</td>
-				<td><input placeholder="Título" class="in" id="ttl_${rcrd.obj.title}" type="text" value=""/></td>
-				<td><input class="in" id="cat_${rcrd.obj.category}" type="date" value=""/></td>
-				<td><input placeholder="Categoria" class="in" id="prior_${rcrd.obj.priority}" type="text" value=""/></td>
-				
-				<td><input placeholder="Descrição" class="in" id="dscr_${rcrd.obj.description}" type="text" value=""/></td>
-				
-				
+				<td><input id="inp_priority" class="in" id="ttl_${rcrd.obj.title}" type="number" value="" /></td>
+				<td><input id="inp_title" class="in" id="ttl_${rcrd.obj.title}" type="text" /></td>
+				<td><input id="inp_dueDate" class="in" id="cat_${rcrd.obj.category}" type="date" /></td>
+				<td><input id="inp_category" class="in" id="prior_${rcrd.obj.priority}" type="text" value="" />
+				</td>
+
+				<td><input id="inp_description" class="in" id="dscr_${rcrd.obj.description}" type="text" value="" />
+				</td>
+
+
 				<td>
-					<button class="btn green">ADICIONAR</button> 
-					
+					<button class="btn green" onclick="addTask()">ADICIONAR</button>
+
 				</td>
 
 			</tr>
-		
+
 		</table>
-	
+
 	</div>
 	<div id="items_list" class="bord col">
 	</div>
@@ -491,19 +528,25 @@
 	function dateMask(str, n) {
 
 		let r =
-			leftZeroes(str.substring(00, 04), 4) + ' / ' +
+			leftZeroes(str.substring(06, 08), 2) + ' / ' +
 			leftZeroes(str.substring(04, 06), 2) + ' / ' +
-			leftZeroes(str.substring(06, 08), 2) + ' ' +
+			leftZeroes(str.substring(00, 04), 4) + ' ' +
 			str.substring(08, 10) + ':' +
 			str.substring(10, 12) + ':' +
-			str.substring(12, 15)
+			str.substring(12, 14)
 		return r.substring(0, n);
 
 	}
-	function DatetoHtmlFormat(str){
-		return  `${str.substring(00, 04)}-${str.substring(04, 06)}-${str.substring(06, 08)}`;
+	function DatetoHtmlFormat(str) {
+		return `${str.substring(00, 04)}-${str.substring(04, 06)}-${str.substring(06, 08)}`;
 	}
-	
+	function dtFromHtmlFormat(html_date) {
+		let now = dateParse(new Date());
+		return html_date ? html_date.split('-').join('') + now.substring(8) : now;
+		//return '202209234454200';
+		//return html_format.split()
+	}
+
 
 </script>
 
@@ -541,9 +584,8 @@
 			return this.#status;
 		}
 		setStatus = function (val) {
-			if (val === 0 || val === 1) {
-				this.#status = val;
-			}
+			this.#status = val ? true : false;
+
 		}
 
 		#category;
@@ -589,11 +631,11 @@
 			this.setCategory(category);
 			this.setStatus(status);
 			this.setPriority(priority);
-			let now = new Date();
 
 			//console.log(''+now.getFullYear()+ leftZeroes(now.getMonth()+1,2)+leftZeroes(now.getDay(),2) );
 			this.setCreationDate(dateParse(new Date()));
 			this.setDueDate(dueDate);
+			console.log(this)
 		}
 
 		get = function () {
@@ -604,9 +646,24 @@
 				"dueDate": this.getDueDate(),
 				"status": this.getStatus(),
 				"category": this.getCategory(),
-				"priority": this.getPriority()
+				"priority": this.getPriority(),
+				"creationDate": this.getCreationDate(),
 
 			}
+		}
+		set = function ({ title, description, dueDate, status, category, priority }) {
+			//console.log('SET: ',this.get());
+			console.log('ttl 1', this.getTitle(), title);
+			this.setTitle(title);
+			console.log('ttl 2', this.getTitle());
+
+			this.setDescription(description);
+			this.setDueDate(dueDate);
+			this.setStatus(status);
+			this.setCategory(category);
+			this.setPriority(priority);
+			//console.log('SET: ',this.get());
+
 		}
 
 
@@ -617,24 +674,25 @@
 
 
 <script id="DB">
-	console.log(" __DB");
 	let lib = [];
-
-
-
-
-
-	function updateLS(val) {
-		localStorage.setItem('lib', JSON.stringify(val));
+	let a = [1, 2, 3]
+	a.x = 4
+	for (let el in a) {
+		console.log(typeof a, el, a[el]);
 	}
+
+
+	
 
 
 
 </script>
 
 <script id="PROC">
+
 	console.log(" __PROC");
-	generate_lib(5);
+	let lst = document.getElementById('items_list');
+	generate_lib(15);
 	function generate_lib(n) {
 		for (let i of range(n)) {
 			lib.push(
@@ -661,65 +719,147 @@
 				)
 			)
 		}
-		updateLS(lib);
+		updateLS();
 		showList();
-
 	}
 
-	function generateRow(rcrd) {
+	function updateLS() {
+		console.log(localStorage.lib)
+		let r = `[\n`;
+		for(let tsk of lib){
+			console.log(JSON.stringify(tsk.get())) ;
+
+			r += JSON.stringify(tsk.get())+',\n';
+
+		}
+		r+=']\n\n';
+console.log('R> ',r)
+		//localStorage.setItem('lib', JSON.parse(r) );
+	}
+
+	function download_lib() {
+		let LS = localStorage.lib;
+		console.log(LS);
+		return;
+		for (let i of range(n)) {
+			lib.push(
+				new Task(
+					{
+						title: 'TITULO' + i, //
+						description: 'DE ' + i,
+						id: 0,
+						category: 'cat_' + i,
+						status: Math.floor(Math.random() * 10 % 3),
+						priority: Math.floor(Math.random() * 10 % 10),
+
+						dueDate: '2022' +                                           //Y
+							leftZeroes((Math.floor(Math.random() * 100 % 12) + 1), 2) +//M
+							leftZeroes(Math.floor(Math.random() * 100 % 30), 2) +//D
+							leftZeroes(Math.floor(Math.random() * 100 % 24), 2) +//h
+							leftZeroes(Math.floor(Math.random() * 100 % 60), 2) +//m
+							leftZeroes(Math.floor(Math.random() * 100 % 60), 2) +//s
+							leftZeroes(Math.floor(Math.random() * 1000 % 1000), 3)  //ms
+						//Math.floor(Math.random() * 10 % 2),
+
+					}
+
+				)
+			)
+		}
+		updateLS();
+		showList();
+	}
+
+	function generateRow(rcrd, parent_id = null) {
 		//console.log(rcrd, rcrd.obj);
+		let cdt = dateMask(rcrd.obj.creationDate);
 		return `
-		<div class="hvrable">
-			<table class="bord" style="margin:2px">
+		<div iclass="hvrable">
+			<table class="bord" style="margin:2px;">
 				<tr>
 					<th>ID</th>
+					<th>Completa?</th>
 					<th>Prioridade</th>
 					<th>Título</th>
 					<th>Data a Ser Entregue</th>
 					<th>Categoria</th>
 					<th>Descrição</th>
-					
+					<th style="font-size: 7px">Data de Criação</th>
 					<th>Ações</th>
 					
 				</tr>
-				<tr>
+				<tr ">
 					<td>${rcrd.obj.id}</td>
+					<td>
+						<input id='stts_${rcrd.obj.id}'
+						type="checkbox" value='asd' />${rcrd.obj.status == 0 ? `` : ``}
+						</td>
+					<td>
+						<input placeholder="Prioridade" class="in" type="number" 
+						id="priority_${rcrd.obj.id}" 
+						onchange="tint(${parent_id})"
+						value="${rcrd.obj.priority}" style="width:30px"/>
+					</td>
 
-					<td style="max-width:"><input placeholder="Prioridade" class="in" type="number" 
-					id="ttl_${rcrd.obj.id}" 
-					value="${rcrd.obj.priority}" style="width:30px"/></td>
+					<td>
+						<input placeholder="Titulo" class="in" 
+						onchange="tint(${parent_id})"
+						id="ttl_${rcrd.obj.id}" type="text" 
+						value="${rcrd.obj.title}" style="width:90px"/>
+					</td>
 
-					<td><input placeholder="Titulo" class="in" 
-					id="ttl_${rcrd.obj.id}" type="number" 
-					value="${rcrd.obj.title}" style="width:90px"/></td>
+					<td>
+						<input class="in"  type="date" 
+						onchange="tint(${parent_id})"
+						id="dt_${rcrd.obj.id}"
+						value="${DatetoHtmlFormat(rcrd.obj.dueDate)}" style="width:80px"/>
+					</td>
 
-					<td><input class="in"  type="date" 
-					id="dt_${rcrd.obj.id}"
-					value="${DatetoHtmlFormat(rcrd.obj.dueDate)}" style="width:80px"/></td>
+					<td>
+						<input class="in"  type="text" 
+						id="cat_${rcrd.obj.id}"
+						onchange="tint(${parent_id})"
+						value="${rcrd.obj.category}" style="width:80px"/>
+					</td>
 
-					<td><input class="in"  type="text" 
-					id="cat_${rcrd.obj.id}"
-					value="${rcrd.obj.category}" style="width:80px"/></td>
-
-					<td><input placeholder="Prioridade" class="in"  type="text" 
-					id="dscr_${rcrd.obj.id}"
-					value="${rcrd.obj.description}"/></td>
-					
-					
-					
+					<td>
+						<input placeholder="Prioridade" class="in"  type="text" 
+						id="dscr_${rcrd.obj.id}"
+						onchange="tint('${parent_id}')"
+						value="${rcrd.obj.description}"/>
+					</td>
+					<td>
+						<p placeholder="Prioridade" class="bord" 
+							style="
+							background-color: var(--txt);
+							color: var(--bg);
+							border-color: var(--bg);
+							
+							border-radius: 4px;
+							display:flex;
+							flex-direction: column;
+							"
+							type="text" 
+						id="creationDt_${rcrd.obj.creationDate}"
+						onchange="tint('${parent_id}')"
+						>${cdt.substring(0, 14)}
+						<span class="inhrt" style="flex:1; font-size: 7px">${cdt.substring(15)}</span></p>
+					</td>
 					<td class="bord" style="background-color: var(--bg2)">
-						<button class="btn inv" 
-							onclick="updateRcrdBtn({
-									title:         'ttl_${rcrd.obj.id}',
-									dueDate:        'dt_${rcrd.obj.id}',
-									category:      'cat_${rcrd.obj.id}',
-									priority:    'prior_${rcrd.obj.id}',
-									description:  'dscr_${rcrd.obj.id}',
-									
-								}
-								"
+						<button class="btn blue" 
+							onclick = "updateRcrdBtn({
+								id: '${rcrd.obj.id}',
+								title_el: ttl_${rcrd.obj.id},
+								description_el: dscr_${rcrd.obj.id},
+								dueDate_el: dt_${rcrd.obj.id},
+								status_el: stts_${rcrd.obj.id},
+								category_el: cat_${rcrd.obj.id},
+								priority_el: priority_${rcrd.obj.id}
+							})"
 						>ATUALIZAR</button> 
-						<button class="btn red">DELETAR</button> 
+						<button class="btn red"
+							onclick = "deleteRcrdBtn('${parent_id}',${rcrd.obj.id})"
+						>DELETAR</button> 
 						
 					</td>
 
@@ -729,44 +869,105 @@
 		</div>`;
 
 	}
+	function tint(el) {
+		console.log('id> ', el)
+		el.classList.add('chngd');
+	}
+	function updateRcrdBtn(inp) {
+		console.log('INP> ', inp);
+		let x = {
+			title: inp.title_el.value,
+			description: inp.description_el.value,
+			dueDate: inp.dueDate_el.value,
+			status: inp.status_el.checked,
+			category: inp.category_el.value
+		}
+		console.log(x);
+		//newData = JSON.parse(newData.textContent);
+		for (let tsk of lib) {
+			if (tsk.getId() === inp.id) {
+				tsk.set(x);
+				updateLS();
+			}
+		}
 
-	function updateRcrdBtn(inp){
-		console.log(JSON.stringify(inp));
+
+		//console.log(lib);
+	}
+	function deleteRcrdBtn(el_id, tsk_id) {
+		if (!confirm('Tem certeza que quer deletar esta tarefa? ')) return;
+		document.getElementById(el_id).remove();
+
+		for (let i = 0; i < lib.length; i++) {
+			if (lib[i].getId() == tsk_id) {
+				console.log('DESGRAMEIRA', lib, i, lib[i])
+				lib.splice(i, 1);
+				console.log(lib);
+				updateLS();
+
+			}
+		}
+
 	}
 
 
-	function appendToList(el, lst, i) {
+	function appendToList(el, i) {
 		let obj = el.get();//mount obj
 		let rcrd = document.createElement('span');
-		rcrd.id = 'rcrd_el_' + leftZeroes(i, 2);
+		const rcrd_id = 'rcrd_el_' + leftZeroes(i, 2);
+		rcrd.id = rcrd_id;
 		rcrd.obj = obj;
-		rcrd.innerHTML = generateRow(rcrd);
+		//console.log('G: ', rcrd.attributes.id)
+		rcrd.innerHTML = generateRow(rcrd, rcrd_id);
 
 		lst.append(rcrd);
 
 	}
 
 	function showList() {
-		let lst = document.getElementById('items_list');
+
 		let i = 0;
 		for (let it of lib) {
-			appendToList(it, lst, i);
+			appendToList(it, i);
 			i++;
 		}
 	}
-	function addTask(dsc){
-		console.log('dsc',dsc);
+	function addTask() {
+		let ttl = document.getElementById('inp_title').value;
 
+		let descr = document.getElementById('inp_description').value;
+
+		let categ = document.getElementById('inp_category').value;
+		categ = categ ? categ : 'geral';
+		let prior = document.getElementById('inp_priority').value;
+		prior = prior ? prior : 4;
+		let dDt = dtFromHtmlFormat(document.getElementById('inp_dueDate').value);
+
+		// console.log('ttl: ', ttl);
+		// console.log('descr: ', descr);
+		// console.log('dDt: ', dDt);
+		// console.log('prior: ', prior);
+		// console.log('categ: ', categ);
+
+		let el = new Task(
+			{
+				title: ttl,
+				description: descr,
+				category: categ,
+				status: false,
+				priority: prior,
+				dueDate: dDt,
+
+			});
+
+		lib.push(el);
+		//console.log(lib);
+
+		appendToList(el, lib.length);
+		updateLS();
 	}
 
 
-
-
-
 </script>
-
-
-
-
 
 </html>
