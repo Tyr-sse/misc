@@ -17,4 +17,4 @@ https://forms.gle/dsqr6iCdkkUNf6AP9
 Autoavaliação: https://forms.gle/Aru1r91NjVCwmZNMA
 
 let x = ('b'+'a'+ + 'a'+'a').toLowerCase()
-console.log(x)
+console.log('RESULTADO> ',x,'< RESULTADO')

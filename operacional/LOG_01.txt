@@ -109,7 +109,11 @@ Guildas
   https://ditec.intranet.bb.com.br/#/player-video/http:%2F%2Fvideostvditec.servicos.bb.com.br%2Frepositorio%2Finovacao%2Fcomunicacao%2FTVDITEC%2F2020%2FSET%2Fn_G39_-_Python-1.webm?cat=GuildasDitec&page=11&title=%23G39%20Python
 
 
+Assistir aula de MAinframe
 
+PRODUCAO F9329132/&USERPW/APD
+DSAT &USERID/&USERPW PROC(TSO390)
+DROSP01 &USERID/&USERPW
 
 
 

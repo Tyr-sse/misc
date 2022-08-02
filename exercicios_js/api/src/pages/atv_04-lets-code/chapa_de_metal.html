@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<style id="stl">
+		:root {
+			--bg: #222222;
+			--bg2: #333333;
+			--bg3: #444444;
+			--bg4: #555555;
+			--bg5: #535353;
+			--bg6: #888888;
+
+			--softBg: #999999;
+			--txt: #888888;
+
+			--tint01: #000000;
+			--tint02: #552255;
+
+			--red: #bb3030;
+			--green: #11ee11;
+			--golden: #ffff11;
+			--blue: #55ffff;
+
+			background-color: var(--bg);
+		}
+
+		* {
+			background-color: transparent;
+			color: var(--txt);
+			font-family: lato, sans-serif;
+
+
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 12px;
+
+		}
+
+
+		div {
+			color: inherit;
+			font-size: inherit;
+		}
+
+		h1 {
+			background-color: #aabbcc00;
+			font-size: 18px;
+			color: var(--txt);
+		}
+
+		h2 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		h3 {
+			background-color: #aabbcc00;
+			font-size: 20px;
+			color: var(--txt);
+		}
+
+		p,
+		h4 {
+			background-color: #aabbcc00;
+			font-size: 14px;
+			color: var(--txt);
+		}
+
+
+
+
+		.in {
+			border-color: var(--softBg);
+			border-style: solid;
+			border-width: 0px;
+			border-radius: 5px;
+			margin: 2px;
+
+			min-height: 30px;
+			max-height: 30px;
+
+			min-width: 20px;
+			max-width: 100px;
+
+			font-size: 16px;
+
+			background-color: var(--softBg);
+			color: var(--bg);
+		}
+
+		::placeholder {
+			color: var(--tint010);
+			font-size: 14px;
+
+
+		}
+
+		.cbxOuterWrap {
+			background-color: transparent;
+			min-height: 20px;
+			max-height: 20px;
+			min-width: 20px;
+			max-width: 20px;
+
+			border-radius: 2px;
+			border-style: solid;
+			border-width: 0px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+
+
+		.btn {
+			color: inherit;
+			background-color: inherit;
+			border-color: inherit;
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 8px;
+
+			margin-left: 5px;
+			margin-right: 5px;
+			margin-top: auto;
+			margin-bottom: auto;
+
+			min-height: 20px;
+			max-height: 20px;
+
+			min-width: 20px;
+
+			transition: background-color 0.2s;
+		}
+
+		.btn.expand {
+			font-weight: 300;
+			min-width: 25px;
+			margin-left: auto;
+			margin-right: 30px;
+
+
+
+		}
+
+
+
+
+		.btn:hover {
+			background-color: var(--bg);
+		}
+
+		.bord {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 12px;
+			background-color: #aabbcc00;
+		}
+
+		.row {
+			text-align: center;
+			display: flex;
+			flex-direction: row;
+
+		}
+
+		.col {
+			flex: 1;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+
+			align-items: center;
+		}
+
+		.item {
+			flex: 1;
+			margin: 2px;
+			display: flex;
+			vertical-align: center;
+			vertical-align: middle;
+
+		}
+
+
+		.transp {
+			background-color: #aabbcc00;
+		}
+
+		.hcent {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.vcent {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+		.atom{
+			flex:1
+		}
+
+
+		.info {
+			border-radius: 2px;
+			background-color: inherit;
+			color: inherit;
+			border-color: inherit;
+			padding-left: 5px;
+			padding-right: 5px;
+
+		}
+
+
+		.hdn {
+			display: none;
+		}
+	</style>
+
+	<style>
+		.tbl {
+			min-height: 600px;
+			background-color: var(--bg);
+			display: block;
+		}
+
+		td,
+		th {
+			border-color: var(--txt);
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 3px;
+			background-color: #aabbcc00;
+			padding: 2px;
+			margin: 2px;
+
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+
+	<title>Contas - Thiago</title>
+</head>
+
+<body id="body" style="background-color: var(--bg2);">
+	<table>
+		<tr>
+			<th>
+				Linhas
+			</th>
+			<th>
+				Colunas
+			</th>
+			<th>
+				Máximo de Iterações
+			</th>
+			<th>
+				Erro máximo
+			</th>
+			<th>
+				Temperatura Linhas
+			</th>
+			<th>
+				Temperatura Colunas
+			</th>
+
+
+		</tr>
+		<tr style="display: flexs;flex-direction: row;" class="hcent">
+			<td>
+				<input id="h" class="in" type="number" value="5" />
+			</td>
+			<td>
+				<input id="w" class="in" type="number" value="5" />
+			</td>
+			<td>
+				<input id="mi" class="in" type="number" value="3" />
+			</td>
+			<td>
+				<input id="me" class="in" type="number" value="2" />
+			</td>
+			<td>
+				<input id="tl" class="in" type="number" value="200" />
+			</td>
+			<td>
+				<input id="tc" class="in" type="number" value="500" />
+			</td>
+
+		</tr>
+		<table id="canv">
+			
+		</table>
+
+	</table>
+	<div style="align-self: center;">
+		<button class="btn" onclick="strt()">SUBMIT</button>
+	</div>
+
+</body>
+<script>
+	function strt() {
+		let h = +document.getElementById('h').value;
+		let w = +document.getElementById('w').value;
+		let mi = +document.getElementById('mi').value;
+		let me = +document.getElementById('me').value;
+		let tl = +document.getElementById('tl').value;
+		let tc = +document.getElementById('tc').value;
+
+		let M = [];
+		for (let y = 0; y <= h; y++) {
+			let L = [];
+			for (let x = 0; x <= w; x++) {
+				L.push(0);
+			}
+			M.push(L);
+		}
+		for (let el of M) {
+			el[0] = tc;
+		}
+		M[0] = [];
+		for (let el of M[1]) {
+			M[0].push(tl);
+		}
+		let mei = me;
+		for (let i = 0; i < mi && mei>=me; i++, console.table(M)) {
+			mei = me;
+			for (let y = 1; y < h; y++) {
+				for (let x = 1; x < w; x++) {
+					//console.log('el> '+'['+x+','+y+']'+M[x][y]);
+					let nV = M[x-1][y] + M[x+1][y] + M[x][y-1] + M[x][y+1];
+					nV /= 4;
+					let e = nV - M[x][y];
+					e = e>0?e:-e;
+					if(e>mei) mei=e;
+					M[x][y]=nV;
+				}
+
+			}
+			
+			generatePlate(M, me);
+		}
+
+
+	}
+	let ms = [];
+	function generatePlate(M, bn) {
+		
+		let r = "";
+		for(let el of M){
+			r+='<tr>';
+			for(let c of el){
+				let val = (c+'');
+				if(val.length>8) val = val.substring(0,8);
+				let proprt = ((c/bn)+'');
+				if(proprt.length>8) vproprtl = proprt.substring(0,8);
+				r+=`<td class="atom" style="">
+						${val}(${proprt})
+					</td>`
+			}
+			r+='</tr>';
+		}
+		ms.push(r);
+		//document.getElementById('canv').innerHTML = r;
+
+	}
+
+</script>
+
+
+</table>
+
+
+
+</html>
