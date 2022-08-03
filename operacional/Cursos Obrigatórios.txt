@@ -62,3 +62,18 @@ Guildas
 	5h terças e Quintas
 Minipalestras
 	10h Terças e Quintas
+
+
+  
+$
+npm i yarn -g
+$
+yarn create react-app todo-list --template typescript
+
+npm create react-app todo-list --template typescript
+
+$
+npx create-react-app my-app --template typescript
+
+
+
