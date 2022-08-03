@@ -5,7 +5,7 @@
       * Tectonics: cobc
       ******************************************************************
        IDENTIFICATION DIVISION.
-        PROGRAM-ID. PROG0001.
+        PROGRAM-ID. CONV0001.
        ENVIRONMENT DIVISION.
         CONFIGURATION SECTION.
 
@@ -17,6 +17,10 @@
          SELECT OUT-FL ASSIGN ".\..\fls\O0001.txt"
           ORGANIZATION IS LINE SEQUENTIAL
           FILE STATUS IS STTS-OUT.
+         SELECT LOG-FL ASSIGN ".\..\fls\O0002.txt"
+          ORGANIZATION IS LINE SEQUENTIAL
+          FILE STATUS IS STTS-LOG.
+
 
        DATA DIVISION.
         FILE SECTION.
@@ -31,14 +35,22 @@
           02 O-A                                           PIC X(10).
           02 O-B                                           PIC X(10).
           02 O-V                                           PIC 9(10).
-
+         FD LOG-FL.
+         01 LOG-RCRD.
+          02 N1                                            PIC 999.
+          02 N2                                            PIC 999.
+          02 DSCR                                          PIC X(10).
 
 
         WORKING-STORAGE SECTION.
-         77 STTS-IN PIC 99.
-         77 STTS-OUT PIC 99.
+         77 STTS-IN                                        PIC 99.
+         77 STTS-OUT                                       PIC 99.
+         77 STTS-LOG                                       PIC 99.
+
          77 CT-01 PIC 99.
          77 CT-02 PIC 99.
+         77 CT-03 PIC 99.
+         77 ERR   PIC XXX.
 
 
 
@@ -47,16 +59,16 @@
 
 
         000-MAIN.
-         DISPLAY 'MAIN: PROG0001'.
+         DISPLAY 'MAIN: CONV0001'.
          PERFORM 100-INIT.
 
          OPEN INPUT IN-FL.
-         OPEN OUTPUT OUT-FL.
+
 
          PERFORM 200-PROCESS.
 
          CLOSE IN-FL.
-         CLOSE OUT-FL.
+
 
 
 
@@ -64,14 +76,18 @@
 
 
         100-INIT.
-         DISPLAY 'INIT: PROG0001'.
+         DISPLAY 'INIT: CONV0001'.
+         OPEN EXTEND OUT-FL.
+         MOVE ' 123456789 123456789 123456789' TO RCRD-OUT.
+         WRITE RCRD-OUT.
+         CLOSE OUT-FL.
 
 
 
         200-PROCESS.
-         DISPLAY 'PROCESS: PROG0001'.
+         DISPLAY 'PROCESS: CONV0001'.
          MOVE 0 TO CT-02.
-         PERFORM 201-PROC-LINE UNTIL CT-01=4 OR CT-02=1 .
+         PERFORM 201-PROC-LINE UNTIL CT-01=4 OR ERR='EOF' .
 
 
         201-PROC-LINE.
@@ -84,11 +100,32 @@
            MOVE I-B TO O-B
            MOVE I-V TO O-V
          END-READ.
-         DISPLAY ':' RCRD-OUT.
-         WRITE RCRD-OUT.
+         MOVE 0 TO CT-03.
+         PERFORM 202-FIND-EXTREME 10 TIMES.
 
-        ADD 1 TO CT-01.
-              300-END.
-         DISPLAY 'END-PROGRAM: PROG0001'.
+         OPEN EXTEND OUT-FL.
+         WRITE RCRD-OUT.
+         CLOSE OUT-FL.
+
+         ADD 1 TO CT-01.
+         MOVE 'NIL' TO ERR.
+        202-FIND-EXTREME.
+         DISPLAY 'FIND EXTREME ' CT-03 '-' ERR.
+         OPEN EXTEND LOG-FL.
+         STRING
+         CT-03 DELIMITED BY SIZE
+         CT-02 DELIMITED BY SIZE
+         '_ 123456789 123456789' DELIMITED BY SIZE
+         INTO LOG-RCRD.
+
+         WRITE LOG-RCRD.
+         CLOSE LOG-FL.
+         IF CT-03>10 THEN
+          MOVE 'MIT' TO ERR
+         END-IF.
+
+         ADD 1 TO CT-03.
+        300-END.
+         DISPLAY 'END-PROGRAM: CONV0001'.
          STOP RUN.
-       END PROGRAM PROG0001.
+       END PROGRAM CONV0001.
