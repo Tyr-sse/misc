@@ -7,14 +7,29 @@ Cursos Obrigatórios para o Homeoffice
 [ ] 7905
 
 
-Cursos Obrigatórios para Os 3 meses de treinamento:
+Cursos Obrigatórios para Os 3 meses de treinamento:========================
 Tecnologia
-	7791 Introdução ao Teste de Software
-	5609 Sinapse Noções da Plataforma Mainframe no BB
+	[ ] 7791 - 2h Introdução ao Teste de Software
+	[ ] 5609 -    Sinapse Noções da Plataforma Mainframe no BB
+JS e TS:
+[ ] 201617 - 10h
+[ ] 201720 - 10h
+[ ] 201721 - 12h
+[ ] 200412 - 12h
+[ ] 200438 - 12h
+[ ] 200772 - 10h
+[ ] 201941 - 12h
+[ ] 202190 - 10h
+[ ] 202191 - 10h
+[ ] 202192 - 10h
+[ ] 201817 - 12h
+
+
+
 
 Trilha Estratégica 5h de Escolha Livre
  escolhas
-  202462 06h SQL
+[ ] 202462 06h SQL
   
  candidatos
   201909     UX
