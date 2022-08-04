@@ -17,9 +17,13 @@
          SELECT OUT-FL ASSIGN ".\..\fls\O0001.txt"
           ORGANIZATION IS LINE SEQUENTIAL
           FILE STATUS IS STTS-OUT.
-         SELECT LOG-FL ASSIGN ".\..\fls\O0002.txt"
+         SELECT L-FL ASSIGN ".\..\fls\O0002.txt"
           ORGANIZATION IS LINE SEQUENTIAL
           FILE STATUS IS STTS-LOG.
+         SELECT LOG-FL ASSIGN ".\..\fls\LOG.txt"
+          ORGANIZATION IS LINE SEQUENTIAL
+          FILE STATUS IS STTS-LOG.
+
 
 
        DATA DIVISION.
@@ -35,6 +39,9 @@
           02 O-A                                           PIC X(10).
           02 O-B                                           PIC X(10).
           02 O-V                                           PIC 9(10).
+        FD L-FL.
+         01 RCRD-L                                         PIC X(10).
+
          FD LOG-FL.
          01 LOG-RCRD.
           02 N1                                            PIC 999.
@@ -47,10 +54,16 @@
          77 STTS-OUT                                       PIC 99.
          77 STTS-LOG                                       PIC 99.
 
-         77 CT-01 PIC 99.
-         77 CT-02 PIC 99.
-         77 CT-03 PIC 99.
-         77 ERR   PIC XXX.
+         77 CT-01                                          PIC 99.
+         77 CT-02                                          PIC 99.
+         77 CT-03                                          PIC 99.
+         77 ERR                                            PIC XXX.
+
+         77 NUM                                            PIC 9(10).
+         77 DEN                                            PIC 9(10).
+         77 PREV-A                                         PIC 9(10).
+         77 PREV-B                                         PIC 9(10).
+
 
 
 
@@ -87,6 +100,10 @@
         200-PROCESS.
          DISPLAY 'PROCESS: CONV0001'.
          MOVE 0 TO CT-02.
+         MOVE 1 TO NUM.
+         MOVE 1 TO DEN.
+
+
          PERFORM 201-PROC-LINE UNTIL CT-01=4 OR ERR='EOF' .
 
 
@@ -96,30 +113,45 @@
            DISPLAY 'EOF, CT-02 = 0'
            MOVE 1 TO CT-02
           NOT AT END
+      *    VER SE HÁ NOVIDADE
+      *      ADICIONAR NOVIDADE AO FL
+
+
+
+
+
+
+      *    VER SE HÁ DUPLICATA
+      *      ENCERRAR POR INCONSISTENCIA
+      *
+
            MOVE I-A TO O-A
            MOVE I-B TO O-B
            MOVE I-V TO O-V
          END-READ.
          MOVE 0 TO CT-03.
-         PERFORM 202-FIND-EXTREME 10 TIMES.
 
-         OPEN EXTEND OUT-FL.
-         WRITE RCRD-OUT.
-         CLOSE OUT-FL.
+      *  PERFORM 202-FIND-EXTREME-A 10 TIMES.
+
+      *  OPEN EXTEND OUT-FL.
+
+      *  WRITE RCRD-OUT.
+      *  CLOSE OUT-FL.
 
          ADD 1 TO CT-01.
          MOVE 'NIL' TO ERR.
-        202-FIND-EXTREME.
+        202-FIND-EXTREME-A.
          DISPLAY 'FIND EXTREME ' CT-03 '-' ERR.
-         OPEN EXTEND LOG-FL.
-         STRING
-         CT-03 DELIMITED BY SIZE
-         CT-02 DELIMITED BY SIZE
-         '_ 123456789 123456789' DELIMITED BY SIZE
-         INTO LOG-RCRD.
 
-         WRITE LOG-RCRD.
-         CLOSE LOG-FL.
+      *  OPEN EXTEND LOG-FL.
+      *  STRING
+      *  CT-03 DELIMITED BY SIZE
+      *  CT-02 DELIMITED BY SIZE
+      *  '_ 123456789 123456789' DELIMITED BY SIZE
+      *  INTO LOG-RCRD.
+      *  WRITE LOG-RCRD.
+      *  CLOSE LOG-FL.
+
          IF CT-03>10 THEN
           MOVE 'MIT' TO ERR
          END-IF.
