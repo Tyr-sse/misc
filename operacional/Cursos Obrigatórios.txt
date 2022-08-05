@@ -9,12 +9,12 @@ Cursos Obrigatórios para o Homeoffice
 
 Cursos Obrigatórios para Os 3 meses de treinamento:========================
 Tecnologia
-	[ ] 7791 - 2h Introdução ao Teste de Software
+	[ ] 7791 - 2h Introdução ao Teste de Software x
 	[ ] 5609 -    Sinapse Noções da Plataforma Mainframe no BB
 JS e TS:
-[ ] 201617 - 10h
-[ ] 201720 - 10h
-[ ] 201721 - 12h
+[X] 201617 - 10h Linguagem
+[ ] 201720 - 10h OO
+[ ] 201721 - 12h Browser
 [ ] 200412 - 12h
 [ ] 200438 - 12h
 [ ] 200772 - 10h
