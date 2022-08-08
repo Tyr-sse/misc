@@ -47,7 +47,7 @@ Trilha RSA 5h de Escolha Livre
  escolhas
   
  candidatos
-  8943
+  8943 [x]
   8942
 
 Mentoria

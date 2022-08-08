@@ -1,5 +1,37 @@
+:root {
+  --bg: #222222;
+  --bg2: #333333;
+  --bg3: #444444;
+  --bg4: #555555;
+
+  --softBg: #999999;
+  --txt: #eeeedd;
+
+  --tint01: #ed7411;
+  --tint02: #555555;
+
+  --red: #bb3030;
+  --green: #11ee11;
+  --golden: #ffff11;
+
+  background-color: var(--bg);
+}
+
+* {
+  background-color: transparent;
+  color: var(--txt);
+  font-family: lato, sans-serif;
+
+
+  border-style: solid;
+  border-width: 0px;
+  border-radius: 12px;
+
+}
+
 .App {
   text-align: center;
+  background-color: var(--bg);
 }
 
 .App-logo {
