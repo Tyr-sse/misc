@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import AddTaskForm from './components/addTaskForm/AddTaskFormIndex';
 import TaskList from './components/TaskList/taskListIndex';
 
 
@@ -10,7 +11,9 @@ function App() {
   genTSK(10);
   return (
     <div className="App">
+      <AddTaskForm />
       <TaskList taskList={taskList}/>
+
     </div>
   );
 }
