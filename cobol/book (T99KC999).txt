@@ -1,0 +1,14 @@
+*----------------------------------------------------------------*
+      * BOOK..: T99KC999.
+      *----------------------------------------------------------------*
+           03  OPERACAO                          PIC  X(01).
+             88  ADICAO                          VALUE '+'.
+             88  SUBTRCAO                        VALUE '-'.
+             88  MULTIPLICACAO                   VALUE '*'.
+             88  DIVISAO                         VALUE '/'.
+           03  OPERANDO-1                        PIC  9(04).
+           03  OPERANDO-2                        PIC  9(04).
+           03  RESULTADO                         PIC  9(04).
+           03  CD-COD-ERRO                       PIC  9(01) VALUE 0.
+           03  MSG-ERRO                          PIC  x(20).
+      *---- FIM:T99KC999 ----------------------------------------------*

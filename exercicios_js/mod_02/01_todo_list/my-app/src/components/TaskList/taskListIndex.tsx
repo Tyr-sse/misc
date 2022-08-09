@@ -1,7 +1,5 @@
 import React from "react";
 
-import Accordion from 'react-bootstrap/Accordion';
-
 function leftZeroes(val: (number | string), n: number) {
     n = Math.floor(n);
     val = '' + val;
@@ -22,11 +20,26 @@ export default function TaskList(props: any) {
 
 function Acc(props:any){
     let list: any[] = props.taskList ?? [];
-    return <>{list.map((x)=>{
-        return <span>A {x.id}</span>
+    let i = -1;
+    return (
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>STATUS</th>
+            <th>TITLE</th>
+            <th>PRIORITY</th>
+            
+            
+        </tr>
+    {list.map((x)=>{
+        i++;
+        return <tr className="AccItem">
+
+            
+            </tr>
 
 
-    })}</>
+    })}</table>);
 
 
 }

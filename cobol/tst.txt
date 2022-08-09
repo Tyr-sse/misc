@@ -1,0 +1,24 @@
+/**
+Autor:F0739509
+Sigla: T99
+Modulo: T99PC999
+Cenario:Subtrair dois números positivos
+*/
+@TITLE SUBTRAIR DOIS NÚMEROS POSITIVOS
+
+@MODULE T99PC999 SUBBATCH
+
+@BOOK
+        01 PARM1.
+           03  OPERACAO                          PIC  X(01).
+           03  OPERANDO-1                        PIC  9(04).
+           03  OPERANDO-2                        PIC  9(04).
+           03  RESULTADO                         PIC  9(04).
+
+@IN
+OPERACAO = '-'
+OPERANDO-1 = 3
+OPERANDO-2 = 1
+
+
+@ASSERT RESULTADO = 2

@@ -1,0 +1,86 @@
+      *----------------------------------------------------------------*
+      * PROGRAMA..: T99PBO31.
+      * ANALISTA..: F9329132 THIAGO ARCANJO
+      * AUTOR.....: F9329132 THIAGO ARCANJO
+      * DATA......: 03.08.2022
+      * COMPILACAO: 52 - PSOSE600 - Cobol 4.2 c/otimizacao p/producao
+      * OBJETIVO..: Teste de cobertura de programa BATCH
+      *-----------------------------------------------------------------
+      * Vrs Data     Ação  Responsável     Descrição da versão
+      * --- -------- ----- --------------- -----------------------------
+
+      *-----------------------------------------------------------------
+      *-----------------------------------------------------------------
+       IDENTIFICATION DIVISION.
+      *-----------------------------------------------------------------
+       PROGRAM-ID. T99PBO31.
+      *-----------------------------------------------------------------
+       ENVIRONMENT DIVISION.
+      *-----------------------------------------------------------------
+       CONFIGURATION SECTION.
+       SPECIAL-NAMES.
+           DECIMAL-POINT IS COMMA.
+      *-----------------------------------------------------------------
+      *-----------------------------------------------------------------
+       DATA DIVISION.
+
+      *-----------------------------------------------------------------
+       WORKING-STORAGE SECTION.
+      *-----------------------------------------------------------------
+      ******************************************************************
+      ************** Tabela lista de programas chamados ****************
+      ******************************************************************
+       01 TAB-PROGRAMAS-CHAMADOS.
+          03 SBDATA                         PIC  X(08) VALUE 'SBDATA'.
+          03 SBVERSAO                       PIC  X(08) VALUE 'SBVERSAO'.
+       01 CTE-PROG                          PIC  X(17) VALUE
+                                                    '*** T99PC999 ***'.
+       01 CTE-VERS                          PIC  X(06) VALUE 'VRS001'.
+
+      *-----------------------------------------------------------------
+       LOCAL-STORAGE SECTION.
+      *-----------------------------------------------------------------
+        01 FUNCAO          PIC  X(03) VALUE 'F01'.
+        01 VAR-A           PIC  9(02)    VALUE 12.
+      *-----------------------------------------------------------------
+       LINKAGE SECTION.
+      *-----------------------------------------------------------------
+       01  DFHCOMMAREA.
+           03  OPERACAO                          PIC  X(01).
+                 88  ADICAO                          VALUE '+'.
+                 88  SUBTRCAO                        VALUE '-'.
+                 88  MULTIPLICACAO                   VALUE '*'.
+                 88  DIVISAO                         VALUE '/'.
+               03  OPERANDO-1                        PIC  9(04).
+               03  OPERANDO-2                        PIC  9(04).
+               03  RESULTADO                         PIC  S9(04).
+               03  CD-COD-ERRO                       PIC  9(01) VALUE 0.
+               03  MSG-ERRO                          PIC  X(20).
+      *-----------------------------------------------------------------
+       PROCEDURE DIVISION USING DFHCOMMAREA.
+      *-----------------------------------------------------------------
+
+       0000-INICIO SECTION.
+           MOVE ZERO TO VAR-A.
+           COMPUTE VAR-A = 31
+           EVALUATE OPERACAO
+                WHEN '+'
+                    COMPUTE RESULTADO = OPERANDO-1 + OPERANDO-2
+                WHEN '-'
+                    COMPUTE RESULTADO = OPERANDO-1 - OPERANDO-2
+                WHEN '*'
+                    COMPUTE RESULTADO = OPERANDO-1 * OPERANDO-2
+                WHEN '/'
+                    IF OPERANDO-2 EQUAL ZERO
+                        MOVE 1 TO CD-COD-ERRO
+                        MOVE 'DIVISÃO POR ZERO' TO MSG-ERRO
+                    ELSE
+                        COMPUTE RESULTADO = OPERANDO-1 / OPERANDO-2
+                    END-IF
+
+           END-EVALUATE.
+      *-----------------------------------------------------------------
+           GOBACK.
+      *-----------------------------------------------------------------
+       END PROGRAM T99PBO31.
+      *-----------------------------------------------------------------
