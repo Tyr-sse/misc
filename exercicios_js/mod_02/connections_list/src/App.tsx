@@ -72,12 +72,12 @@ function generateConnections(n: number) {
 }
 
 
-function editItem() {
-  console.log('asd')
+function editItem(ia:string) {
+  console.log('edit Item', ia);
 
 }
 function deleteItem() {
-  console.log('assd')
+  console.log('delete Item')
 
 }
 
