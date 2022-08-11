@@ -1,4 +1,4 @@
-export let lib:Iitem[] = [];
+let lib:Iitem[] = [];
 
 export interface Iitem{
     id: string,
@@ -9,7 +9,15 @@ export interface Iitem{
     deleteFunc: Function
 } 
 
+export function setLib(newLib:Iitem[]){
+    //console.log('LIB SET TO: ', newLib)
+    lib = newLib;
 
+}
+export function getLib(maxNum= -1, chunkPos=0 ){
+    //console.log('LIB SET TO: ', newLib)
+    return lib;
+}
 export function addItemToLib(item: Iitem){
     
 

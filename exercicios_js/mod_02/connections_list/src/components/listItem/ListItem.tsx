@@ -2,25 +2,32 @@ import React, { useState } from "react";
 import { currentTheme } from "../../themes";
 import { leftZeroes } from "../../util";
 
-let obj = {thiago:'lasd'} 
 
-let editCallback = (x: any) => { };
-let deleteCallback = (x: any) => { };
-let callbackParams = 'asd';
-function onBtnEdit() {
-    console.log('cllbck param > ', callbackParams);
-    console.log('cllbck param > ', callbackParams);
-    
-    editCallback(callbackParams);
-}
-
-function onBtnDelete() {
-    deleteCallback(callbackParams);
-}
 
 export default function ListItem(props: any) {
     const deflt = { A: 'A', B: 'B', C: 2.231, id: 0 };
-    obj = props.obj ?? deflt;
+    let obj = props.obj ?? deflt;
+
+    //obj = { thiago: 'lasd' }
+
+    let editCallback = (x: any) => { };
+    let deleteCallback = (x: any) => { };
+    //let callbackParams = 'asd';
+    function onBtnEdit() {
+        editCallback(obj);
+    }
+
+    function onBtnDelete() {
+        deleteCallback(obj);
+    }
+
+
+
+
+//TC997000
+
+
+
     const stl = {
         line: {
             color: currentTheme.txt,
@@ -128,12 +135,12 @@ export default function ListItem(props: any) {
                 <input style={stl.inVal} defaultValue={`${obj.C}`}></input>
             </td>
             <td style={stl.item}>
-                <button style={stl.editBtn} onClick={onBtnEdit}>EDIT {obj.id}</button>
+                <button style={stl.editBtn} onClick={onBtnEdit}>EDIT{obj.id}</button>
             </td>
             <td style={stl.item}>
                 <button style={stl.redBtn} onClick={onBtnDelete}>X</button>
             </td>
-            
+
         </tr>
     );
 }

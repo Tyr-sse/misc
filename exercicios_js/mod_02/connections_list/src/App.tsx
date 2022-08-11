@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Btn from './components/basic/Btn';
+import { setLib, getLib, addItemToLib, deleteItemFromLib } from './BD';
+import EditModal from './components/editModal/EditModal';
 import ListItem from './components/listItem/ListItem';
 import { currentTheme } from './themes';
 import { leftZeroes, range } from './util';
@@ -8,7 +9,12 @@ import { leftZeroes, range } from './util';
 
 
 function App() {
-  let connections = generateConnections(25);
+  //setLib(generateConnections(25));
+  //let lib = getLib();
+  //let [st, setSt] = useStatee();
+  console.log('GLIB', getLib())
+  let lib = generateConnections(25);
+  setLib(lib)
   let i = 0;
   const stl = {
     display: 'flex',
@@ -26,7 +32,7 @@ function App() {
       <table style={{ backgroundColor: 'red', alignSelf: 'center' }}>
         <tbody>
           {
-            connections.map(
+            lib.map(
               (x) => {
                 i++;
                 return <ListItem obj={x} key={'ListItemId_' + i} />
@@ -36,6 +42,7 @@ function App() {
           }
         </tbody>
       </table>
+      <EditModal />
     </span>
   );
 }
@@ -72,12 +79,14 @@ function generateConnections(n: number) {
 }
 
 
-function editItem(ia:string) {
-  console.log('edit Item', ia);
+function editItem(item: string) {
+  console.log('edit Item', item);
+  //verificar os campos
+  
 
 }
-function deleteItem() {
-  console.log('delete Item')
+function deleteItem(item: string) {
+  console.log('delete Item', item)
 
 }
 

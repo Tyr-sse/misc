@@ -13,7 +13,7 @@ Tecnologia
 	[ ] 5609 -    Sinapse Noções da Plataforma Mainframe no BB
 JS e TS:
 [X] 201617 - 10h Linguagem
-[ ] 201720 - 10h OO
+[X] 201720 - 10h OO
 [ ] 201721 - 12h Browser
 [ ] 200412 - 12h
 [ ] 200438 - 12h
