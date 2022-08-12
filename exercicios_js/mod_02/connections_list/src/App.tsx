@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import './App.css';
 import { setLib, getLib, addItemToLib, deleteItemFromLib } from './BD';
 import EditModal from './components/editModal/EditModal';
 import ListItem from './components/listItem/ListItem';
 import { currentTheme } from './themes';
 import { leftZeroes, range } from './util';
+import { ListContext } from './contexts';
 
+interface IchildToParent {
+  operation: string,
+  id?: string,
 
+}
+
+function rec(inp:IchildToParent={operation: 'none'}){
+  console.log('VAL ', inp.operation);
+}
 
 function App() {
   //setLib(generateConnections(25));
   //let lib = getLib();
   //let [st, setSt] = useStatee();
-  console.log('GLIB', getLib())
+  //console.log('GLIB', getLib())
   let lib = generateConnections(25);
   setLib(lib)
   let i = 0;
@@ -29,8 +38,8 @@ function App() {
       backgroundColor: currentTheme.bg,
       borderRadius: '0px'
     }}>
-      <table style={{ backgroundColor: 'red', alignSelf: 'center' }}>
-        <tbody>
+      <span style={{ backgroundColor: currentTheme.bg02, alignSelf: 'center' }}>
+        <ListContext.Provider value={ {callback: rec} }>
           {
             lib.map(
               (x) => {
@@ -40,10 +49,10 @@ function App() {
               }
             )
           }
-        </tbody>
-      </table>
+        </ListContext.Provider>
+      </span>
       <EditModal />
-    </span>
+    </span >
   );
 }
 
@@ -82,7 +91,7 @@ function generateConnections(n: number) {
 function editItem(item: string) {
   console.log('edit Item', item);
   //verificar os campos
-  
+
 
 }
 function deleteItem(item: string) {
