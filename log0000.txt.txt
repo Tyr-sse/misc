@@ -21,7 +21,7 @@ always-auth = true
               chave F
               senha SISBB
               email@bb.com.br
-asd
+asde
 
 
 https://www.c-sharpcorner.com/blogs/typescript-you-first-program-in-ts
