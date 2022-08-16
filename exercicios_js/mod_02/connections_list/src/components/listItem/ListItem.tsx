@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ListContext } from "../../contexts";
-import { currentTheme } from "../../themes";
-import { leftZeroes } from "../../util";
+
+import { currentTheme ,leftZeroes} from "../../global";
 
 
 
@@ -42,8 +41,22 @@ export default function ListItems(props: any) {
             borderColor: currentTheme.bg,
             borderWidth: '1px',
             borderRadius: '8px',
-            minWidth: '25px',
-            maxWidth: '25px'
+            minWidth: '60px',
+            maxWidth: '60px'
+        },
+        
+        disabledBtn: {
+            margin: '2px',
+            fontSize: '10px',
+            fontWeight: '800',
+            color: currentTheme.bg02,
+            backgroundColor: currentTheme.bg03,
+
+            borderColor: currentTheme.bg02,
+            borderWidth: '1px',
+            borderRadius: '8px',
+            minWidth: '60px',
+            maxWidth: '60px'
         },
         in: {
 
@@ -77,30 +90,22 @@ export default function ListItems(props: any) {
 
 
     }
-    const deflt = { A: 'A', B: 'B', C: 2.231, id: 0 };
 
-
-
-    let obj = props.obj ?? deflt;
+    let obj = props.obj ?? { A: 'A', B: 'B', C: 2.231, id: 0 };
     const [A, setA] = useState(obj.A);
     const [B, setB] = useState(obj.B);
     const [C, setC] = useState(obj.C);
     const [changed, setChanged] = useState<boolean>(false);
 
     stl.line.backgroundColor = changed ? currentTheme.bg03 : currentTheme.bg;
-
-    //setA('asd');
-    function onBtnEdit() {
-        obj.editFunc(obj.id);
-    }
-    function onBtnDelete() {
-        obj.deleteFunc(obj.id);
-    }
-
-    const listCtxt = useContext(ListContext);
-    //console.log('LCTXT ', listCtxt.callback(obj.id))
+    const {addF, updateF, deleteF} = props.connectionFunctions;
+    //console.log('>> ', props.connectionFunctions, addF, updateF, deleteF);
+    // const addF = ()=>{}
+    // const updateF = ()=>{}
+    // const deleteF = ()=>{}
+    
     return (
-        <form style={stl.line}>
+        <span style={stl.line}>
             <span style={stl.id}>{obj.id}</span>
             <input
                 type="text"
@@ -133,10 +138,13 @@ export default function ListItems(props: any) {
                     setChanged(true);
                 }}
             />
-            <button style={stl.editBtn} onClick={() => { listCtxt.callback({...obj, operation: 'edit'}) }} >EDIT</button>
-            <button style={stl.redBtn} onClick={() => { listCtxt.callback({...obj, operation: 'delete'}) }} >X</button>
+            <button style={stl.editBtn} onClick={() => updateF()} 
+            >UPDATE</button>
+            <button style={stl.editBtn} onClick={() => updateF()} 
+            >RESET</button>
+            <button style={stl.redBtn} onClick={() => deleteF()} >DELETE</button>
 
-        </form>
+        </span>
     );
 
 

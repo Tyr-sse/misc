@@ -3,19 +3,26 @@ import './App.css';
 import { setLib, getLib, addItemToLib, deleteItemFromLib } from './BD';
 import EditModal from './components/editModal/EditModal';
 import ListItem from './components/listItem/ListItem';
-import { currentTheme } from './themes';
-import { leftZeroes, range } from './util';
-import { ListContext } from './contexts';
+import { currentTheme, leftZeroes, range } from './global';
 
-interface IchildToParent {
-  operation: string,
-  id?: string,
+function receiveAdd() {
+  console.log('RC ADD');
+
+
+}
+function receiveUpdate() {
+
+  console.log('RC UPDT');
+
+
+}
+function receiveDelete() {
+
+  console.log('RC DEL');
+
 
 }
 
-function rec(inp:IchildToParent={operation: 'none'}){
-  console.log('VAL ', inp.operation);
-}
 
 function App() {
   //setLib(generateConnections(25));
@@ -39,19 +46,25 @@ function App() {
       borderRadius: '0px'
     }}>
       <span style={{ backgroundColor: currentTheme.bg02, alignSelf: 'center' }}>
-        <ListContext.Provider value={ {callback: rec} }>
-          {
-            lib.map(
-              (x) => {
-                i++;
-                return <ListItem obj={x} key={'ListItemId_' + i} />
+        {
+          lib.map(
+            (x) => {
+              i++;
+              return <ListItem
+                obj={x}
+                key={'ListItemId_' + i}
+                connectionFunctions={
+                  {
+                    addF: receiveAdd,
+                    updateF: receiveUpdate,
+                    deleteF: receiveDelete
+                  }} />
 
-              }
-            )
-          }
-        </ListContext.Provider>
+            }
+          )
+        }
+
       </span>
-      <EditModal />
     </span >
   );
 }

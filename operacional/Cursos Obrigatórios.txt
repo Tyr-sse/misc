@@ -2,7 +2,7 @@ Cursos Obrigatórios para o Homeoffice
 [X] 2179
 [X] 3770
 [X] 5953 - Ergonomia - Orientações Posturais
-[ ] 6546
+[X] 6546 - DORT
 [ ] 7636
 [ ] 7905
 
