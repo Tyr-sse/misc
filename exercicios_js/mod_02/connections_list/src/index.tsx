@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { currentTheme } from './global';
 
 
 const root = ReactDOM.createRoot(
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <div style={{ flex: '1', backgroundColor: currentTheme.bg }}>
+      <App />
+    </div>
   </React.StrictMode>
 );
 

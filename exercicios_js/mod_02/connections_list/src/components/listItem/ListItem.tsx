@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { currentTheme ,leftZeroes} from "../../global";
+import { currentTheme, leftZeroes } from "../../global";
 
 
 
@@ -24,7 +24,7 @@ export default function ListItems(props: any) {
             fontSize: '10px',
             fontWeight: '800',
             color: currentTheme.bg,
-            backgroundColor: currentTheme.txt,
+            backgroundColor: currentTheme.tint01,
             borderColor: currentTheme.bg,
             borderWidth: '1px',
             borderRadius: '5px',
@@ -36,7 +36,7 @@ export default function ListItems(props: any) {
             fontSize: '10px',
             fontWeight: '800',
             color: currentTheme.bg,
-            backgroundColor: '#aa2222',
+            backgroundColor: currentTheme.tint02,
 
             borderColor: currentTheme.bg,
             borderWidth: '1px',
@@ -44,7 +44,7 @@ export default function ListItems(props: any) {
             minWidth: '60px',
             maxWidth: '60px'
         },
-        
+
         disabledBtn: {
             margin: '2px',
             fontSize: '10px',
@@ -98,12 +98,8 @@ export default function ListItems(props: any) {
     const [changed, setChanged] = useState<boolean>(false);
 
     stl.line.backgroundColor = changed ? currentTheme.bg03 : currentTheme.bg;
-    const {addF, updateF, deleteF} = props.connectionFunctions;
-    //console.log('>> ', props.connectionFunctions, addF, updateF, deleteF);
-    // const addF = ()=>{}
-    // const updateF = ()=>{}
-    // const deleteF = ()=>{}
-    
+    const { addF, updateF, deleteF, changeF, resetF } = props.connectionFunctions;
+
     return (
         <span style={stl.line}>
             <span style={stl.id}>{obj.id}</span>
@@ -115,6 +111,7 @@ export default function ListItems(props: any) {
                 onChange={(e) => {
                     setA(e.target.value);
                     setChanged(true);
+                    changeF(obj);
                 }}
             />
 
@@ -126,23 +123,35 @@ export default function ListItems(props: any) {
                 onChange={(e) => {
                     setB(e.target.value);
                     setChanged(true);
+                    changeF(obj);
                 }}
             />
             <input
-                type="text"
+                type="number"
                 required
                 value={C}
                 style={stl.in}
                 onChange={(e) => {
                     setC(e.target.value);
                     setChanged(true);
+                    changeF(obj);
+
                 }}
             />
-            <button style={stl.editBtn} onClick={() => updateF()} 
+            <button disabled={changed ? false : true}
+                style={changed ? stl.editBtn : stl.disabledBtn} onClick={() => {
+                    const id = obj.id;
+                    updateF({ id, A, B, C })
+                }}
             >UPDATE</button>
-            <button style={stl.editBtn} onClick={() => updateF()} 
+            <button disabled={changed ? false : true}
+                style={changed ? stl.editBtn : stl.disabledBtn} onClick={() => resetF()}
             >RESET</button>
-            <button style={stl.redBtn} onClick={() => deleteF()} >DELETE</button>
+            <button style={stl.redBtn} onClick={() => {
+                const id = obj.id;
+                console.log('CHEGOU NO BOTAO')
+                deleteF(id);
+            }} >DELETE</button>
 
         </span>
     );
@@ -150,148 +159,3 @@ export default function ListItems(props: any) {
 
 
 }
-
-/*
-
-export function ListItema(props: any) {
-    const deflt = { A: 'A', B: 'B', C: 2.231, id: 0 };
-    let obj = props.obj ?? deflt;
-
-    //obj = { thiago: 'lasd' }
-
-    let editCallback = (x: any) => { };
-    let deleteCallback = (x: any) => { };
-    //let callbackParams = 'asd';
-    function onBtnEdit() {
-        editCallback(obj);
-    }
-
-    function onBtnDelete() {
-        deleteCallback(obj);
-    }
-
-
-
-
-//TC997000
-
-
-
-    const stl = {
-        line: {
-            color: currentTheme.txt,
-            backgroundColor: currentTheme.bg,
-            borderColor: currentTheme.bg,
-            borderWidth: '0px',
-            borderRadius: '2px',
-        },
-        item: {
-            color: currentTheme.txt,
-            backgroundColor: currentTheme.bg,
-            borderColor: currentTheme.txt,
-            borderWidth: '1px',
-            borderRadius: '1px',
-            flex: '1',
-        },
-        label: {
-            fontSize: '12px',
-            color: currentTheme.txt,
-            backgroundColor: currentTheme.bg,
-            borderColor: currentTheme.txt,
-            borderWidth: '1px',
-            borderRadius: '1px',
-            minWidth: '40px',
-            maxWidth: '40px',
-        },
-        val: {
-            fontSize: '10px',
-            color: currentTheme.txt,
-            backgroundColor: currentTheme.bg,
-            borderColor: currentTheme.txt,
-            borderWidth: '1px',
-            borderRadius: '1px',
-            minWidth: '40px',
-            maxWidth: '40px',
-        },
-
-
-        editBtn: {
-            margin: '2px',
-            fontSize: '10px',
-            fontWeight: '800',
-            color: currentTheme.bg,
-            backgroundColor: currentTheme.txt,
-            borderColor: currentTheme.bg,
-            borderWidth: '1px',
-            borderRadius: '5px',
-            minWidth: '40px',
-            maxWidth: '40px'
-        },
-        redBtn: {
-            margin: '2px',
-            fontSize: '10px',
-            fontWeight: '800',
-            color: currentTheme.bg,
-            backgroundColor: '#aa2222',
-
-            borderColor: currentTheme.bg,
-            borderWidth: '1px',
-            borderRadius: '8px',
-            minWidth: '25px',
-            maxWidth: '25px'
-        },
-        in: {
-            backgroundColor: 'transparent',
-            margin: '2px',
-            minWidth: '50px',
-            maxWidth: '50px',
-            borderWidth: '0px',
-            borderRadius: '1px',
-            alignText: 'center'
-        },
-        inVal: {
-            margin: '2px',
-            backgroundColor: 'transparent',
-
-            minWidth: '35px',
-            maxWidth: '35px',
-            borderWidth: '0px',
-            borderRadius: '1px',
-            alignText: 'center'
-        }
-
-
-
-    }
-    editCallback = obj.editFunc;
-    deleteCallback = obj.deleteFunc;
-    //console.log('JSON ', JSON.stringify(obj))
-    return (
-        <tr style={stl.line}>
-            <td style={stl.label}>
-                {obj.id}
-            </td>
-            <td style={stl.label}>
-                {JSON.stringify(obj.id)}
-            </td>
-            <td style={stl.label}>
-                <input style={stl.in} defaultValue={`${obj.A}`}></input>
-            </td>
-            <td style={stl.label}>
-                <input style={stl.in} defaultValue={`${obj.B}`}></input>
-            </td>
-            <td style={stl.val}>
-                <input style={stl.inVal} defaultValue={`${obj.C}`}></input>
-            </td>
-            <td style={stl.item}>
-                <button style={stl.editBtn} onClick={onBtnEdit}>EDIT{obj.id}</button>
-            </td>
-            <td style={stl.item}>
-                <button style={stl.redBtn} onClick={onBtnDelete}>X</button>
-            </td>
-
-        </tr>
-    );
-}
-
-*/

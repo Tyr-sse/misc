@@ -1,8 +1,8 @@
-export interface Iadd{
-    id: string,
-    
-}
+import React from "react"
 
+export interface Iupdate { id: string, A: string, B: string, C: string }
+
+export interface Iadd { A: string, B: string, C: string }
 
 export interface IchildToParent {
     operation: string,
@@ -29,17 +29,17 @@ const dark: theme = {
     bg: '#222222',
     bg02: '#333333',
     bg03: '#131313',
-    tint01: '#49ff1c',
-    tint02: '#992244',
+    tint01: '#777777',
+    tint02: '#aa1212',
 }
 const light: theme = {
-    id: 'dark',
-    txt: '#222222',
-    bg: '#9a9a9a',
+    id: 'light',
+    txt: '#444444',
+    bg: '#7a7a7a',
     bg02: '#aaaaaa',
     bg03: '#ffffff',
     tint01: '#49ff1c',
-    tint02: '#992244',
+    tint02: '#aa1212',
 }
 
 export const themes_list: theme[] = [
@@ -68,3 +68,6 @@ export function range(n: number) {
     for (let i = 0; i < n; i++) L.push(i);
     return L;
 }
+
+const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
