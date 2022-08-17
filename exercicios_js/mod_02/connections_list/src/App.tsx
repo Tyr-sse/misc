@@ -1,208 +1,71 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { setLib, getLib, addItemToLib, deleteItemFromLib, updateItemFromLib, persistLib } from './BD';
-//import AddForm from './components/addForm/AddForm';
-import AddForm from './components/addForm/addForm';
+import { currentTheme, leftZeroes, range, Iupdate, ListContext, listStl } from './global';
+import { Accordion } from "react-bootstrap";
 import ListItem from './components/listItem/ListItem';
-import { currentTheme, leftZeroes, range, Iupdate } from './global';
+import ItemsList from './components/ItemsList/ItemsList';
 
 
-
-const MockLib = [
-  { "id": "0000", "A": "T", "B": "R", "C": 3 },
-  { "id": "0055", "A": "A", "B": "U", "C": 6 },
-  { "id": "0002", "A": "R", "B": "Q", "C": 0 },
-  { "id": "0003", "A": "O", "B": "Z", "C": 4 },
-  { "id": "0004", "A": "E", "B": "O", "C": 6 },
-  { "id": "0005", "A": "U", "B": "L", "C": 1 },
-  { "id": "0006", "A": "F", "B": "I", "C": 5 },
-  { "id": "0007", "A": "I", "B": "E", "C": 4 },
-  { "id": "0008", "A": "J", "B": "T", "C": 8 },
-  { "id": "0009", "A": "U", "B": "D", "C": 2 },
-  { "id": "0010", "A": "V", "B": "C", "C": 3 },
-  { "id": "0011", "A": "S", "B": "O", "C": 5 },
-  { "id": "0012", "A": "D", "B": "A", "C": 8 },
-  { "id": "0013", "A": "G", "B": "Z", "C": 2 },
-  { "id": "0014", "A": "P", "B": "L", "C": 1 },
-  { "id": "0015", "A": "L", "B": "K", "C": 3 },
-  { "id": "0016", "A": "C", "B": "K", "C": 4 },
-  { "id": "0017", "A": "E", "B": "J", "C": 9 },
-  { "id": "0018", "A": "N", "B": "H", "C": 8 },
-  { "id": "0019", "A": "H", "B": "S", "C": 8 },
-  { "id": "0020", "A": "H", "B": "N", "C": 3 },
-  { "id": "0021", "A": "X", "B": "M", "C": 0 },
-  { "id": "0022", "A": "S", "B": "B", "C": 4 },
-  { "id": "0023", "A": "X", "B": "L", "C": 2 },
-  { "id": "0024", "A": "Z", "B": "M", "C": 9 }
+const mockLib = [
+  { "status": false, "id": "id_0000", "title": "Title 000", "ref_list": [], "dt": new Date() },
+  { "status": true, "id": "id_0001", "title": "Title 001", "ref_list": [0], "dt": new Date() },
+  { "status": false, "id": "id_0002", "title": "Title 002", "ref_list": [0, 1], "dt": new Date() },
+  { "status": false, "id": "id_0003", "title": "Title 003", "ref_list": [0, 1, 2], "dt": new Date() },
+  { "status": false, "id": "id_0004", "title": "Title 004", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+  { "status": false, "id": "id_0005", "title": "Title 005", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+  { "status": false, "id": "id_0006", "title": "Title 006", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+  { "status": false, "id": "id_0007", "title": "Title 007", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+  { "status": false, "id": "id_0008", "title": "Title 008", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+  { "status": false, "id": "id_0009", "title": "Title 009", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
 ];
 
-function App() {
-  const [st, setSt] = useState<boolean>(false);
-  let lib = MockLib;
-  setLib(lib)
+
+// let mck = []
+// for (let i of range(10)) {
+//   mck.push({
+//     id: 'id_' + leftZeroes(i, 4)
+//     ,
+//     title: 'Title ' + leftZeroes(i, 3),
+//     ref_list: range(i),
+//     dt: new Date()
+//   }
+//   );
+
+
+// }
+//console.log(JSON.stringify(mck));
 
 
 
-
-
-  function receiveAdd(A: string, B: string, C: number) {
-    //console.log('RC ADD', A, B, C);
-    //checar erros RETURN
-    addItemToLib(A, B, C);
-    setSt(!st);
-  }
-  function receiveUpdate(payload: Iupdate) {
-    console.log('RC UPDT', payload.id, payload.A, payload.B, +payload.C);
-    //checar erros
-    //erro de conversão
-
-    updateItemFromLib({
-      id: payload.id,
-      A: payload.A,
-      B: payload.B,
-      C: +payload.C //
-    })
-
-  }
-  function receiveReset() {
-
-    console.log('RC RESET');
-
-
-  }
-  function receiveDelete(id: string) {
-
-    console.log('RC DEL saindo');
-    deleteItemFromLib(id);
-    setSt(!st);
-
-
-  }
-  function receiveChange(obja: any) {
-
-    console.log('RC Change > ', obja);
-
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-  let i = 0;
-  const stl = {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: currentTheme.bg,
-    borderRadius: '0px',
-
-  };
-  /*
- in: {
-
-      color: currentTheme.bg,
-      backgroundColor: currentTheme.txt,
-      borderWidth: '0px',
-      borderRadius: '2px',
-      maxWidth: '80px',
-      marginLeft: '10px',
-      marginRight: '10px',
-      marginTop: '5px',
-      marginBottom: '5px',
-
-
-    }
-  */
+let itemList01 = [
+  { "status": true, "id": "id_01_0000", "title": "LISTA 01 T01", "ref_list": [], "dt": new Date() },
+  { "status": true, "id": "id_01_0001", "title": "LISTA 01 T02", "ref_list": [0], "dt": new Date() },
+  { "status": true, "id": "id_01_0002", "title": "LISTA 01 T03", "ref_list": [0, 1], "dt": new Date() },
+  { "status": true, "id": "id_01_0003", "title": "LISTA 01 T04", "ref_list": [0, 1, 2], "dt": new Date() },
+  { "status": true, "id": "id_01_0004", "title": "LISTA 01 T05", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+  { "status": true, "id": "id_01_0005", "title": "LISTA 01 T06", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+  { "status": true, "id": "id_01_0006", "title": "LISTA 01 T07", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+  { "status": true, "id": "id_01_0007", "title": "LISTA 01 T08", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+  { "status": true, "id": "id_01_0008", "title": "LISTA 01 T09", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+  { "status": true, "id": "id_01_0009", "title": "LISTA 01 T10", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
+];
+let itemList02 = [
+  { "status": false, "id": "id_02_0000", "title": "Title A", "ref_list": [], "dt": new Date() },
+  { "status": false, "id": "id_02_0001", "title": "Title 001", "ref_list": [0], "dt": new Date() },
+  { "status": false, "id": "id_02_0002", "title": "Title 002", "ref_list": [0, 1], "dt": new Date() },
+  { "status": false, "id": "id_02_0003", "title": "Title 003", "ref_list": [0, 1, 2], "dt": new Date() },
+  { "status": false, "id": "id_02_0004", "title": "Title 004", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+  { "status": false, "id": "id_02_0005", "title": "Title 005", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+  { "status": false, "id": "id_02_0006", "title": "Title 006", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+  { "status": false, "id": "id_02_0007", "title": "Title 007", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+  { "status": false, "id": "id_02_0008", "title": "Title 008", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+  { "status": false, "id": "id_02_0009", "title": "Title 009", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
+];
+export default function App() {
   return (
-    <span style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', backgroundColor: currentTheme.bg, borderRadius: '0px' }}>
-      <AddForm connectionFunctions={{ addF: receiveAdd }} key={'AddForm_ID'} />
-      <button style={{color: 'red', backgroundColor: 'blue'}}onClick={()=>{persistLib()}}>ASD</button>
-    
-      <span style={{
-        display: 'flex',
-        flexDirection: 'column',
-        backgroundColor: currentTheme.bg,
-        borderRadius: '0px'
-      }}>
-
-        <span key={'List_ID'}
-          style={{ backgroundColor: currentTheme.bg02, alignSelf: 'center' }}>
-          {
-            lib.map(
-              (x) => {
-                i++;
-                return <ListItem
-                  obj={x}
-                  key={'ListItemId_' + i}
-                  connectionFunctions={
-                    {
-                      resetF: receiveReset,
-                      updateF: receiveUpdate,
-                      deleteF: receiveDelete,
-                      changeF: receiveChange
-                    }} />
-
-              }
-            )
-          }
-
-        </span>
-      </span >
-    </span>
-  );
+    <ListContext.Provider value={{ theme:  listStl  }}>
+      <ItemsList ttl={'LISTA 01'}  lst={itemList01} />
+      <ItemsList ttl={'LISTA 02'}  lst={itemList02} />
+    </ListContext.Provider>);
 }
 
-
-
-
-const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
-let nodes = [];
-
-function generateConnections(n: number) {
-
-  let L = [];
-  for (let it of range(n)) {
-    let a = alphabet[Math.floor(Math.random() * 100) % alphabet.length];
-    let b = alphabet[Math.floor(Math.random() * 100) % alphabet.length];
-    if (b == a) b = 'A';
-    L.push(
-      {
-        id: leftZeroes(it, 4),
-        A: a,
-        B: b,
-        C: +((Math.floor(Math.random() * 10 % 10) + '').substring(0, 6)),
-        editFunc: editItem,
-        deleteFunc: deleteItem
-
-      }
-    )
-  }
-  //console.log(JSON.stringify(L))
-  return L;
-
-
-}
-
-
-function editItem(item: string) {
-  console.log('edit Item', item);
-  //verificar os campos
-
-
-}
-function deleteItem(item: string) {
-  console.log('delete Item', item)
-
-}
-
-
-export default App;

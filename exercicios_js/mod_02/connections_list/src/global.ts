@@ -1,15 +1,16 @@
-import React from "react"
+import React, { createContext } from "react"
 
 export interface Iupdate { id: string, A: string, B: string, C: string }
 
 export interface Iadd { A: string, B: string, C: string }
 
-export interface IchildToParent {
-    operation: string,
-    payload: any
-  
-  }
-
+export interface Iitem {
+    id: string,
+    title: string,
+    ref_list: number[],
+    dt: Date,
+    status: boolean
+}
 
 interface theme {
     id: string,
@@ -49,7 +50,7 @@ export const themes_list: theme[] = [
 ]
 
 //export let currentTheme: theme = {...light};
-export let currentTheme: theme = {...dark};
+export let currentTheme: theme = { ...dark };
 
 
 
@@ -69,5 +70,37 @@ export function range(n: number) {
     return L;
 }
 
+export function formatedDate(x: Date) {
+
+
+    return '' + leftZeroes(x.getFullYear(), 4) + leftZeroes(x.getMonth() + 1, 2) + leftZeroes(x.getDate(), 2);
+}
+
 const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
+export const ListContext = createContext<any>('');
+
+export const listStl = {
+    title: {
+        backgroundColor: '#121212',
+        color: '#a1a1a1',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '40px',
+        borderRadius: '2px'
+    },
+    itemLine: {
+        backgroundColor: '#ff00ff',
+        color: '#a1a1a1',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '40px',
+        borderRadius: '2px'
+    },
+
+
+
+}

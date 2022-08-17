@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <div style={{ flex: '1', backgroundColor: currentTheme.bg }}>
+    <div>
       <App />
     </div>
   </React.StrictMode>

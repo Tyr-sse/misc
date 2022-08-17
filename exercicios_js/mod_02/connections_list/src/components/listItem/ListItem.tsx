@@ -1,161 +1,65 @@
 import React, { useContext, useState } from "react";
+import { Accordion } from "react-bootstrap";
+import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
-import { currentTheme, leftZeroes } from "../../global";
-
-
-
-
-export default function ListItems(props: any) {
-    let stl = {
-        line: {
-            color: currentTheme.txt,
-            backgroundColor: currentTheme.bg,
-            borderWidth: '0px',
-            borderRadius: '6px',
-            padding: '4px',
-            display: 'flex',
-            marginTop: '2px',
-            marginDown: '2px',
-            marginLeft: '2px',
-            marginRight: '2px',
-        },
-        editBtn: {
-            margin: '2px',
-            fontSize: '10px',
-            fontWeight: '800',
-            color: currentTheme.bg,
-            backgroundColor: currentTheme.tint01,
-            borderColor: currentTheme.bg,
-            borderWidth: '1px',
-            borderRadius: '5px',
-            minWidth: '60px',
-            maxWidth: '60px',
-        },
-        redBtn: {
-            margin: '2px',
-            fontSize: '10px',
-            fontWeight: '800',
-            color: currentTheme.bg,
-            backgroundColor: currentTheme.tint02,
-
-            borderColor: currentTheme.bg,
-            borderWidth: '1px',
-            borderRadius: '8px',
-            minWidth: '60px',
-            maxWidth: '60px'
-        },
-
-        disabledBtn: {
-            margin: '2px',
-            fontSize: '10px',
-            fontWeight: '800',
-            color: currentTheme.bg02,
-            backgroundColor: currentTheme.bg03,
-
-            borderColor: currentTheme.bg02,
-            borderWidth: '1px',
-            borderRadius: '8px',
-            minWidth: '60px',
-            maxWidth: '60px'
-        },
-        in: {
-
-            color: currentTheme.bg,
-            backgroundColor: currentTheme.txt,
-            borderWidth: '0px',
-            borderRadius: '2px',
-            maxWidth: '80px',
-            marginLeft: '10px',
-            marginRight: '10px',
-            marginTop: '5px',
-            marginBottom: '5px',
-
-
-        },
-        id: {
-            fontWeight: '800',
-            color: currentTheme.txt,
-            backgroundColor: 'transparent',
-            borderWidth: '0px',
-            borderRadius: '2px',
-            maxWidth: '80px',
-            marginLeft: '10px',
-            marginRight: '10px',
-            marginTop: '5px',
-            marginBottom: '5px',
-
-
-        }
+import { currentTheme, Iitem, leftZeroes, formatedDate, ListContext } from "../../global";
 
 
 
-    }
 
-    let obj = props.obj ?? { A: 'A', B: 'B', C: 2.231, id: 0 };
-    const [A, setA] = useState(obj.A);
-    const [B, setB] = useState(obj.B);
-    const [C, setC] = useState(obj.C);
-    const [changed, setChanged] = useState<boolean>(false);
+export default function ListItem(props: Iitem) {
+    const [st, setSt] = useState<boolean>(false);
 
-    stl.line.backgroundColor = changed ? currentTheme.bg03 : currentTheme.bg;
-    const { addF, updateF, deleteF, changeF, resetF } = props.connectionFunctions;
+    //console.log('P S > ', props)
+    const ctxt = useContext(ListContext);
+    //console.log('I> ', ctxt)
 
+    const dt = formatedDate(props.dt);
     return (
-        <span style={stl.line}>
-            <span style={stl.id}>{obj.id}</span>
-            <input
-                type="text"
-                required
-                value={A}
-                style={stl.in}
-                onChange={(e) => {
-                    setA(e.target.value);
-                    setChanged(true);
-                    changeF(obj);
-                }}
-            />
+        <Accordion.Item key={props.id} eventKey={props.id}>
+            <Accordion.Header>
+                {props.title}
+            </Accordion.Header>
+            <Accordion.Body>
+                <table >
+                    <tbody>
+                        <tr>
+                            <td style={ctxt.theme.itemLine}>
+                                {'ID: ' + props.id}
+                                ...
 
-            <input
-                type="text"
-                required
-                value={B}
-                style={stl.in}
-                onChange={(e) => {
-                    setB(e.target.value);
-                    setChanged(true);
-                    changeF(obj);
-                }}
-            />
-            <input
-                type="number"
-                required
-                value={C}
-                style={stl.in}
-                onChange={(e) => {
-                    setC(e.target.value);
-                    setChanged(true);
-                    changeF(obj);
+                                <span>{dt.substring(6, 8)}|</span>
 
-                }}
-            />
-            <button disabled={changed ? false : true}
-                style={changed ? stl.editBtn : stl.disabledBtn} onClick={() => {
-                    const id = obj.id;
-                    updateF({ id, A, B, C })
-                }}
-            >UPDATE</button>
-            <button disabled={changed ? false : true}
-                style={changed ? stl.editBtn : stl.disabledBtn} onClick={() => resetF()}
-            >RESET</button>
-            <button style={stl.redBtn} onClick={() => {
-                const id = obj.id;
-                console.log('CHEGOU NO BOTAO')
-                deleteF(id);
-            }} >DELETE</button>
+                                <span>{dt.substring(4, 6)}|</span>
+                                <span>{dt.substring(0, 4)}|</span>
+                                ...
+                            </td>
+                            <td>
+                                {
+                                    props.ref_list.length ?
+                                        props.ref_list.map((x) => {
 
-        </span>
-    );
+                                            return <p>{'[' + x + ']'}</p>
+
+                                        }) : <p>[0]</p>
+                                }
 
 
+                            </td>
+                            <td>
+
+                                <button onClick={() => { console.log('EDIT', props.id) }}>EDIT</button>
+                                <button onClick={() => { console.log('DELETE', props.id) }}>DELETE</button>
+
+                            </td>
+                            <td>
+                                ...status: {props.status ? 'TRUE' : 'FALSE'}^...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </Accordion.Body>
+        </Accordion.Item>);
 
 }

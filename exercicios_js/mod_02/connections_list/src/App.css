@@ -2,8 +2,10 @@
   --red: #bb3030;
   --green: #11ee11;
   --golden: #ffff11;
-
+  --txt: #999999;
+  --bg: #222222;
   background-color: var(--bg);
+  color: #ee1212;
 }
 
 * {
