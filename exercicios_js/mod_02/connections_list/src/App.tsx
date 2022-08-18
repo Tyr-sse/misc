@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { leftZeroes, range, ListContext, listStl, Iitem } from './global';
 import ItemsList from './components/ItemsList/ItemsList';
-import { addItemToLib, getLib, setLib } from './BD';
+import { addItemToLib, deleteItemFromLib, getLib, setLib } from './BD';
 import EditModal from './components/editModal/EditModal';
 
 const mockLib = [
@@ -34,18 +34,34 @@ const mockLib = [
 // }
 //console.log(JSON.stringify(mck));
 
+// [x] Adicao *data bugada * lista nao tratada
+// [ ] Atualizaçao NOPE
+// [X] Exclusao
+// [X] status
+//  [ ] checkbox
+// [X] Bootstrap
+// [ ] navigation
+
+// [X] useState
+// [X] useContext
+// [ ] useEffect
+
+// [ ] LocalStorage
+// [X] Categorias 
 
 setLib();
 let lib = getLib()
 export default function App() {
+  const [st, setSt] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   let i = 0
   function recEditF(lp: number, p: number) {
     if(!showModal) setShowModal(true);
   }
-  function recDeleteF(lp: number, p: number) {
-    console.log("DEL ", lp, p)
-  }
+  // function recDeleteF(lp: number, p: number) {
+  //   console.log("DEL ", lp, p)
+  //   deleteItemFromLib(lp, p)
+  // }
   console.log('RENDER APP', showModal)
   return (
     <ListContext.Provider value={
@@ -53,7 +69,11 @@ export default function App() {
         theme: listStl,
         addFunc: addItemToLib,
         editF: recEditF,
-        deleteF: recDeleteF,
+        deleteF: (lp: number,p: number)=>{
+          deleteItemFromLib(lp,p);
+          setSt(!st);
+          
+        },//recDeleteF,
         
       }
     }>

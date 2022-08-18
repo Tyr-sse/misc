@@ -86,25 +86,32 @@ export function addItemToLib( pos:number, title: string, ref_list: string, dt: s
     lib[pos].push(obj);
 
 }
-export function deleteItemFromLib(id: string) {
-    console.log('ENTROU NA DEL BD');
-    console.log('TST 01 ', JSON.stringify(lib))
-    let pos = -1;
-    for (let i = 0; i < lib.length; i++) {
-        if (+lib[i].id === +id) {
-            pos = i; break;
-        }
-    }
-    if (pos == -1) return;//NÃO ENCONTRADO
-    console.log("ENCONTRADO ", 'POS: ' + pos, 'VALOR: ', lib[pos]);
-    lib.splice(pos, 1);
-    console.log('TST 02 ', JSON.stringify(lib))
+export function deleteItemFromLib(lp: number, p: number) {
+    console.log("DELETE_____", lp, p);
+    console.log(JSON.stringify(lib));
+    if(lib[lp][p]) lib[lp].splice(p,1);
+    console.log('\n___DESPUES ',JSON.stringify(lib));
 }
+
+
+
+
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
 export function updateItemFromLib(lp: number, p: number, newValue: Iitem) {
     //console.log('TST 01 ', JSON.stringify(lib))
     if(!lib[lp][p]) return;
     else lib[lp][p] = newValue;
 }
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
+//===========>>===========>>===========>>==========
+
+
+
 
 export function persistLib() {
     localStorage.clear();
