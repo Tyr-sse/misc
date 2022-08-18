@@ -4,13 +4,16 @@ import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 import { currentTheme, Iitem, leftZeroes, formatedDate, ListContext } from "../../global";
 
+interface IitemP extends Iitem{
+    pos: number,
+    listPos: number
+}
 
 
-
-export default function ListItem(props: Iitem) {
+export default function ListItem(props: IitemP) {
     const [st, setSt] = useState<boolean>(false);
 
-    //console.log('P S > ', props)
+    //console.log('LI k > ', props.pos)
     const ctxt = useContext(ListContext);
     //console.log('I> ', ctxt)
 
@@ -23,8 +26,8 @@ export default function ListItem(props: Iitem) {
             <Accordion.Body>
                 <table >
                     <tbody>
-                        <tr>
-                            <td style={ctxt.theme.itemLine}>
+                        <tr style={ctxt.theme.itemLine}>
+                            <td >
                                 {'ID: ' + props.id}
                                 ...
 
@@ -48,8 +51,8 @@ export default function ListItem(props: Iitem) {
                             </td>
                             <td>
 
-                                <button onClick={() => { console.log('EDIT', props.id) }}>EDIT</button>
-                                <button onClick={() => { console.log('DELETE', props.id) }}>DELETE</button>
+                                <button onClick={()=>ctxt.editF(props.listPos,props.pos)}>EDIT</button>
+                                <button onClick={()=>ctxt.deleteF(props.listPos,props.pos)}>DELETE</button>
 
                             </td>
                             <td>

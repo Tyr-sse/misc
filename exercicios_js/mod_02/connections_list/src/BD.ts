@@ -1,24 +1,57 @@
-import { leftZeroes, range } from "./global";
+import { Iitem, leftZeroes, range } from "./global";
+//MOCK
+let mockLib = [[
+    { "status": true, "id": "id_01_0010", "title": "LISTA 01 T01", "ref_list": [], "dt": new Date() },
+    { "status": true, "id": "id_01_0011", "title": "LISTA 01 T02", "ref_list": [0], "dt": new Date() },
+    { "status": true, "id": "id_01_0012", "title": "LISTA 01 T03", "ref_list": [0, 1], "dt": new Date() },
+    { "status": true, "id": "id_01_0013", "title": "LISTA 01 T04", "ref_list": [0, 1, 2], "dt": new Date() },
+    { "status": true, "id": "id_01_0014", "title": "LISTA 01 T05", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+    { "status": true, "id": "id_01_0015", "title": "LISTA 01 T06", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+    { "status": true, "id": "id_01_0016", "title": "LISTA 01 T07", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+    { "status": true, "id": "id_01_0017", "title": "LISTA 01 T08", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+    { "status": true, "id": "id_01_0018", "title": "LISTA 01 T09", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+    { "status": true, "id": "id_01_0019", "title": "LISTA 01 T10", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
+  ], [
+    { "status": true, "id": "id_02_0020", "title": "LISTA 02 T01", "ref_list": [], "dt": new Date() },
+    { "status": true, "id": "id_02_0021", "title": "LISTA 02 T02", "ref_list": [0], "dt": new Date() },
+    { "status": true, "id": "id_02_0022", "title": "LISTA 02 T03", "ref_list": [0, 1], "dt": new Date() },
+    { "status": true, "id": "id_02_0023", "title": "LISTA 02 T04", "ref_list": [0, 1, 2], "dt": new Date() },
+    { "status": true, "id": "id_02_0024", "title": "LISTA 02 T05", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+    { "status": true, "id": "id_02_0025", "title": "LISTA 02 T06", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+    { "status": true, "id": "id_02_0026", "title": "LISTA 02 T07", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+    { "status": true, "id": "id_02_0027", "title": "LISTA 02 T08", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+    { "status": true, "id": "id_02_0028", "title": "LISTA 02 T09", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+    { "status": true, "id": "id_02_0029", "title": "LISTA 02 T10", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
+  ], [
+    { "status": false, "id": "id_03_0030", "title": "LISTA 03 T01", "ref_list": [], "dt": new Date() },
+    { "status": false, "id": "id_03_0031", "title": "LISTA 03 T02", "ref_list": [0], "dt": new Date() },
+    { "status": false, "id": "id_03_0032", "title": "LISTA 03 T03", "ref_list": [0, 1], "dt": new Date() },
+    { "status": false, "id": "id_03_0033", "title": "LISTA 03 T04", "ref_list": [0, 1, 2], "dt": new Date() },
+    { "status": false, "id": "id_03_0034", "title": "LISTA 03 T05", "ref_list": [0, 1, 2, 3], "dt": new Date() },
+    { "status": false, "id": "id_03_0035", "title": "LISTA 03 T06", "ref_list": [0, 1, 2, 3, 4], "dt": new Date() },
+    { "status": false, "id": "id_03_0036", "title": "LISTA 03 T07", "ref_list": [0, 1, 2, 3, 4, 5], "dt": new Date() },
+    { "status": false, "id": "id_03_0037", "title": "LISTA 03 T08", "ref_list": [0, 1, 2, 3, 4, 5, 6], "dt": new Date() },
+    { "status": false, "id": "id_03_0038", "title": "LISTA 03 T09", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7], "dt": new Date() },
+    { "status": false, "id": "id_03_0039", "title": "LISTA 03 T10", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
+  ]
+    ,
+  
+  ]
+
 
 //META INFO
-let lib: Iitem[] = [];
+let lib:any[] = [];
 let lid = 0;
-
-export interface Iitem {
-    id: string,
-    A: string,
-    B: string,
-    C: number,
-}
 
 // function newItem({ id, A, B, C }) {
 //     return 2
 
 // }
 
-export function setLib(newLib: Iitem[]) {
-    //console.log('LIB SET TO: ', newLib)
-    lib = newLib;
+export function setLib(newLib?: any) {
+    //checar formato
+    console.log('LIB SET TO: ', newLib??mockLib)
+    lib = newLib??mockLib;
     updateLibMetaInfo();
 
 }
@@ -39,15 +72,18 @@ export function getLib(maxNum = -1, chunkPos = 0) {
 
 
 
-export function addItemToLib(A: string, B: string, C: number) {
+export function addItemToLib( pos:number, title: string, ref_list: string, dt: string ) {
     lid++;
     const newId = leftZeroes(lid, 4);
-    lib.push({
+    let obj = {
         id: newId,
-        A: A,
-        B: B,
-        C: C
-    });
+        status: false,
+        title: title,
+        ref_list: [0,2], 
+        dt:new Date(dt),
+    }
+    console.log('ATUALIZADO' ,obj, ' A LISTA['+pos+'](', lib[pos],')')
+    lib[pos].push(obj);
 
 }
 export function deleteItemFromLib(id: string) {
@@ -64,19 +100,13 @@ export function deleteItemFromLib(id: string) {
     lib.splice(pos, 1);
     console.log('TST 02 ', JSON.stringify(lib))
 }
-export function updateItemFromLib(item: Iitem) {
+export function updateItemFromLib(lp: number, p: number, newValue: Iitem) {
     //console.log('TST 01 ', JSON.stringify(lib))
-    let pos = -1;
-    for (let i = 0; i < lib.length; i++) {
-        if (+lib[i].id === +item.id) {
-            pos = i; break
-        };
-    }
-    if (pos == -1) return;//NÃO ENCONTRADO
-    lib[pos] = item;
+    if(!lib[lp][p]) return;
+    else lib[lp][p] = newValue;
 }
 
-export function persistLib(){
+export function persistLib() {
     localStorage.clear();
     console.log('LS ANTES ', localStorage)
     localStorage.setItem("lib", JSON.stringify(lib));
@@ -84,11 +114,11 @@ export function persistLib(){
 
 }
 
-export function refreshLib(){
+export function refreshLib() {
     localStorage.clear();
     //lib = JSON.parse( localStorage.getItem("lib") );
 
-    
+
 }
 
 

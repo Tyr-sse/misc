@@ -1,8 +1,12 @@
-import React, { useState } from "react";
-import { currentTheme } from "../../global";
+import React, { useContext, useEffect, useState } from "react";
+import { addItemToLib } from "../../BD";
+import { currentTheme, ListContext } from "../../global";
+import './addFormStyle.css';
 
-export default function AddForm(props: any) {
-    const addF = props.connectionFunctions?.addF ?? (() => { console.log('FUNC') });
+export default function AddForm(props: { pos: number, id: string, updtF: Function }) {
+    //const addF = props.connectionFunctions?.addF ?? (() => { console.log('FUNC') });
+    const ctxt = useContext(ListContext);
+
     let stl = {
         line: {},
         in: {
@@ -11,7 +15,7 @@ export default function AddForm(props: any) {
             backgroundColor: currentTheme.txt,
             borderWidth: '0px',
             borderRadius: '2px',
-            maxWidth: '80px',
+            maxWidth: '110px',
             marginLeft: '10px',
             marginRight: '10px',
             marginTop: '5px',
@@ -27,9 +31,9 @@ export default function AddForm(props: any) {
             backgroundColor: '#22aa22',
 
             borderWidth: '0px',
-            borderRadius: '3px',
-            minWidth: '80px',
-            maxWidth: '80px',
+            borderRadius: '20px',
+            minWidth: '30px',
+            maxWidth: '30px',
             minHeight: '30px',
             maxHeight: '30px',
 
@@ -39,51 +43,75 @@ export default function AddForm(props: any) {
             marginBottom: '5px',
         },
     }
-    const [A, setA] = useState('');
-    const [B, setB] = useState('');
-    const [C, setC] = useState('');
-    const [st, setSt] = useState<boolean>(false);
-    return (
-        <span style={{backgroundColor: currentTheme.bg, minHeight: '100%'}}>
-            <span style={{
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                marginTop: '15px',
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: currentTheme.bg02,
-                borderRadius: '4px',
-                color: 'red',
-                minWidth: '98px',
-                maxWidth: '98px',
-                minHeight: '150px',
-                maxHeight: '150px'
-            }}>
-                <input
-                    type="text"
-                    required
-                    style={stl.in}
-                    onChange={(e) => { setA(e.target.value) }}
-                />
-                <input
-                    type="text"
-                    required
-                    style={stl.in}
-                    onChange={(e) => { setB(e.target.value) }}
-                />
-                <input
-                    type="number"
-                    required
-                    style={stl.in}
-                    onChange={(e) => { setC(e.target.value) }}
-                />
-                <button style={stl.addBtn}
-                    onClick={() => {
-                        addF(A, B, C, [st, setSt]);
+    /*
+    export interface Iitem {
+    id: string,
+    title: string,
+    ref_list: number[],
+    dt: Date,
+    status: boolean
+}
 
-                    }}
-                >ADD</button>
-            </span>
+    */
+    const [title, setTitle] = useState('');
+    const [ref_list, setRefList] = useState('');
+    const dfltDt = '0000-00-00';
+    const [dt, setDt] = useState(dfltDt);
+    //setDt('2022-03-05')
+    useEffect(()=>{'criou'},[dt])
+    return (
+        <span style={{ backgroundColor: currentTheme.bg, minHeight: '100%' }}>
+            <table>
+                <thead>
+                    <tr>
+                        <th>TITLE</th>
+                        <th>REF LIST</th>
+                        <th>DATE</th>
+                        <th>ADD</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input
+                                type="text"
+                                required
+                                placeholder={'TÍTULO'}
+
+                                onChange={(e) => { setTitle(e.target.value) }}
+                            /></td>
+                        <td>
+                            <input
+                                type="text"
+                                placeholder={ref_list}
+                                onChange={(e) => { setRefList(e.target.value) }}
+                            /></td>
+                        <td>
+                            <input
+                            defaultValue={dfltDt}
+                                type="date"
+                                required
+                                onChange={(e) => setDt(e.target.value)}
+                            /></td>
+
+                        <td>
+                            <button className="btn"
+                                onClick={() => {
+                                    //validar data
+                                    const dtStr = dt+'';
+                                    console.log('DATA NO ADD FORM> ',dtStr,'<>', dt)
+                                    
+                                    addItemToLib(props.pos, title, ref_list, dt);
+                                    props.updtF();
+                                    //addF(A, B, C, [st, setSt]);
+                                    //ADD ELEMENT TO LIST
+                                }}
+                            >+</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </span>
     );
 

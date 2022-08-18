@@ -92,10 +92,10 @@ export const listStl = {
         borderRadius: '2px'
     },
     itemLine: {
-        backgroundColor: '#ff00ff',
-        color: '#a1a1a1',
+        //backgroundColor: '#ff00ff',
+        //color: '#a1a1a1',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-around',
         alignItems: 'center',
         minHeight: '40px',
         borderRadius: '2px'
