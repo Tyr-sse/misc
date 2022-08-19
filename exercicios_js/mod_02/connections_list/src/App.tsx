@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { leftZeroes, range, ListContext, listStl, Iitem } from './global';
 import ItemsList from './components/ItemsList/ItemsList';
-import { addItemToLib, deleteItemFromLib, getLib, setLib } from './DB';
+import { addItemToLib, deleteItemFromLib, getLib, setLib, updateItemFromLib } from './DB';
 
 const mockLib = [
   { "status": false, "id": "id_0000", "title": "Title 000", "ref_list": [], "dt": new Date() },
@@ -17,24 +17,8 @@ const mockLib = [
   { "status": false, "id": "id_0009", "title": "Title 009", "ref_list": [0, 1, 2, 3, 4, 5, 6, 7, 8], "dt": new Date() }
 ];
 
-
-// let mck = []
-// for (let i of range(10)) {
-//   mck.push({
-//     id: 'id_' + leftZeroes(i, 4)
-//     ,
-//     title: 'Title ' + leftZeroes(i, 3),
-//     ref_list: range(i),
-//     dt: new Date()
-//   }
-//   );
-
-
-// }
-//console.log(JSON.stringify(mck));
-
 // [x] Adicao *data bugada * lista nao tratada
-// [ ] Atualizaçao //não implementada
+// [x] Atualizaçao //não implementada
 // [X] Exclusao
 // [X] status
 //  [ ] checkbox
@@ -53,8 +37,15 @@ let lib = getLib()
 export default function App() {
   const [st, setSt] = useState<boolean>(false);
   let i = 0
-  function recEditF(lp: number, p: number, values:Iitem) {
+  function recUpdateF(lp: number, p: number, values: Iitem) {
+    //console.log('APP GOT DATA: ',{lp, p, values});
+    console.log('APP GOT DATA: ', values);
 
+    updateItemFromLib(lp, p, values, (cod: number) => {
+      
+      console.log(cod === -1 ? 'ERROR' : 'UPDATED \n' + JSON.stringify(lib));
+      setSt(!st);
+    });
   }
   // function recDeleteF(lp: number, p: number) {
   //   console.log("DEL ", lp, p)
@@ -65,13 +56,13 @@ export default function App() {
       {
         theme: listStl,
         addFunc: addItemToLib,
-        editF: recEditF,
-        deleteF: (lp: number,p: number)=>{
-          deleteItemFromLib(lp,p);
+        updateF: recUpdateF,
+        deleteF: (lp: number, p: number) => {
+          deleteItemFromLib(lp, p);
           setSt(!st);
-          
+
         },//recDeleteF,
-        
+
       }
     }>
 

@@ -74,6 +74,7 @@ export function getLib(maxNum = -1, chunkPos = 0) {
 
 export function addItemToLib( pos:number, title: string, ref_list: string, dt: string ) {
     lid++;
+    console.log('DT ',dt)
     const newId = leftZeroes(lid, 4);
     let obj = {
         id: newId,
@@ -100,10 +101,12 @@ export function deleteItemFromLib(lp: number, p: number) {
 //===========>>===========>>===========>>==========
 //===========>>===========>>===========>>==========
 //===========>>===========>>===========>>==========
-export function updateItemFromLib(lp: number, p: number, newValue: Iitem) {
-    //console.log('TST 01 ', JSON.stringify(lib))
-    if(!lib[lp][p]) return;
-    else lib[lp][p] = newValue;
+export function updateItemFromLib(lp: number, p: number, newValue: Iitem, appUpdateCallback: Function ) {
+    console.log('TST 01 ', JSON.stringify(lib))
+    console.log('DB got data: ', newValue)
+    if(!lib[lp][p]) return appUpdateCallback(-1);
+    lib[lp][p] = newValue;
+    appUpdateCallback(0);
 }
 //===========>>===========>>===========>>==========
 //===========>>===========>>===========>>==========

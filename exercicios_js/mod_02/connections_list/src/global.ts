@@ -74,12 +74,8 @@ export function dateToString(dt: Date) {
     return '' + leftZeroes(dt.getFullYear(), 4) + leftZeroes(dt.getMonth() + 1, 2) + leftZeroes(dt.getDate(), 2);
 }
 export function stringToDate(inputString: string) {
-    //verificar formato
-    //naive way:
-    const dateInfos = inputString.split('-').map((str) => +str);
-
-    return new Date()
-
+    const dateInfo = inputString.split('-').map((str) => +str);
+    return new Date(dateInfo[0], dateInfo[1] - 1, dateInfo[2]);
 }
 
 const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];

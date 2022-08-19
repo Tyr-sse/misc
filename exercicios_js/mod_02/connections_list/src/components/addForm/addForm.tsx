@@ -66,6 +66,7 @@ export default function AddForm(props: { pos: number, id: string, updtF: Functio
                 <thead>
                     <tr>
                         <th>TITLE</th>
+                        
                         <th>REF LIST</th>
                         <th>DATE</th>
                         <th>ADD</th>

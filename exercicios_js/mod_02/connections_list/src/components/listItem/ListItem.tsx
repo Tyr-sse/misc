@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Accordion } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import './listItem.module.css'
-import { currentTheme, Iitem, leftZeroes, dateToString, ListContext } from "../../global";
+import { currentTheme, Iitem, leftZeroes, dateToString, ListContext, stringToDate } from "../../global";
 
 interface IitemP extends Iitem {
     pos: number,
@@ -11,12 +11,12 @@ interface IitemP extends Iitem {
 
 
 export default function ListItem(props: IitemP) {
-    const [st, setSt] = useState<boolean>(false);
+    //const [st, setSt] = useState<boolean>(false);
 
     const [stStatus, setStStatus] = useState<boolean>(props.status);
     const [stRefList, setStRefList] = useState<string>(JSON.stringify(props.ref_list));
     const [stTitle, setTitle] = useState<string>(props.title);
-    const [stDt, setStDt] = useState<string>("0000-00-00");
+    const [stDt, setStDt] = useState<string>(dateToString(props.dt));
     const [isOnEditMode, setIsOnEditMode] = useState<boolean>(false);
     //console.log('LI k > ', props.pos)
     const ctxt = useContext(ListContext);
@@ -70,12 +70,30 @@ export default function ListItem(props: IitemP) {
                     type="text"
                     required
                 />
-                <input
-                    value={stDt}
-                    onChange={e => setStDt(e.target.value)}//Adicionar tratamento
-                    type="date"
+                <span
+                    style={
+                        {
+                            display: 'flex',
+                            flexDirection: 'column',
+                            borderColor: currentTheme.txt,
+                            borderWidth: '2px'
+                        }}
+                >
+                    <span >Valor anterior:</span>
+                    <span>{dt.substring(6, 8) + ' / ' + dt.substring(4, 6) + ' / ' + dt.substring(0, 4)}</span>
 
-                />
+                    <input
+                        defaultValue={'2000-20-20'}
+                        onChange={e => {
+                            console.log(e.target.value);
+                            setStDt(e.target.value);
+
+                        }}//Adicionar tratamento
+                        type="date"
+
+                    />
+                </span>
+
             </td>
             <td>
 
@@ -84,16 +102,27 @@ export default function ListItem(props: IitemP) {
                 <button
                     onClick={
                         () => {
-                            console.log('ASD', ctxt.editF)
-                            ctxt.editF(props.listPos, props.pos,
+                            //checar campos
+                            console.log('ASD',
                                 {
                                     "status": stStatus,
                                     "id": props.id,
                                     "title": stTitle,
                                     "ref_list": [],//tratar lista
-                                    "dt": new Date()//tratar data
+                                    "dt": stringToDate(stDt)//tratar data
+                                })
+                            ctxt.updateF(props.listPos, props.pos,
+                                {
+                                    "status": stStatus,
+                                    "id": props.id,
+                                    "title": stTitle,
+                                    "ref_list": [],//tratar lista
+                                    "dt": stringToDate(stDt)//tratar data
                                 }
                             );
+
+                            setIsOnEditMode(false);
+
                         }
                     }
                 >
@@ -101,13 +130,6 @@ export default function ListItem(props: IitemP) {
                 </button>
             </td>
             <td>
-                <button
-                    onClick={
-                        () => setIsOnEditMode(false)/*ctxt.editF(props.listPos, props.pos)*/
-                    }
-                >
-                    CANCEL
-                </button>
             </td>
         </>);
 
@@ -119,11 +141,27 @@ export default function ListItem(props: IitemP) {
                 {props.title}
             </Accordion.Header>
             <Accordion.Body>
-                <table >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>REF LIST</th>
+                            <th>DATE</th>
+                            <th>ACOES</th>
+
+                        </tr>
+                    </thead>
                     <tbody>
                         <tr style={ctxt.theme.itemLine}>
                             {isOnEditMode ? displayOnEditMode : defaultDisplay}
                         </tr>
+                        <button
+                            onClick={
+                                () => setIsOnEditMode(false)/*ctxt.editF(props.listPos, props.pos)*/
+                            }
+                        >
+                           {isOnEditMode ?  'CANCEL':'EDIT'}
+                        </button>
                     </tbody>
                 </table>
 
