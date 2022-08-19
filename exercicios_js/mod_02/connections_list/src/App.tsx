@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { leftZeroes, range, ListContext, listStl, Iitem } from './global';
 import ItemsList from './components/ItemsList/ItemsList';
-import { addItemToLib, deleteItemFromLib, getLib, setLib } from './BD';
-import EditModal from './components/editModal/EditModal';
+import { addItemToLib, deleteItemFromLib, getLib, setLib } from './DB';
 
 const mockLib = [
   { "status": false, "id": "id_0000", "title": "Title 000", "ref_list": [], "dt": new Date() },
@@ -35,7 +34,7 @@ const mockLib = [
 //console.log(JSON.stringify(mck));
 
 // [x] Adicao *data bugada * lista nao tratada
-// [ ] Atualizaçao NOPE
+// [ ] Atualizaçao //não implementada
 // [X] Exclusao
 // [X] status
 //  [ ] checkbox
@@ -53,16 +52,14 @@ setLib();
 let lib = getLib()
 export default function App() {
   const [st, setSt] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
   let i = 0
-  function recEditF(lp: number, p: number) {
-    if(!showModal) setShowModal(true);
+  function recEditF(lp: number, p: number, values:Iitem) {
+
   }
   // function recDeleteF(lp: number, p: number) {
   //   console.log("DEL ", lp, p)
   //   deleteItemFromLib(lp, p)
   // }
-  console.log('RENDER APP', showModal)
   return (
     <ListContext.Provider value={
       {
@@ -82,7 +79,6 @@ export default function App() {
         lib.map((L) => <ItemsList pos={i++} ttl={'Cat_' + leftZeroes(i, 4)} lst={L} key={leftZeroes(i, 5)} />)
       }
 
-      <EditModal shouldShow={showModal} key={1}/>
       {/* <ItemsList ttl={'LISTA 02'} lst={itemList02} /> */}
     </ListContext.Provider>);
 }

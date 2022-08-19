@@ -40,12 +40,12 @@ input {
 
 input:hover {
 
-    background-color: #bb10bb;
+    background-color: #bb10bb55;
 
 
 }
 
-.btn {
+.addBtn {
 
     margin: 2px;
     font-size: 10px;
@@ -67,7 +67,7 @@ input:hover {
     transition: background-color 0.2s;
 }
 
-.btn:hover {
+.addBtn:hover {
 
     background-color: #22ff22;
 

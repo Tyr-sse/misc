@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { addItemToLib } from "../../BD";
+import { addItemToLib } from "../../DB";
 import { currentTheme, ListContext } from "../../global";
-import './addFormStyle.css';
+import './addFormStyle.module.css';
 
 export default function AddForm(props: { pos: number, id: string, updtF: Function }) {
     //const addF = props.connectionFunctions?.addF ?? (() => { console.log('FUNC') });
@@ -58,6 +58,7 @@ export default function AddForm(props: { pos: number, id: string, updtF: Functio
     const dfltDt = '0000-00-00';
     const [dt, setDt] = useState(dfltDt);
     //setDt('2022-03-05')
+    //const stl = {backgroundColor: 'green'}
     useEffect(()=>{'criou'},[dt])
     return (
         <span style={{ backgroundColor: currentTheme.bg, minHeight: '100%' }}>
@@ -96,7 +97,7 @@ export default function AddForm(props: { pos: number, id: string, updtF: Functio
                             /></td>
 
                         <td>
-                            <button className="btn"
+                            <button className="addBtn"
                                 onClick={() => {
                                     //validar data
                                     const dtStr = dt+'';

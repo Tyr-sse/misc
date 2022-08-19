@@ -70,10 +70,16 @@ export function range(n: number) {
     return L;
 }
 
-export function formatedDate(x: Date) {
+export function dateToString(dt: Date) {
+    return '' + leftZeroes(dt.getFullYear(), 4) + leftZeroes(dt.getMonth() + 1, 2) + leftZeroes(dt.getDate(), 2);
+}
+export function stringToDate(inputString: string) {
+    //verificar formato
+    //naive way:
+    const dateInfos = inputString.split('-').map((str) => +str);
 
+    return new Date()
 
-    return '' + leftZeroes(x.getFullYear(), 4) + leftZeroes(x.getMonth() + 1, 2) + leftZeroes(x.getDate(), 2);
 }
 
 const algarisms = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -99,6 +105,10 @@ export const listStl = {
         alignItems: 'center',
         minHeight: '40px',
         borderRadius: '2px'
+    },
+    itemTd: {
+
+
     },
 
 

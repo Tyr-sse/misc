@@ -1,0 +1,26 @@
+*{
+    background-color: transparent;
+    color: black;
+
+    margin: 2px;
+    padding: 2px;
+}
+tr{
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-evenly;
+}
+td{
+    border: 1px solid red;
+    border-radius: 2px;
+}
+button{
+    border: 3px solid purple;
+    border-radius: 12px;
+    background-color: transparent;
+    margin: 2px;
+    transition: background-color 0.3s;
+}
+button:hover{
+    background-color: #ff000099;
+}
