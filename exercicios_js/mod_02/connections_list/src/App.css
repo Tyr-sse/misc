@@ -4,6 +4,8 @@
   --golden: #ffff11;
   --txt: #999999;
   --bg: #222222;
+  --bg2: #444444;
+  --bg3: #666666;
   background-color: var(--bg);
   color: #ee1212;
 }
@@ -12,14 +14,17 @@
   background-color: transparent;
   color: var(--txt);
   font-family: lato, sans-serif;
-
-
+  /* margin: 1px; */
+  padding: 1px;
   border-style: solid;
   border-width: 0px;
   border-radius: 12px;
 
 }
 
+p{
+  margin: 0px;
+}
 .App {
   text-align: center;
   background-color: var(--bg);
@@ -55,7 +60,129 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+input {
+  border-width: 2px;
+  border-color: #800;
+  border-radius: 2px;
+  max-width: 110px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  transition: background-color 0.2s;
+}
+
+input:hover {
+
+  background-color: #bb10bb55;
+
+
+}
+
+.addBtn {
+
+  margin: 2px;
+  font-size: 10px;
+  font-weight: 800;
+
+  background-color: #22aa22;
+
+  border-width: 0px;
+  border-radius: 20px;
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.2s;
+}
+
+.addBtn:hover {
+
+  background-color: #22ff22;
+
+
+}
+
+
+
+table {
+  background-color: rgb(40, 176, 185);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  padding: 10px;
+
+  align-self: center;
+}
+thead{
+  background-color: #eeeeee;
+}
+tbody{
+  background-color: #eeeeee;
+}
+tr {
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-evenly;
+
+  background-color: #fafafa;
+}
+
+td,
+th {
+ 
+ 
+  background-color: #fefefe;
+  
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+
+  height:     50px;
+  min-height: 50px;
+  max-height: 50px;
+  min-width: 100px;
+ 
+  align-self: center;
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  vertical-align: middle;
+  align-items: center;
+}
+
+button {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
+  background-color: var(--bg3);
+  color: var(--txt);
+  margin: 2px;
+  height: 30px;
+  transition: background-color 0.3s;
+}
+
+td.big{
+  min-width: 150px;
+  max-width: 150px;
+  
+
 }

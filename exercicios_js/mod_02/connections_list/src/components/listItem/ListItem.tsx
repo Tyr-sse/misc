@@ -1,7 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Accordion } from "react-bootstrap";
-import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-import './listItem.module.css'
 import { currentTheme, Iitem, leftZeroes, dateToString, ListContext, stringToDate } from "../../global";
 
 interface IitemP extends Iitem {
@@ -134,7 +132,7 @@ export default function ListItem(props: IitemP) {
         </>);
 
 
-
+    //console.log("RENDER ", isOnEditMode)
     return (
         <Accordion.Item key={props.id} eventKey={props.id}>
             <Accordion.Header>
@@ -144,24 +142,68 @@ export default function ListItem(props: IitemP) {
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>REF LIST</th>
-                            <th>DATE</th>
-                            <th>ACOES</th>
 
                         </tr>
                     </thead>
                     <tbody>
                         <tr style={ctxt.theme.itemLine}>
-                            {isOnEditMode ? displayOnEditMode : defaultDisplay}
+                            {/* {isOnEditMode ? displayOnEditMode : defaultDisplay} */}
+                            {isOnEditMode ?
+                                <>
+                                    <td>STATUS
+                                        <input
+                                            checked={stStatus}
+                                            onChange={e => setStStatus(!stStatus)}
+                                            type="checkbox"
+                                            name="lastName"
+                                            required
+                                        />
+                                    </td>
+                                    <td>ID: {props.id}
+
+                                    </td>
+                                    <td>TITLE:
+                                        <input
+                                            value={stTitle}
+                                            onChange={e => setTitle(e.target.value)}
+                                            placeholder="Title"
+                                            type="text"
+                                            required
+                                        /></td>
+                                    <td>REF LIST</td>
+                                    <td>DATE</td>
+                                    <td>ACTIONS</td>
+
+                                </>
+                                :
+                                <>
+                                    <td style={ctxt.theme.id}>
+                                        <span style={ctxt.theme.idLbl}>{props.id}</span>
+                                        <p style={ctxt.theme.lbl_01}>ID</p>
+                                    </td>
+
+                                    <td>
+                                        <span style={ctxt.theme.idLbl}>{JSON.stringify(props.ref_list)}</span>
+                                        <p style={ctxt.theme.lbl_01}>Reference List</p>
+                                    </td>
+
+                                    <td style={{ fontSize: '14px' }}>
+                                        <span style={ctxt.theme.idLbl}>{dt.substring(6, 8) + ' / ' + dt.substring(4, 6) + ' / ' + dt.substring(0, 4)}</span>
+                                        <p style={ctxt.theme.lbl_01}>Date</p>
+                                    </td>
+
+                                    <td>
+                                        <button style={{ borderRadius: '8px' }}
+                                            onClick={
+                                                () => setIsOnEditMode(isOnEditMode => !isOnEditMode)/*ctxt.editF(props.listPos, props.pos)*/
+                                            }
+                                        >EDIT</button>
+                                    </td>
+
+
+                                </>}
                         </tr>
-                        <button
-                            onClick={
-                                () => setIsOnEditMode(false)/*ctxt.editF(props.listPos, props.pos)*/
-                            }
-                        >
-                           {isOnEditMode ?  'CANCEL':'EDIT'}
-                        </button>
+
                     </tbody>
                 </table>
 

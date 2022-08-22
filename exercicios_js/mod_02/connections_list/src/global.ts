@@ -103,10 +103,13 @@ export const listStl = {
         borderRadius: '2px'
     },
     itemTd: {
-
+        minWidth: '80px', maxWidth: '80px'
 
     },
-
-
-
+    lbl_01:{
+        fontSize: '10px',
+    },
+    idLbl:{
+        marginTop: '16px',
+    }
 }
