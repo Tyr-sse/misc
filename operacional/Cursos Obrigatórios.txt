@@ -1,11 +1,13 @@
 Cursos Obrigatórios para o Homeoffice
 [X] 2179
 [X] 3770
-[X] 5953 - Ergonomia - Orientações Posturais
-[X] 6546 - DORT
-[ ] 7636
-[ ] 7905
-
+[X] 7636 - Segurança
+[X] 7905 - Trabalho remoto noBB
+ [X] 5953 - Ergonomia - Orientações Posturais
+ [X] 6546 - DORT 
+ [X] 3770 - trabalhe com saúde
+  [X] Trilha de Bem estar
+  
 
 Cursos Obrigatórios para Os 3 meses de treinamento:========================
 Tecnologia

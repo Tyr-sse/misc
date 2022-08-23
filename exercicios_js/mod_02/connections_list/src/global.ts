@@ -7,7 +7,7 @@ export interface Iadd { A: string, B: string, C: string }
 export interface Iitem {
     id: string,
     title: string,
-    ref_list: number[],
+    info: string,
     dt: Date,
     status: boolean
 }
@@ -99,17 +99,31 @@ export const listStl = {
         display: 'flex',
         justifyContent: 'space-around',
         alignItems: 'center',
-        minHeight: '40px',
+        minHeight: '80px',
         borderRadius: '2px'
     },
     itemTd: {
         minWidth: '80px', maxWidth: '80px'
 
     },
-    lbl_01:{
+    lbl_01: {
         fontSize: '10px',
     },
-    idLbl:{
+    idLbl: {
         marginTop: '16px',
+    }
+    ,
+    btnUpdate: {
+        borderRadius: '8px',
+        backgroundColor: 'var(--tint01)',
+        fontWeight: '600',
+        color: 'var(--bg)'
+    },
+    btnDelete: {
+        borderRadius: '8px',
+        backgroundColor: 'var(--red)',
+        fontWeight: '600',
+        color: 'var(--bg)',
+        marginBottom: '-10px'
     }
 }

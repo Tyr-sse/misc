@@ -44,6 +44,7 @@ export default function App() {
     updateItemFromLib(lp, p, values, (cod: number) => {
       
       console.log(cod === -1 ? 'ERROR' : 'UPDATED \n' + JSON.stringify(lib));
+      
       setSt(!st);
     });
   }

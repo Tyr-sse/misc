@@ -61,9 +61,10 @@ export default function AddForm(props: { pos: number, id: string, updtF: Functio
     useEffect(() => { 'criou' }, [dt])
     return (
         <span style={{ backgroundColor: currentTheme.bg, minHeight: '100%' }}>
+            {/* <h3>ADICIONE UM REGISTRO</h3> */}
             <table>
                 <tbody>
-                    <tr>
+                    <tr className="addFormC">
                         <td>
                             <input
                                 type="text"
