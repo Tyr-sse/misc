@@ -10,3 +10,16 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+
+//https://miro.com/app/board/uXjVPc0AUrc=/
+//install ANGULAR: 
+//  npm install -g @angular/cli
+//generate new App:
+//  ng new appName
+//run the app:
+//  ng serve
+//generate new component:
+//  ng generate component xyz
+//use angular material library:
+//  ng add @angular/material
