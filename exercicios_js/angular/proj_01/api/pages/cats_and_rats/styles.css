@@ -1,0 +1,23 @@
+:root{
+    --bg: #222222;
+    --txt: #aaaaaa;
+}
+body{
+    background-color: var(--bg);
+}
+* {
+    background-color: transparent;
+    color: var(--txt);
+}
+button{
+    
+    background-color: var(--txt);
+    color: var(--bg);
+    font-weight: 800;
+    border-width: 0px;
+    border-radius: 6px;
+    min-width: 60px;
+    min-height: 28px;
+    
+
+}

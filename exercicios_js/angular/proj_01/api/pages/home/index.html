@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<<<>>>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+    <style>
+        :root{
+            --bg: #222222;
+            --txt: #aaaaaa;
+        }
+        body{
+            background-color: var(--bg);
+        }
+        * {
+            background-color: transparent;
+            color: var(--txt);
+        }
+        button{
+            
+            background-color: var(--txt);
+            color: var(--bg);
+            font-weight: 800;
+            border-width: 0px;
+            border-radius: 6px;
+            min-width: 60px;
+            min-height: 28px;
+            
+
+        }
+    </style>
+    <title>HOME</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>HOME</h1>
+    </header>
+    <div>
+        JOGOS:
+        <button onclick="open_cats_and_rats()"> CATS AND RATS</button>
+    </div>
+
+
+</body>
+<<<>>>
+<script>
+    function open_cats_and_rats() {
+        //console.log('>>',window.location.href+'cats_and_rats')
+        window.location = window.location.href + 'cats_and_rats';
+    }
+
+
+</script>
+
+</html>

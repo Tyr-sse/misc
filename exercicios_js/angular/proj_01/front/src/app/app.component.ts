@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class AppComponent {
   title = 'ANGULAR PROJECT 01';
-  @Input() text: string = 'CAVALO';
+  @Input() text: string = 'INFO';
   @Output() saida: string = "XABLAU";
 
 

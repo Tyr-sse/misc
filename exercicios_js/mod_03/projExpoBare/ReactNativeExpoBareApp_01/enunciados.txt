@@ -1,0 +1,50 @@
+[17:27] Isabella Azarias de Souza
+Questão #1
+Vale10
+Enunciado
+Crie um componente ConcertCard para possibilitar a conferência do dia e preço de um show específico de uma banda, que receba as seguintes props:
+type Ticket = {    value: number}
+
+bandName: string
+country: string
+city: string
+date: Date
+ticket: Ticket
+Exiba-o em tela com os mesmos dados passados, exceto o value que será convertido para price, formatado em reais no padrão R$ XX,XX
+
+[17:27] Isabella Azarias de Souza
+Questão #2
+Vale10
+Enunciado
+Agora vamos alterar e embutir mais algumas regras no componente ConcertCard, da seguinte forma:
+type Ticket = {    type: "standard" | "vip" | "platinum"    value: number}type TicketSimulation = Ticket & {    amount: number}
+
+bandName: string
+country: string
+city: string
+date: Date
+tickets: Ticket[]
+ticketsSimulation: TicketSimulation[]
+Exiba em tela todas as possibilidades de compra de ticket em uma lista (por exemplo utilizando um componente FlatList) e para cada opção, inclua dois botões (por exemplo do tipo TochableOpactity) para permitir acrescentar (+) ou reduzir (-) uma unidade de ingresso no array de ticketsSimulation. Ao final mostre o valor total da compra.
+
+[17:27] Isabella Azarias de Souza
+Questão #3
+Vale10
+Enunciado
+Crie um componente para tosa de cachorro (PetClipping). Nele, permita ao usuário entrar com o porte do animal (pequeno, médio, grande) e devolver o preço previsto da tosa, além do tempo previsto de término. Siga as seguintes informações:
+Preços de acordo com tamanho:
+pequeno: R$ 15,00
+médio: R$ 24,00
+grande: R$ 35,00
+
+Tempo previsto:
+pequeno: 20 mins
+médio: 35 mins
+grande: 50 mins
+
+[17:28] Isabella Azarias de Souza
+Questão #4
+Vale10
+Enunciado
+Faça um componente ColorDot que possibilite que o usuário digite uma cor em HEX em um input e gere uma bolinha com 60px de largura e altura, borderRadius: 50% e a cor de fundo digitada. Certifique-se de apenas aceitar cores válidas, ou seja com 3 ou 6 caracteres e apenas com os caracteres 0 a 9 ou A a F.
+
