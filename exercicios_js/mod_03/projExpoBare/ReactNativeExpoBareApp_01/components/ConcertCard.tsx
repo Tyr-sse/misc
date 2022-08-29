@@ -18,7 +18,6 @@ interface IConcertCard {
     city: string,
     date: Date,
     tickets: Ticket[],
-    ticketsSimulation: TicketSimulation[]
 }
 
 const styles = StyleSheet.create({
@@ -40,7 +39,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderRadius: 8,
         padding: 8,
-        marginVertical: 6
+        marginVertical: 6,
+        minWidth: 400,
 
     },
     row: { flexDirection: 'row' },
@@ -62,28 +62,55 @@ const styles = StyleSheet.create({
 
     tag: { color: colours.tag, alignSelf: 'center', fontSize: 12 },
     btnUpdt: {
-        borderWidth: 1,
-        borderColor: colours.tint01,
-        borderRadius: 4,
         width: 20,
         height: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
+
         fontSize: 12,
+
         color: colours.bg,
         backgroundColor: colours.tint01,
+        borderColor: colours.tint01,
+
+        borderWidth: 0,
+        borderRadius: 4,
+
+
+        alignItems: 'center',
+        justifyContent: 'center',
     },
+    btnBuy: {
+        height: 20,
+        minWidth: 80,
+        maxWidth: 80,
+
+        fontSize: 12,
+
+        color: colours.tint01,
+        borderColor: colours.tint01,
+        backgroundColor: colours.bg,
+
+        alignItems: 'center',
+
+        alignSelf: 'center',
+        alignContent: 'center',
+        textAlign: 'center',
+        borderWidth: 1,
+        borderRadius: 4,
+        justifyContent: 'center',
+
+
+    }
 
 });
 
 
 
-export default function ConcertCard({ bandName, country, city, date, tickets, ticketsSimulation }: IConcertCard) {
+export default function ConcertCard({ bandName, country, city, date, tickets }: IConcertCard) {
     let [Y, M, D] = date.toISOString().slice(0, 10).split('-');
     let obj: any[] = [];
-
+    const [ticketSimulation, setTicketSimulation] = useState<any[]>([]);
     let Sum = 0;
-    for (let ticket of ticketsSimulation) {
+    for (let ticket of ticketSimulation) {
         Sum += ticket.amount * ticket.value;
         obj.push({ ...ticket, sum: ticket.amount * ticket.value });
     }
@@ -93,15 +120,7 @@ export default function ConcertCard({ bandName, country, city, date, tickets, ti
     return (
 
         <View style={styles.ConcertContainer}>
-            <View style={styles.row}>
-
-                {/* <View style={styles.infoWrapper}>
-                    <Text style={styles.info}>{'' + ticket.value} R$</Text>
-                </View>
-                <View style={styles.infoWrapper}>
-                    <Text style={styles.info}>{'' + ticket.type.toUpperCase()}</Text>
-                    <Text style={styles.tag}>Tipo</Text>
-                </View> */}
+            <View style={[styles.row, { justifyContent: 'center' }]}>
                 <View>
                     <View style={styles.infoWrapper}>
                         <Text style={styles.info}>{bandName}</Text>
@@ -109,14 +128,20 @@ export default function ConcertCard({ bandName, country, city, date, tickets, ti
                     </View>
                     <View style={styles.row}>
                         <View style={styles.infoWrapper}>
-                            <Text style={[styles.info, { fontSize: 12 }]}>{city + ' - ' + country}</Text>
+                            <Text style={[styles.info, { fontSize: 12 }]}>{city}</Text>
+                            <Text style={[styles.info, { fontSize: 12 }]}>{country}</Text>
+
                             <Text style={styles.tag}>Local</Text>
                         </View>
                         <View style={styles.infoWrapper}>
+                            <Text style={[styles.info, styles.date]}> </Text>
                             <Text style={[styles.info, styles.date]}>{D + '/' + M + '/' + Y}</Text>
                             <Text style={styles.tag}>Data</Text>
                         </View>
                     </View>
+                    <TouchableOpacity>
+                        <Text style={styles.btnBuy}>COMPRAR</Text>
+                    </TouchableOpacity>
 
                 </View>
                 <View style={{ borderLeftWidth: 1, borderLeftColor: colours.tint01 }}>
@@ -129,7 +154,7 @@ export default function ConcertCard({ bandName, country, city, date, tickets, ti
                     {
                         //var arr = [55, 44, 65,1,2,3,3,34,5];
                         //var unique = [...new Set(arr)]
-                        obj.map((el) => {
+                        tickets.map((el) => {
                             return (
                                 <View style={[styles.info, styles.ticketType, { flexDirection: 'row' }]}>
                                     <TouchableOpacity style={styles.btnUpdt}
@@ -140,7 +165,7 @@ export default function ConcertCard({ bandName, country, city, date, tickets, ti
                                     <Text
                                         style={[styles.info, { fontSize: 8, marginHorizontal: 3, minWidth: 80 }]}
                                     >
-                                        {el.type.toUpperCase()} ({2})
+                                        {el.type.toUpperCase()} ({el.amount})
                                     </Text>
                                     <TouchableOpacity style={styles.btnUpdt}
                                         onPress={() => { }}

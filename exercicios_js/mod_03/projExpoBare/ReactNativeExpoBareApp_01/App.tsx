@@ -17,19 +17,7 @@ export default function App() {
           { value: 170.35, type: 'vip' },
           { value: 300.40, type: 'platinum' }
         ],
-        ticketsSimulation: [
-          {
-            amount: 2,
-            type: "standard",
-            value: 100,
-          },
-          {
-            amount: 3,
-            type: "vip",
-            value: 300,
-          },
-
-        ]
+        
       }} />
 
       <ConcertCard {...{
@@ -42,24 +30,7 @@ export default function App() {
           {value: 300.15, type: 'vip'},
           {value: 400.10, type: 'platinum'}
         ],
-        ticketsSimulation: [
-          {
-            amount: 2,
-            type: "standard",
-            value: 200.78,
-          },
-          {
-            amount: 3,
-            type: "vip",
-            value: 300,
-          },
-          {
-            amount: 1,
-            type: "platinum",
-            value: 500,
-          },
-
-        ]
+        
 
       }} />
       
