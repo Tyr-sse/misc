@@ -6,7 +6,7 @@ import { Ticket } from './components/ConcertCard';
 
 export default function App() {
   return (
-    <View style={[styles.container, { backgroundColor: '#121212' }]}>
+    <View style={[styles.container, { backgroundColor: '#252525' }]}>
       <ConcertCard {...{
         bandName: 'Carlinhos Brown',
         country: 'Brasil',
@@ -50,3 +50,4 @@ const styles = StyleSheet.create({
 
 //e-mail do prof:
 //felipe.cabral@ada.tech
+//https://stackoverflow.com/questions/52751874/expo-run-on-android-emulator-using-windows-10

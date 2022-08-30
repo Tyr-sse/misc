@@ -5,6 +5,7 @@ export type Ticket = { type: "standard" | "vip" | "platinum", value: number };
 export type TicketSimulation = Ticket & { amount: number };
 const colours = {
     tint01: '#ffbb01',
+    tint02: '#ff5501',
     bg: '#121212',
     bg2: '#222222',
 
@@ -19,8 +20,8 @@ interface IConcertCard {
     date: Date,
     tickets: Ticket[],
 }
-console.log('STR ', formatNumber(12345678.2))
-function formatNumber(val: number | string, int: number = 5, d: number = 2) {
+console.log('STR ', formatNumber(1234567891.123456, 10, 5))
+function formatNumber(val: number | string, int: number = 4, d: number = 2) {
     let str = (val + '').split('.');
     //console.log('d: ', str);
     function zeroes(n: number) {
@@ -32,11 +33,11 @@ function formatNumber(val: number | string, int: number = 5, d: number = 2) {
     }
     let dec = '';
     let resu = '';
-    if(int> str[0].length) resu+=zeroes(int-str[0].length)+str[0];
-    else resu+= str[0].substring(str[0].length - int);
-    if(d<=0) return resu;
-    
-
+    if (int > str[0].length) resu += zeroes(int - str[0].length) + str[0];
+    else resu += str[0].substring(str[0].length - int);
+    if (d <= 0) return resu;
+    resu += ('.' + (str.length > 1 ? str[1] + zeroes(d - str[1].length) : zeroes(d))).substring(0, d + 1);
+    return resu
 
     console.log(val, '>>', resu);
 
@@ -186,26 +187,39 @@ export default function ConcertCard({ bandName, country, city, date, tickets }: 
                                 <View style={[styles.info, styles.ticketType, { flexDirection: 'row' }]} key={el.type + '__'}>
                                     <TouchableOpacity style={styles.btnUpdt}
                                         onPress={() => {
-                                            const type = el.type;
+                                            console.log(el);
                                             let newT = { ...ticketsForThisShow };
+                                            console.log('>> ', el.value);
+
+                                            newT[el.type] = {
+                                                amount: ticketsForThisShow[el.type] && ticketsForThisShow[el.type].amount > 0 ? ticketsForThisShow[el.type].amount - 1 : 0,
+                                                value: el.value
+                                            }
                                             console.log('TS', newT);
-
-
-                                            //setTicketSimulation(ticketSimulation)
+                                            setTicketsForThisShow(newT)
                                         }
                                         }
                                     >
                                         <Text style={{ alignSelf: 'center' }}>-</Text>
                                     </TouchableOpacity>
                                     <Text
-                                        style={[styles.info, { fontSize: 8, marginHorizontal: 3, minWidth: 80 }]}
+                                        style={[styles.info, { fontSize: 12, marginHorizontal: 3, minWidth: 80 }]}
                                     >
                                         {el.type.toUpperCase()}
                                     </Text>
                                     <Text
-                                        style={[styles.info, { fontSize: 5, marginHorizontal: 3, minWidth: 60 }]}
+                                        style={[styles.info, { fontSize: 10, marginHorizontal: 3, minWidth: 60 }]}
                                     >
-                                        ({ticketsForThisShow[el.type] ? ticketsForThisShow[el.type].amount : 0} * {formatNumber(el.value)} = {ticketsForThisShow[el.type] ? ticketsForThisShow[el.type].amount * el.value : 0})
+                                        <Text style={{color: colours.tint02}}> {
+                                            ticketsForThisShow[el.type] ?
+                                                ticketsForThisShow[el.type].amount :
+                                                0
+                                        } * {
+                                            formatNumber(el.value)} R$ = {ticketsForThisShow[el.type] ?
+                                                formatNumber(ticketsForThisShow[el.type].amount * el.value) :
+                                                '0000.00'
+                                            } R$ 
+                                        )</Text>
                                     </Text>
 
                                     <TouchableOpacity style={styles.btnUpdt}
