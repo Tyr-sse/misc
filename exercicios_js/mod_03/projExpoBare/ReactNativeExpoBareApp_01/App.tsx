@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import ConcertCard from './components/ConcertCard';
 import List from './components/list/List';
 import { Ticket } from './components/ConcertCard';
+import PetClipping from './components/PetClipping';
+import ColorDot from './components/ColorDot';
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
         
 
       }} />
+      <PetClipping />
+      <ColorDot />
       
       <StatusBar style="auto" />
     </View>
