@@ -28,7 +28,6 @@ export default function App() {
         tickets: [
           {value: 200.78, type: 'standard'},
           {value: 300.15, type: 'vip'},
-          {value: 400.10, type: 'platinum'}
         ],
         
 

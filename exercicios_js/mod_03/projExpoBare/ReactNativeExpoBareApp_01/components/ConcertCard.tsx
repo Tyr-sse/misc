@@ -19,6 +19,31 @@ interface IConcertCard {
     date: Date,
     tickets: Ticket[],
 }
+console.log('STR ', formatNumber(12345678.2))
+function formatNumber(val: number | string, int: number = 5, d: number = 2) {
+    let str = (val + '').split('.');
+    //console.log('d: ', str);
+    function zeroes(n: number) {
+        if (n <= 0) return '';
+        let zr = '';
+        for (let i = 0; i < n; i++)
+            zr += '0'
+        return zr;
+    }
+    let dec = '';
+    let resu = '';
+    if(int> str[0].length) resu+=zeroes(int-str[0].length)+str[0];
+    else resu+= str[0].substring(str[0].length - int);
+    if(d<=0) return resu;
+    
+
+
+    console.log(val, '>>', resu);
+
+    return val;
+
+
+}
 
 const styles = StyleSheet.create({
     txt: {
@@ -106,15 +131,16 @@ const styles = StyleSheet.create({
 
 
 export default function ConcertCard({ bandName, country, city, date, tickets }: IConcertCard) {
+    //tickets : different types of tickets possible
     let [Y, M, D] = date.toISOString().slice(0, 10).split('-');
     let obj: any[] = [];
-    const [ticketSimulation, setTicketSimulation] = useState<any[]>([]);
+    const [ticketsForThisShow, setTicketsForThisShow] = useState<any>({});
     let Sum = 0;
-    for (let ticket of ticketSimulation) {
-        Sum += ticket.amount * ticket.value;
-        obj.push({ ...ticket, sum: ticket.amount * ticket.value });
+    for (let type in ticketsForThisShow) {
+        Sum += ticketsForThisShow[type].amount * ticketsForThisShow[type].value;
+        console.log('> ', ticketsForThisShow[type].amount * ticketsForThisShow[type].value);
     }
-    console.log("OBJ ", obj, Sum);
+    console.log("OBJ SUM", Sum);
 
     //const sum = ticketsSimulation.reduce((acc, curr) => acc + curr.amount * curr.value, 0);
     return (
@@ -149,30 +175,58 @@ export default function ConcertCard({ bandName, country, city, date, tickets }: 
                     <Text
                         style={[styles.info, { fontSize: 22, marginBottom: 3 }]}
                     >
-                        {Sum} R$
+                        TOTAL: {formatNumber(Sum)} R$
                     </Text>
                     {
                         //var arr = [55, 44, 65,1,2,3,3,34,5];
                         //var unique = [...new Set(arr)]
                         tickets.map((el) => {
+                            //console.log("EL> ", el)
                             return (
-                                <View style={[styles.info, styles.ticketType, { flexDirection: 'row' }]}>
+                                <View style={[styles.info, styles.ticketType, { flexDirection: 'row' }]} key={el.type + '__'}>
                                     <TouchableOpacity style={styles.btnUpdt}
-                                        onPress={() => { }}
+                                        onPress={() => {
+                                            const type = el.type;
+                                            let newT = { ...ticketsForThisShow };
+                                            console.log('TS', newT);
+
+
+                                            //setTicketSimulation(ticketSimulation)
+                                        }
+                                        }
                                     >
                                         <Text style={{ alignSelf: 'center' }}>-</Text>
                                     </TouchableOpacity>
                                     <Text
                                         style={[styles.info, { fontSize: 8, marginHorizontal: 3, minWidth: 80 }]}
                                     >
-                                        {el.type.toUpperCase()} ({el.amount})
+                                        {el.type.toUpperCase()}
                                     </Text>
+                                    <Text
+                                        style={[styles.info, { fontSize: 5, marginHorizontal: 3, minWidth: 60 }]}
+                                    >
+                                        ({ticketsForThisShow[el.type] ? ticketsForThisShow[el.type].amount : 0} * {formatNumber(el.value)} = {ticketsForThisShow[el.type] ? ticketsForThisShow[el.type].amount * el.value : 0})
+                                    </Text>
+
                                     <TouchableOpacity style={styles.btnUpdt}
-                                        onPress={() => { }}
+                                        onPress={() => {
+                                            console.log(el);
+                                            let newT = { ...ticketsForThisShow };
+                                            console.log('>> ', el.value);
+
+                                            newT[el.type] = {
+                                                amount: ticketsForThisShow[el.type] ? ticketsForThisShow[el.type].amount + 1 : 1,
+                                                value: el.value
+                                            }
+                                            console.log('TS', newT);
+                                            setTicketsForThisShow(newT)
+                                        }}
                                     >
                                         <Text style={{ alignSelf: 'center' }}>+</Text>
                                     </TouchableOpacity>
-                                </View>);
+
+                                </View>
+                            );
 
 
                         })
