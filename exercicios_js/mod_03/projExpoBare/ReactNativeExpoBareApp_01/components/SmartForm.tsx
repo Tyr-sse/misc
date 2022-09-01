@@ -139,7 +139,8 @@ interface modalidade {
 
 interface Ioption {
     type: ("inclusive" | "exclusive" | "intensity" | "free"),
-    text: string
+    text: string,
+    value?: string
 
 }
 
@@ -147,9 +148,36 @@ interface Ioption {
 interface Iquestion {
     id: string,
     text: string,
-    inputs?: Ioption[]//STRING
+    inputs?: Ioption[],//STRING
+    exclusive_options?: Ioption[],
+    inclusive_options?: Ioption[],
 
 
+
+}
+
+
+interface getFormularios {//OPERAÇÂO GET FORMULARIOS
+    forms: IPesquisa[],//RETORNA UMA LISTA DE PESQUISAS (FORMULARIOS)
+}
+interface IPesquisa {//CADA PESQUISA TEM UM ID, NOME E UMA LISTA DE PERGUNTAS (PODE TER UMA DESCRIÇÃO OPCIONAL)
+    id_pesquisa: string | number,
+    nome: string,
+    pergunta: IPergunta[],
+    descricao?: string
+
+
+}
+interface IPergunta {//CADA PERGUNTA DA LISTA TEM UM ID ()
+    id_peergunta: string | number,
+    texto_pergunta: string,
+    tipo_pergunta: 'free' | 'multiple',//o tipo pode ter um dos dois valores, um para sinaliza texto livre, o outro sinaliza multipla escolha
+    opcoes?: IOpcao[]//caso o campo "tipo_pergunta" tenha em si "multiple", este campo deve possuir em si as distintas opções de resposta
+}
+interface IOpcao {//Cada opção da lista
+    texto_opcao: string,//texto a ser exibido ao entrevistador para esta opção
+    valor_opcao: string //valor oculto da opção
+    id_pergunta: string | number,// referência para a pergunta que o contém
 }
 
 
@@ -182,17 +210,17 @@ export default function SmartForm(props: { questions_list: Iquestion[] }) {
                             (inp) => (
                                 <View style={{ backgroundColor: 'teal' }}>
                                     <Text >
-                                    {inp.type=='exclusive' && <ExclusiveOption />}
-                                    {inp.type=='inclusive' && <Text>INC</Text>}
-                                    {inp.type=='free' && <FreeOption />}
-                                    {/* type: ("inclusive" | "exclusive" | "intensity" | "free"), */}
-                                        
+                                        {inp.type == 'exclusive' && <ExclusiveOption />}
+                                        {inp.type == 'inclusive' && <Text>INC</Text>}
+                                        {inp.type == 'free' && <FreeOption />}
+                                        {/* type: ("inclusive" | "exclusive" | "intensity" | "free"), */}
+
 
                                     </Text>
                                     <Text >
                                         {inp.text}
                                     </Text>
-                                    
+
                                 </View>
                             )
                         )

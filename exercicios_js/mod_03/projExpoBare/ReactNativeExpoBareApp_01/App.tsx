@@ -6,6 +6,35 @@ import { Ticket } from './components/ConcertCard';
 import PetClipping from './components/PetClipping';
 import ColorDot from './components/ColorDot';
 import SmartForm from './components/SmartForm';
+generateMock(20)
+function generateMock(n: number) {
+  let L = [];
+  for (let i = 0; i < n; i++) {
+    let form =
+    {
+      id_pesquisa: 'F'+leftZeroes(i,3)
+
+
+    };
+    if(i%4==0){
+      form.exclusive_options = [1,2,3];
+    }
+    // exclusive_options: [
+
+    // ],
+    // inclusive_options: [
+
+    // ],
+    
+
+    console.log('X> ', x);
+
+
+  }
+
+
+}
+
 
 const qList = [
   {
