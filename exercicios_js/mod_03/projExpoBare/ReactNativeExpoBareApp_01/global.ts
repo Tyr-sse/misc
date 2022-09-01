@@ -69,3 +69,24 @@ export function stringToDate(inputString: string) {
     const dateInfo = inputString.split('-').map((str) => +str);
     return new Date(dateInfo[0], dateInfo[1] - 1, dateInfo[2]);
 }
+
+export function formatNumber(val: number | string, int: number = 4, d: number = 2) {
+    let str = (val + '').split('.');
+    //console.log('d: ', str);
+    function zeroes(n: number) {
+        if (n <= 0) return '';
+        let zr = '';
+        for (let i = 0; i < n; i++)
+            zr += '0'
+        return zr;
+    }
+    let dec = '';
+    let resu = '';
+    if (int > str[0].length) resu += zeroes(int - str[0].length) + str[0];
+    else resu += str[0].substring(str[0].length - int);
+    if (d <= 0) return resu;
+    resu += ('.' + (str.length > 1 ? str[1] + zeroes(d - str[1].length) : zeroes(d))).substring(0, d + 1);
+    return resu
+
+
+}
