@@ -201,4 +201,118 @@ DSAT &USERID/&USERPW PROC(TSO390)
 DROSP01 &USERID/&USERPW
 
 
+DOSSIE PESSOAL:
+
+(1) Pessoas
+
+(2) Minha Visão
+
+(3) Dossiê Digital > Meu Dossiê Digital
+
+
+
+
+
+Onde:
+
+(1) Pesquisar  (primeiro passo para mostrar os documentos);
+
+(2) Todos os documentos (assuntos) já incluídos;
+
+(3) Expandir a aba do documento que quer inserir.
+
+
+
+
+
+Seguindo o item (3) acima, iremos incluir um documento que foi assinado digitalmente (para ver como assinar digitalmente entre aqui):
+
+ 
+
+Temos que ir expandindo os níveis (3) (4) até aparecer a opção: (5) Adicionar documento
+
+ 
+
+Clicando no item (5) irá abrir uma caixa para informar onde o documento está:
+
+ 
+
+(1) Acionar a busca
+
+(2) Selecionar o documento e clicar em cima
+
+(3) Abrir (para colocar o caminho de busca e upload)
+
+
+
+
+
+Agora é só acionar o botão SALVAR (2)
+
+ 
+
+
+
+Feito isso irá aparecer o documento incluído, as vezes para ser deferido pelo gerente (algumas ocasiões)
+
+ 
+
+Onde:
+
+(1) Documento inserido;
+
+(2) Em algum casos existe um ícone de lixeira para excluir o documento;
+
+(3) Caso queira baixar o documento em algum momento.
+
+
+Acessar o:
+
+(1) Menu Minha Visão
+
+(2) Meu Dossie Digital
+
+
+
+
+(1) Adicionar Documentos
+
+
+ 
+
+
+Tire uma foto do comprovante eleitoral e envie para seu e-mail corporativo.
+
+Baixe a foto (ou tire um print) e anexe-o(s) no (1) lupa de localização de arquivo (conforme abaixo)
+
+ 
+
+(2) digite "elei" na pesquisa
+
+(3) Selecione a opção: Quitação Eleitoral
+
+(4) Salve o documento.
+
+
+Será apresentada mensagem de sucesso...
+
+ 
+
+Clique em pesquisar para visualizar o documento inserido.
+
+Abra as seleções (1) e (2) para visualizar o documento.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
